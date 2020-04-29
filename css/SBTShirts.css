@@ -1,0 +1,288 @@
+body {
+    background-color: white;
+}
+
+.decreaseCount {
+  font-size:.8em;
+  font-weight: bold;
+  color: tan;
+}
+
+.externalID {
+  font-size:.75em;
+  font-style: italic;
+  color:tan;
+}
+
+#shoppingCart {
+  /* position:absolute; */
+  position: fixed;
+  width: 40%;
+  height: 20%;
+  top: 5%;
+  right: 5%;
+  visibility: hidden;
+  /*border: 2px solid red;*/
+}
+
+img {
+  /* float:left; */
+  position:relative;
+  border:4px solid orange;
+  /*! height: 40%; */
+  /*! width: 80%; */
+}
+
+.bigable {
+  position: fixed;
+  float:left;
+  top: 0px;
+  left: 0px;
+  height: 80%;
+  width: 60%;
+  z-index: 99;
+}
+
+.back {
+    height: 20%;
+    width: 35%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.front {
+    height: 30%;
+    width: 55%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+
+#count-00, #count-01, #count-02, #count-03, #count-04, #count-05,
+#count-06, #count-07, #count-08, #count-09  {
+  display: inline;
+}
+
+#size-00, #size-01,#size-02,#size-03,#size-04,#size-05,
+#size-06,#size-07,#size-08,#size-09 {
+  display: inline;
+}
+
+#color-00, #color-01,#color-02,#color-03,#color-04,#color-05,
+#color-06,#color-07,#color-08,#color-09 {
+  display: inline;
+  font-style:italic;
+  font-size: 1.25em;
+}
+
+#priceTag-00, #priceTag-01, #priceTag-02, #priceTag-03, #priceTag-04, #priceTag-05,
+#priceTag-06, #priceTag-07, #priceTag-08, #priceTag-09 {
+  display: inline;
+}
+
+#showBar-00, #showBar-01, #showBar-02, #showBar-03, #showBar-04, #showBar-05,
+#showBar-06, #showBar-07, #showBar-08, #showBar-09 {
+  width:60%;
+  margin-top: 1%;
+}
+
+#titleBar-00, #titleBar-01, #titleBar-02, #titleBar-03, #titleBar-04, #titleBar-05,
+#titleBar-06, #titleBar-07, #titleBar-08, #titleBar-09 {
+  margin:2%;
+  /* display: inline; */
+}
+
+
+#colorBar-00, #colorBar-01, #colorBar-02, #colorBar-03, #colorBar-04, #colorBar-05,
+#colorBar-06, #colorBar-07, #colorBar-08, #colorBar-09 {
+  margin:2%;
+  /* display: inline; */
+}
+
+
+#total {
+  color:maroon;
+}
+
+#dataGather {
+  visibility: hidden;
+  /* position: absolute; */
+  position:fixed;
+  top: 5%;
+  left: 10%;
+  width: 30%;
+  height: 75%;
+  color: maroon;
+  z-index: 9;
+  background-color: grey;
+  border: 10px inset black;
+  padding: 2%;
+  color: maroon;
+  font: 1.5em;
+}
+
+#paypalElt {
+  position: fixed;
+  left: 20px;
+  top: 40px;
+  border: 2px solid orange;
+  background-color:black;
+  color: tan;
+  display:none;
+  z-index: 18;
+}
+
+.proceeds {
+  font-size: .75em;
+  color:tan;
+}
+
+.ppal {
+  font-size:1.25em;
+  color:maroon;
+  display:inline;
+}
+
+#outdiv {
+  display:none;
+  visibility: hidden;
+}
+
+#outDiv1, #outDiv2 {
+  display:none;
+  visibility: hidden;
+}
+
+#product-00 {
+  visibility: visible;
+}
+
+.pageTitle {
+    font-size: 2em;
+    color: maroon;
+    margin-left: 3%;
+    margin-top: 3%;
+}
+
+.dataGather {
+  font-size: 1.5em;
+  padding: 3%;
+}
+
+.shirtType {
+  font-size:1.5em;
+  color:maroon;
+}
+
+.priceBar {
+  padding:2%;
+}
+
+.rightSide {
+  display:inline;
+}
+
+.productList {
+  display:inline;
+}
+
+.product {
+  display:block;
+  /* margin:1%; */
+  /* padding:2%; */
+  padding-left:6%;
+}
+
+.product2 {
+  display:block;
+  /* margin:1%; */
+  margin-left: 30%;
+  /* padding:2%; */
+  /* padding-left:6%; */
+}
+
+.productNumber {
+    visibility: hidden;
+    display:none;
+}
+
+.sizeButton, .colorButton {
+  padding: 1px;
+  margin: 1px;
+  width: 2%;
+  height: 2%;
+  display: inline;
+  border:1px solid black;
+}
+
+.sideBy {
+  display:inline;
+  max-height: 45%;
+  max-width: 65%;
+  /* background-color: orange; */
+}
+
+.noshow {
+  display:none;
+}
+
+#id-sButton-00,#id-sButton-01,#id-sButton-02,#id-sButton-03,#id-sButton-04,
+#id-sButton-05,#id-sButton-06,#id-sButton-07,#id-sButton-08,#id-sButton-09 {
+
+}
+
+.submitButton {
+  padding: 5px;
+  margin-top:5px;
+  width: 12%;
+  height: 12%;
+  display: inline;
+  border:2px solid orange;
+  background-color: tan;
+  color:maroon;
+}
+
+.cancelButton {
+  padding: 5px;
+  margin-top:5px;
+  width: 12%;
+  height: 12%;
+  display: inline;
+  border:2px solid blue;
+  background-color: lightgrey;
+}
+
+.elementFade {
+    /* width:200px;
+    height: 200px; */
+    /* background: red; */
+    -webkit-animation: fadeinout 1s linear forwards;
+    animation: fadeinout 1s linear forwards;
+    opacity: 1;
+}
+
+@-webkit-keyframes fadeinout {
+  50% { opacity: 0; }
+  /* 100%,0% { opacity: 1; } */
+  /* 0%,100% { opacity: 0; } */
+}
+
+@keyframes fadeinout {
+  50% { opacity: 0; }
+  /* 100%,0% { opacity: 1; } */
+  /* 0%,100% { opacity: 0; } */
+}
+
+td {
+  padding:2px;
+  text-align: center;
+}
+
+.leftAlign {
+  padding:2px;
+  text-align: left;
+}
+
+.oneColumn {
+  width: 20%;
+}
