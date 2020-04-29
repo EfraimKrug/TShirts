@@ -139,7 +139,10 @@ function submitForm(sfx){
   }
 }
 
-function getPayPalInfo(){
+////////////////////////////////////////////////////////////////////
+//getCustomerInfo - open form to get name/email info
+//form click launches dataGather process...getReadyForPayPal()
+function getCustomerInfo(){
   if (!calcShoppingCartTotal()) return;
   var totalCart = document.getElementById("total");
   var dataGather = document.getElementById("dataGather");
@@ -245,20 +248,79 @@ function storeAccount(email, merch, flag, name, street, city, state, zip, countr
 function goToPayPal(){
   // setUpPayPal(amount, pid, oid, yid, X, Y, type, rid);
 }
+///////////////////////////////////////////////////////
+//formatOrderAPI
+//data - merch data
+//
+function formatOrderAPI(data){
+  var shippingData ={};
+  var gather = [];
+  var merch = data[1];
+  for(entry in merch){
+    var external_id = merch[entry][4];
+    for(product in PRINTFUL_DATA){
+        for(var i=0; i < PRINTFUL_DATA[product]["other_info"].length; i++){
+          pexternal_id = "#" + PRINTFUL_DATA[product]["other_info"][i]["external_id"].trim();
+          if(external_id.trim() == pexternal_id){
+            console.log(PRINTFUL_DATA[product]["other_info"][i]);
+            var fileArr = [];
+            for(var j=0; j < PRINTFUL_DATA[product]["other_info"][i]["files"].length; j++){
+              fileArr.push({
+                "type":PRINTFUL_DATA[product]["other_info"][i]["files"][j]["type"],
+                "url":PRINTFUL_DATA[product]["other_info"][i]["files"][j]["url"],
+              });
+            }
+            gather.push ({
+                  "variant_id":PRINTFUL_DATA[product]["other_info"][i]["variant_id"],
+                  "files":fileArr,
+                  "quantity":merch[entry][1],
+              });
+            }
+          }
+        }
+      }
+  // [email,merch,false,toName,street,city,state,zip,country,subTotal,shippingCharge,tax]
+  shippingData.items = [];
+  for(variant in gather){
+      shippingData.items.push({
+          "variant_id":gather[variant]["variant_id"],
+          "quantity":gather[variant]["quantity"],
+          "files":gather[variant]["files"]
+        });
+    }
+  shippingData.recipient = {
+        "name":storeAndChargePass[3],
+        "address1":storeAndChargePass[4],
+        "city":storeAndChargePass[5],
+        "state_code":storeAndChargePass[6],
+        "country_code":storeAndChargePass[8],
+        "zip":storeAndChargePass[7]
+    };
+console.log(shippingData);
+return shippingData;
+}
 
 /////////////////////////////////////////////////////////////////////////
 //this variable is only used between this function and "storeAndCharge"
 var storeAndChargePass = [];
-function getOtherCharges(email,merch,toName,street,city,state, zip, country, callback){
-  var shipReturn = JSON.parse(dummyShippingReturn);
-  var subTotal = shipReturn.result.costs.subtotal;
-  var tax = shipReturn.result.costs.tax;
-  var shippingCharge = shipReturn.result.costs.shipping;
-  storeAndChargePass = [email,merch,false,toName,street,city,state,zip,country,subTotal,shippingCharge,tax];
-
-  callback();
+/////////////////////////////////////////////////////////////////////////
+//getOtherCharges organizes all the charges to present to customer
+//@param -
+//final call: getOrderEstimate - shipping data - and then callback:storeAndCharge()
+//
+function getOtherCharges(email,merch,toName,street,city,state,zip,country,callback){
+  //storeAndChargePass = [email,merch,false,toName,street,city,state,zip,country,subTotal,shippingCharge,tax];
+  storeAndChargePass = [email,merch,false,toName,street,city,state,zip,country];
+  data = formatOrderAPI(storeAndChargePass);
+  getOrderEstimate(outShipping, data, callback)
 }
 
+//////////////////////////////////////////////////////////////////////////
+//getReadyForPayPal - submit form with customer info
+//@param flag determines if form has been canceled or not.
+//  flag => false: form is closed
+//  flag => true: from is opened
+//
 function getReadyForPayPal(flag){
   if(PAYMENT_BEING_PROCESSED) return;
   var dataGather = document.getElementById("dataGather");
@@ -280,12 +342,17 @@ function getReadyForPayPal(flag){
     //Item Name, Count, Size, Cost, ProductID
     // shoppingTable.rows[r].cells[6].style.visibility = "visible";
     numberItems += parseInt(shoppingTable.rows[r].cells[1].innerHTML);
-    merch.push([shoppingTable.rows[r].cells[0].innerHTML,shoppingTable.rows[r].cells[1].innerHTML,shoppingTable.rows[r].cells[2].innerHTML,shoppingTable.rows[r].cells[3].innerHTML,shoppingTable.rows[r].cells[6].innerHTML,shoppingTable.rows[r].cells[5].innerHTML]);
+
+    itemName = shoppingTable.rows[r].cells[0].innerHTML;
+    itemName = itemName.substring(itemName.indexOf(">")+1,itemName.lastIndexOf("<"));
+    merch.push([itemName,shoppingTable.rows[r].cells[1].innerHTML,shoppingTable.rows[r].cells[2].innerHTML,shoppingTable.rows[r].cells[3].innerHTML,shoppingTable.rows[r].cells[6].innerHTML,shoppingTable.rows[r].cells[5].innerHTML]);
     // shoppingTable.rows[r].cells[6].style.visibility = "hidden";
     // payTotal += parseInt(shoppingTable.rows[r].cells[4].innerHTML * 100);
   }
 
+  /////////////////////////// validate data ...
   // console.log(merch);
+  // console.log(PRINTFUL_DATA);
   var dGName = document.getElementById("dGName");
   var dGEMail = document.getElementById("dGEMail");
   var dGVerEMail = document.getElementById("dGVerEMail");
@@ -330,30 +397,30 @@ function getReadyForPayPal(flag){
     dataVerified = false;
   }
 
+  /////////////////// data is validated and good...
+  // get info and organize the order...
+  //
   if (dataVerified){
-    amountElt = document.getElementById("")
-    // formatOrder(e,s,n,p,f,m,od,sd)
-    // console.log(merch);
     var totalCart = document.getElementById("total");
-
     var PPprice = document.getElementById("PPprice");
     var PPnumber = document.getElementById("PPnumber");
-    // var dGSubmit = document.getElementById("dGSubmit");
-    // var dGCancel = document.getElementById("dGCancel");
     var totalAmt = calcShoppingCartTotal(0);
+
     PPprice.innerHTML = "$" + totalAmt;
     //numberItems - number of items ordered from merch processing above
     PPnumber.innerHTML = " for " + numberItems + " items <br>Please check your email for verification.";
+    // including shipping charges...
     otherCharges = getOtherCharges(dGEMail.value, merch, dGMName.value, dGAddress4.value, dGAddress5.value, dGAddress6.value, dGAddress7.value, dGAddress8.value, storeAndCharge);
   }
 }
 
 function storeAndCharge(){
   parms = storeAndChargePass;
+  var outShipping = JSON.parse(document.getElementById("outShipping").innerHTML);
 
-  // subTotal = parms[9];
-  // shippingCharge = parms[10];
-  // tax = parms[11];
+  var subTotal = outShipping.result.costs.subtotal;
+  var tax = outShipping.result.costs.tax;
+  var shippingCharge = outShipping.result.costs.shipping;
 
   PAYMENT_BEING_PROCESSED = true;
 
@@ -362,14 +429,13 @@ function storeAndCharge(){
   paypalElt = document.getElementById("paypalElt");
   paypalElt.style.display="block";
 
-  PPsubTotal = document.getElementById("PPsubTotal").innerHTML = " sub total: " + parms[9];
-  PPshipping = document.getElementById("PPshipping").innerHTML = " shipping: " + parms[10];
-  PPtax = document.getElementById("PPtax").innerHTML = " tax: " + parms[11];
+  document.getElementById("PPsubTotal").innerHTML = " sub total: " + subTotal;
+  document.getElementById("PPshipping").innerHTML = " shipping: " + shippingCharge;
+  document.getElementById("PPtax").innerHTML = " tax: " + tax;
 
   var totalAmt = calcShoppingCartTotal(0);
+  var grandTotal = totalAmt + shippingCharge + tax;
 
-  // dGSubmit.disabled = true;
-  // dGCancel.disabled = true;
-  console.log([totalAmt,parms[0]])
-  setUpPayPal(totalAmt, parms[0]);
+  // console.log([totalAmt,parms[0]])
+  setUpPayPal(grandTotal, parms[0]);
 }

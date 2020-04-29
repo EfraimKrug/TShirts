@@ -143,12 +143,7 @@ img {
   display:inline;
 }
 
-#outdiv {
-  display:none;
-  visibility: hidden;
-}
-
-#outDiv1, #outDiv2 {
+#outdiv, #outDiv1, #outDiv2, #outShipping, #countryList {
   display:none;
   visibility: hidden;
 }

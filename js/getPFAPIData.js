@@ -59,6 +59,16 @@ function getProduct(){
   // console.log(PRINTFUL_DATA);
 }
 
+///////////////////////////////////////////////////////////////////////////
+//getOrderEstimate - api call to printful.com
+//asynchronous process: put return into OUT_DIV_2
+//@param outShipping - output area for data on html page
+//@param data - json object with all the data formatted properly
+//@param callback - where next?
+//
+function getOrderEstimate(outShipping, data, callback){
+  apiCall(outShipping, callback, "estimate", data);
+}
 
 function getVariants(id){
   // var outDiv = document.getElementById("outDiv2");

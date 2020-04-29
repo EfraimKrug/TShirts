@@ -76,7 +76,7 @@
             <div id=shoppingCart>
               <table id=shoppingTable>
                 <tr><td>Type</td><td>Count</td><td>Size</td><td>Cost</td><td>Price</td><td><span id=total> </span></td></tr>
-                <tr><td></td><td></td><td></td><td></td><td></td><td><span class=submitButton id=payButton onclick="getPayPalInfo();"> Pay Now </span></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td><span class=submitButton id=payButton onclick="getCustomerInfo();"> Pay Now </span></td></tr>
               </table>
             </div>
           </div>
@@ -194,6 +194,11 @@
 <!-- area for database return -->
 <div id=outdiv></div>
 <!-- end area for database return -->
+<!-- area for shipping est return -->
+<div id=outShipping></div>
+<!-- end area for shipping est return -->
+<div id=countryList></div>
+
 <script src="js/SBdataBase.js"></script>
 <script src="js/SBpayPal.js"></script>
 <script src="js/oldJS.js"></script>
@@ -506,6 +511,9 @@ function buildPage(){
     leftSide = flipSide(leftSide);
     if(count > PAGE_MAX) break;
   }
+  // get list of countries/States
+  countryList = document.getElementById("countryList");
+  apiCall(countryList, moveCountryData, "countries", "");
   // console.log(PRINTFUL_DATA);
   // console.log(CSPColl);
   // pTemp = document.getElementById("product-XX");
@@ -513,7 +521,10 @@ function buildPage(){
   //pTemp.style.visibility = "hidden";
 }
 
-
+function moveCountryData(){
+  countryList = JSON.parse(document.getElementById("countryList").innerHTML);
+  console.log(countryList);
+}
 ///////////////////////////////////////////////////////////////////
 //testing...
 //dataObj can not be passed back directly because

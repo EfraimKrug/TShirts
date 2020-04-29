@@ -1,6 +1,7 @@
 
 
 // @param id: may function as an id or an entire object request
+
 function apiCall(outDiv, callback, level="list", id=0) {
   if(level == "variants") return;
   var phpProg = "";
@@ -20,7 +21,11 @@ function apiCall(outDiv, callback, level="list", id=0) {
     }
   if(level == "estimate"){
       phpProg = "cgi-bin/apiOrderEstimate.php";
-      parms = id;
+      parms = JSON.stringify(id);
+    }
+  if(level == "countries"){
+      phpProg = "cgi-bin/apiCountries.php";
+      parms = "";
     }
 
 
@@ -47,5 +52,6 @@ function apiCall(outDiv, callback, level="list", id=0) {
 
   xhttp.open("POST", phpProg, true);
   xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  console.log(parms);
   xhttp.send(parms);
 }
