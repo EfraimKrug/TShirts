@@ -1,22 +1,30 @@
 <?php
 require 'apiBase.php';
 // require 'apiTry.php';
-$order = "";
+//liana S. at printful - customer service...  liana@printful.com
+//
 
-if(array_key_exists('order', $_REQUEST)) $order = urldecode($_REQUEST['order']);
-echo ("<pre>");
-print_r($order);
-echo ("</pre>");
-// $order = '{"items":[{"variant_id":7239,"quantity":1,"files":[{"type":"default","url":"https://files.cdn.printful.com/files/11a/11a753954bafe6e8b3ae4e57b7d01ad0_preview.png"},{"type":"label_outside","url":"https://files.cdn.printful.com/files/429/429a29884baec5683237435bb7f9796d_preview.png"},{"type":"preview","url":"https://files.cdn.printful.com/files/fc6/fc63053438f0919c5bf250052cab2c93_preview.png"}]}],"recipient":{"name":"Shlomo Shmo","address1":"183 Honeydew Avenue","city":"Lawrence","state_code":"KS","country_code":"US","zip":"66045"}}';
-$data = json_decode($order);
-echo ("<pre>");
-print_r($data);
-echo ("</pre>");
+$itemArray = [];
+
+$recipient->name = $_REQUEST['name'];
+$recipient->address1 = $_REQUEST['address1'];
+$recipient->city = $_REQUEST['city'];
+$recipient->state_code = $_REQUEST['state_code'];
+$recipient->country_code = $_REQUEST['country_code'];
+$recipient->zip = $_REQUEST['zip'];
+
+$itemArray[0]->sync_variant_id = (int)$_REQUEST['sync_variant_id'];
+$itemArray[0]->quantity = (int)$_REQUEST['quantity'];
+
+$itemArray[1]->sync_variant_id = (int)$_REQUEST['sync_variant_id'];
+$itemArray[1]->quantity = (int)$_REQUEST['quantity'];
+
+$data->recipient = $recipient;
+$data->items = $itemArray;
 
 $apiKey = 'aj8lew54-qdnh-aam0:cswl-uizia5v89ov4';
 $pf = new PrintfulApiClient($apiKey);
 try {
-
     $estimate = $pf->post('orders/estimate-costs', $data);
     echo json_encode($estimate);
 

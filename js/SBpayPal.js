@@ -1,3 +1,9 @@
+////////////////////////////////////////////////////////////////////
+//logPayment - store all the payment details in my database
+//@param total - total amount with tax and shipping 
+//@param email - as reported by user
+//@param details - response data from paypal...
+//
 function logPayment(total, email, details){
 
       var sendString =  "amtPaid=" + details["amtPaid"] +
@@ -19,7 +25,25 @@ function logPayment(total, email, details){
         ppLog("insert", outDiv, sendString.replace(/\s/g,""), function(){});
 }
 
-function actionAfterPayment(total, email, details){
+////////////////////////////////////////////////////////////////////
+//cancelAction - user canceled out of payment
+//
+function cancelAction(){
+  PAYMENT_BEING_PROCESSED = false;
+  getReadyForPayPal(0); //close data collection form
+  paypalElt = document.getElementById("paypalElt"); // close paypal buttons
+  paypalElt.style.display="none";
+}
+
+////////////////////////////////////////////////////////////////////
+//actionAfterPayment - paid and done...
+//@param USDamount -
+//@param total - amount billed
+//@param email - as sent in from order form
+//@param details - response data from paypal...
+//@side effect - throws user to new window...
+//
+function actionAfterPayment(USDamount, total, email, details){
   PAYMENT_BEING_PROCESSED = false;
   getReadyForPayPal(0); //close data collection form
   paypalElt = document.getElementById("paypalElt"); // close paypal buttons
@@ -42,6 +66,8 @@ function extractData(obj, key, value){
 }
 
 function setUpPayPal(total, email){
+    // console.log("setUpPayPal:");
+    // console.log([total,email]);
     var output = document.getElementById("output");
     var USDamount = total ? total : '18.00';
 
@@ -54,6 +80,7 @@ function setUpPayPal(total, email){
 
         },
         createOrder: function(data, actions) {
+            // console.log(data);
             return actions.order.create({
                 purchase_units: [{
                     amount: {
@@ -63,26 +90,30 @@ function setUpPayPal(total, email){
             });
         },
         onApprove: function(data, actions) {
-            return actions.order.capture().then(function(details_return) {
-                var details = JSON.parse(details_return);
-                var obj = extractData({}, "amtPaid",details.purchase_units[0].payments.captures[0].amount.value);
-                    obj = extractData(obj,"pmtStatus",details.purchase_units[0].payments.captures[0].status);
-                    obj = extractData(obj,"firstName", details.payer.name.given_name);
-                    obj = extractData(obj,"lastName", details.payer.name.surname);
-                    obj = extractData(obj,"email", details.payer.email_address);
-                    obj = extractData(obj,"address_line_1", details.purchase_units[0].shipping.address.address_line_1);
-                    obj = extractData(obj,"address_line_2", details.purchase_units[0].shipping.address.address_line_2);
-                    obj = extractData(obj,"city", details.purchase_units[0].shipping.address.admin_area_2);
-                    obj = extractData(obj,"state", details.purchase_units[0].shipping.address.admin_area_1);
-                    obj = extractData(obj,"postal_code", details.purchase_units[0].shipping.address.postal_code);
-                    obj = extractData(obj,"country_code", details.purchase_units[0].shipping.address.country_code);
-                    obj = extractData(obj,"reference_id", details.purchase_units[0].reference_id);
-                    obj = extractData(obj,"id", details.id);
+            // console.log(data);
+            return actions.order.capture().then(function(details) {
+                var detailsJSON = JSON.parse(details);
+                var obj = extractData({}, "amtPaid",detailsJSON.purchase_units[0].payments.captures[0].amount.value);
+                    obj = extractData(obj,"pmtStatus",detailsJSON.purchase_units[0].payments.captures[0].status);
+                    obj = extractData(obj,"firstName", detailsJSON.payer.name.given_name);
+                    obj = extractData(obj,"lastName", detailsJSON.payer.name.surname);
+                    obj = extractData(obj,"email", detailsJSON.payer.email_address);
+                    obj = extractData(obj,"address_line_1", detailsJSON.purchase_units[0].shipping.address.address_line_1);
+                    obj = extractData(obj,"address_line_2", detailsJSON.purchase_units[0].shipping.address.address_line_2);
+                    obj = extractData(obj,"city", detailsJSON.purchase_units[0].shipping.address.admin_area_2);
+                    obj = extractData(obj,"state", detailsJSON.purchase_units[0].shipping.address.admin_area_1);
+                    obj = extractData(obj,"postal_code", detailsJSON.purchase_units[0].shipping.address.postal_code);
+                    obj = extractData(obj,"country_code", detailsJSON.purchase_units[0].shipping.address.country_code);
+                    obj = extractData(obj,"reference_id", detailsJSON.purchase_units[0].reference_id);
+                    obj = extractData(obj,"id", detailsJSON.id);
 
                 actionAfterPayment(USDamount, total, email, obj);
                 //output.innerHTML = "[" + details.payer.name.given_name + "][" + details.purchase_units[0].payments.captures[0].amount.value  + "][" + details.purchase_units[0].payments.captures[0].amount.currency_code + "]";
                 //window.open("https://NameThatThing.site/paidDonation.html?AMOUNT=" + USDamount + "&PID=" + pid + "&OID=" + oid + "&YahrID=" + yid, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
             });
+        }
+         onCancel: function (data) {
+                cancelAction();
         }
     }).render('#paypal-button-container');
 

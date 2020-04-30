@@ -252,42 +252,42 @@ function goToPayPal(){
 //formatOrderAPI
 //data - merch data
 //
+// {
+//     "recipient": {
+//         "name": "John Doe",
+//         "address1": "19749 Dearborn St",
+//         "city": "Chatsworth",
+//         "state_code": "CA",
+//         "country_code": "US",
+//         "zip": "91311"
+//     },
+//     "items": [
+//         {
+//             "sync_variant_id": 1844711751,
+//             "quantity": 1
+//         }
+//     ]
+// }
 function formatOrderAPI(data){
   var shippingData ={};
   var gather = [];
   var merch = data[1];
+  /////////////////////////////////////////////////////////////////////////
   for(entry in merch){
     var external_id = merch[entry][4];
     for(product in PRINTFUL_DATA){
         for(var i=0; i < PRINTFUL_DATA[product]["other_info"].length; i++){
           pexternal_id = "#" + PRINTFUL_DATA[product]["other_info"][i]["external_id"].trim();
           if(external_id.trim() == pexternal_id){
-            console.log(PRINTFUL_DATA[product]["other_info"][i]);
-            var fileArr = [];
-            for(var j=0; j < PRINTFUL_DATA[product]["other_info"][i]["files"].length; j++){
-              fileArr.push({
-                "type":PRINTFUL_DATA[product]["other_info"][i]["files"][j]["type"],
-                "url":PRINTFUL_DATA[product]["other_info"][i]["files"][j]["url"],
-              });
-            }
+            // console.log(PRINTFUL_DATA[product]["other_info"][i]);
             gather.push ({
-                  "variant_id":PRINTFUL_DATA[product]["other_info"][i]["variant_id"],
-                  "files":fileArr,
-                  "quantity":merch[entry][1],
+                  "sync_variant_id":PRINTFUL_DATA[product]["other_info"][i]["id"],
+                  "quantity":parseInt(merch[entry][1]),
               });
             }
           }
         }
       }
-  // [email,merch,false,toName,street,city,state,zip,country,subTotal,shippingCharge,tax]
-  shippingData.items = [];
-  for(variant in gather){
-      shippingData.items.push({
-          "variant_id":gather[variant]["variant_id"],
-          "quantity":gather[variant]["quantity"],
-          "files":gather[variant]["files"]
-        });
-    }
   shippingData.recipient = {
         "name":storeAndChargePass[3],
         "address1":storeAndChargePass[4],
@@ -296,10 +296,37 @@ function formatOrderAPI(data){
         "country_code":storeAndChargePass[8],
         "zip":storeAndChargePass[7]
     };
-console.log(shippingData);
-return shippingData;
+  shippingData.items = gather;
+
+  return shippingData;
 }
 
+/////////////////////////////////////////////////////////////////////////
+//fromOrderString
+//@param data - returned object from formatOrderAPI above
+//@return string - ready to pass to php as a $_POST string
+//                  I am passing this to php as a flat string...
+//                  In php it is built back into an object
+function fromOrderString(data){
+  console.log(data);
+  var dataString = "name=" + data.recipient.name;
+  dataString += "&address1=" + data.recipient.address1;
+  dataString += "&city=" + data.recipient.city;
+  dataString += "&state_code=" + data.recipient.state_code;
+  dataString += "&country_code=" + data.recipient.country_code;
+  dataString += "&zip=" + data.recipient.zip;
+  for (var i=0; i < data.items.length; i++){
+    if(!i){
+      dataString += "&sync_variant_id=" + data.items[0].sync_variant_id;
+      dataString += "&quantity=" + data.items[0].quantity;
+    } else {
+      dataString += "&sync_variant_id" + i + "=" + data.items[i].sync_variant_id;
+      dataString += "&quantity" + i + "=" + data.items[i].quantity;
+    }
+  }
+  console.log(dataString);
+  return dataString;
+}
 /////////////////////////////////////////////////////////////////////////
 //this variable is only used between this function and "storeAndCharge"
 var storeAndChargePass = [];
@@ -312,7 +339,10 @@ function getOtherCharges(email,merch,toName,street,city,state,zip,country,callba
   //storeAndChargePass = [email,merch,false,toName,street,city,state,zip,country,subTotal,shippingCharge,tax];
   storeAndChargePass = [email,merch,false,toName,street,city,state,zip,country];
   data = formatOrderAPI(storeAndChargePass);
-  getOrderEstimate(outShipping, data, callback)
+  // console.log(data);
+  dataString = fromOrderString(data);
+
+  getOrderEstimate(outShipping, dataString, callback)
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -414,13 +444,17 @@ function getReadyForPayPal(flag){
   }
 }
 
+////////////////////////////////////////////////////////////////////////
+//storeAndCharge - call back function from api call for order estimate
+//
 function storeAndCharge(){
   parms = storeAndChargePass;
   var outShipping = JSON.parse(document.getElementById("outShipping").innerHTML);
+  console.log(outShipping);
 
-  var subTotal = outShipping.result.costs.subtotal;
-  var tax = outShipping.result.costs.tax;
-  var shippingCharge = outShipping.result.costs.shipping;
+  // var subTotal = outShipping.costs.subtotal; // oops! this is cost...
+  var tax = outShipping.costs.tax;
+  var shippingCharge = outShipping.costs.shipping;
 
   PAYMENT_BEING_PROCESSED = true;
 
@@ -428,13 +462,13 @@ function storeAndCharge(){
   // storeAccount(dGEMail.value, merch, false, dGMName.value, dGAddress4.value, dGAddress5.value, dGAddress6.value, dGAddress7.value, dGAddress8.value);
   paypalElt = document.getElementById("paypalElt");
   paypalElt.style.display="block";
-
-  document.getElementById("PPsubTotal").innerHTML = " sub total: " + subTotal;
-  document.getElementById("PPshipping").innerHTML = " shipping: " + shippingCharge;
-  document.getElementById("PPtax").innerHTML = " tax: " + tax;
-
   var totalAmt = calcShoppingCartTotal(0);
-  var grandTotal = totalAmt + shippingCharge + tax;
+
+  document.getElementById("PPsubTotal").innerHTML = " sub total: " + addDecimal(totalAmt) + " ";
+  document.getElementById("PPshipping").innerHTML = " shipping: " + addDecimal(shippingCharge) + " ";
+  document.getElementById("PPtax").innerHTML = " tax: " + addDecimal(tax) + " ";
+
+  var grandTotal = ((totalAmt * 100) + (shippingCharge * 100) + (tax * 100))/100;
 
   // console.log([totalAmt,parms[0]])
   setUpPayPal(grandTotal, parms[0]);

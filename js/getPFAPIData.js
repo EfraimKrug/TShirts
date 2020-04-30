@@ -20,6 +20,7 @@ function addProductRow(key, valsArr){
 function getProduct(){
   // if(NUMBER_OF_PRODUCTS < 0)return;
   var listJ = JSON.parse(OUT_DIV_2.innerHTML.trim());
+  // console.log(listJ);
   arr = [];
   var productID = listJ["sync_product"]["id"];
   PRINTFUL_DATA[productID]["other_info"] = [];
@@ -35,6 +36,7 @@ function getProduct(){
     var size = long_name.substring(long_name.lastIndexOf("/")+1,long_name.lastIndexOf(")"));
     var color = long_name.substring(long_name.lastIndexOf("(")+1,long_name.lastIndexOf("/"));
 
+    PRINTFUL_DATA[productID]["other_info"][variant_counter]["id"]=listJ["sync_variants"][variant]["id"];
     PRINTFUL_DATA[productID]["other_info"][variant_counter]["external_id"]=listJ["sync_variants"][variant]["external_id"];
     PRINTFUL_DATA[productID]["other_info"][variant_counter]["variant_id"]=listJ["sync_variants"][variant]["variant_id"];
     PRINTFUL_DATA[productID]["other_info"][variant_counter]["retail_price"]=listJ["sync_variants"][variant]["retail_price"];
@@ -63,10 +65,12 @@ function getProduct(){
 //getOrderEstimate - api call to printful.com
 //asynchronous process: put return into OUT_DIV_2
 //@param outShipping - output area for data on html page
-//@param data - json object with all the data formatted properly
+//@param data - formed post string e.g. id=1&var=2&...
 //@param callback - where next?
 //
 function getOrderEstimate(outShipping, data, callback){
+  console.log("getOrderEstimate...");
+  console.log(data);
   apiCall(outShipping, callback, "estimate", data);
 }
 

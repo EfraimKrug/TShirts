@@ -1,6 +1,11 @@
+<html>
+<head>
+</head>
+<body>
+<h1>Working... </h1>
+<div id=outDiv></div>
+<script>
 
-
-// @param id: may function as an id or an entire object request
 
 function apiCall(outDiv, callback, level="list", id=0) {
   // console.log("apiCall:" + level);
@@ -26,6 +31,7 @@ function apiCall(outDiv, callback, level="list", id=0) {
       phpProg = "cgi-bin/apiOrderEstimate.php";
       // headerParam = "application/json;charset=UTF-8";
       parms = JSON.stringify(id);
+      parms = '[~"recipient":[~"name":"Becky Ashland","address1":"1928 Sickamore Road","city":"Lawrence","state_code":"KS","country_code":"US","zip":"66044"~],"items":[[~"sync_variant_id":1846018106,"quantity":4~],[~"sync_variant_id":1845887351,"quantity":3~],[~"sync_variant_id":1844711751,"quantity":2~]]~]';
       parms = parms.replace(/{/g, "[~").replace(/}/g,"~]");
     }
   if(level == "countries"){
@@ -60,3 +66,6 @@ function apiCall(outDiv, callback, level="list", id=0) {
   console.log(parms);
   xhttp.send(parms);
 }
+
+var p = '[~"recipient":[~"name":"Becky Ashland","address1":"1928 Sickamore Road","city":"Lawrence","state_code":"KS","country_code":"US","zip":"66044"~],"items":[[~"sync_variant_id":1846018106,"quantity":4~],[~"sync_variant_id":1845887351,"quantity":3~],[~"sync_variant_id":1844711751,"quantity":2~]]~]';
+outDiv = document.getElementById("outDiv");
