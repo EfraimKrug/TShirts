@@ -1,5 +1,5 @@
 <?php
-
+require 'apiky.php'
 // namespace Printful\Exceptions;
 
 use Exception;
@@ -31,7 +31,7 @@ class PrintfulApiClient
      * Printful API key
      * @var string
      */
-    private $key = 'aj8lew54-qdnh-aam0:cswl-uizia5v89ov4';
+    private $key = $apiKey;
 
     private $lastResponseRaw;
 

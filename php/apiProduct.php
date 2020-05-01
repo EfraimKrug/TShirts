@@ -1,12 +1,13 @@
 <?php
 require 'apiBase.php';
+require 'apiky.php'
+
 $stillRequired = FALSE;
 $ID = 0;
 
 if(array_key_exists('ID', $_REQUEST)) $ID = urldecode($_REQUEST['ID']);
 $FILE_NAME = "./api/product" . $ID . ".api";
 
-$apiKey = 'aj8lew54-qdnh-aam0:cswl-uizia5v89ov4';
 $pf = new PrintfulApiClient($apiKey);
 
 $oldProduct = file_get_contents($FILE_NAME);

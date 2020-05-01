@@ -1,10 +1,9 @@
 <?php
 require 'apiBase.php';
+require 'apiky.php'
 
 $FILE_NAME = "./api/productList.api";
 $stillRequired = FALSE;
-
-$apiKey = 'aj8lew54-qdnh-aam0:cswl-uizia5v89ov4';
 
 $pf = new PrintfulApiClient($apiKey);
 $oldProductList = file_get_contents($FILE_NAME);
