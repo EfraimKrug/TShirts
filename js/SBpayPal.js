@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////
 //logPayment - store all the payment details in my database
-//@param total - total amount with tax and shipping 
+//@param total - total amount with tax and shipping
 //@param email - as reported by user
 //@param details - response data from paypal...
 //
@@ -74,10 +74,10 @@ function setUpPayPal(total, email){
     paypal.Buttons({
         style: {
             shape: 'pill',
-            color: 'gold',
+            color: 'blue',
             layout: 'horizontal',
-            label: 'pay',
-
+            label: 'paypal',
+            tagline: 'true'
         },
         createOrder: function(data, actions) {
             // console.log(data);
@@ -111,7 +111,7 @@ function setUpPayPal(total, email){
                 //output.innerHTML = "[" + details.payer.name.given_name + "][" + details.purchase_units[0].payments.captures[0].amount.value  + "][" + details.purchase_units[0].payments.captures[0].amount.currency_code + "]";
                 //window.open("https://NameThatThing.site/paidDonation.html?AMOUNT=" + USDamount + "&PID=" + pid + "&OID=" + oid + "&YahrID=" + yid, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
             });
-        }
+        },
          onCancel: function (data) {
                 cancelAction();
         }

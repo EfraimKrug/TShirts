@@ -209,7 +209,7 @@ function verifyBillingData(){
 
   if (dGAddress4.value.length > 0 &&
       dGAddress5.value.length > 0 &&
-      dGAddress6.value.length > 0 &&
+      dGAddress6.selectedIndex > 0 &&
       dGAddress7.value.length > 0 &&
       dGAddress8.value.length > 0 ) return true;
 
@@ -440,11 +440,11 @@ function getReadyForPayPal(flag){
     //numberItems - number of items ordered from merch processing above
     PPnumber.innerHTML = " for " + numberItems + " items <br>Please check your email for verification.";
     // including shipping charges...
-    otherCharges = getOtherCharges(dGEMail.value, merch, dGMName.value, dGAddress4.value, dGAddress5.value, dGAddress6.value, dGAddress7.value, dGAddress8.value, storeAndCharge);
+    otherCharges = getOtherCharges(dGEMail.value, merch, dGMName.value, dGAddress4.value, dGAddress5.value, dGAddress6.options[dGAddress6.selectedIndex].value, dGAddress7.value, dGAddress8.options[dGAddress8.selectedIndex].value, storeAndCharge);
   }
 }
 
-////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////sel.options[sel.selectedIndex].text
 //storeAndCharge - call back function from api call for order estimate
 //
 function storeAndCharge(){

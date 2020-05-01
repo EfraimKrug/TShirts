@@ -761,9 +761,9 @@ legend {
     padding: 0 0.1875rem; }
 
 select {
-  height: 2.4375rem;
+  /* height: 2.4375rem; */
   margin: 0 0 1rem;
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;

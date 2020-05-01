@@ -123,21 +123,28 @@
   </div>
 
   <div class="grid-x grid-padding-x">
-    <div class="large-3 medium-3 cell">
+    <div class="large-6 medium-6 cell">
       <label>City</label>
       <input id=dGAddress5 type="text" placeholder="City?" />
     </div>
-    <div class="large-3 medium-3 cell">
-      <label>State</label>
-      <input id=dGAddress6 type="text" placeholder="State?" />
+    <div class="large-6 medium-6 cell">
+        <label>State</label>
+        <select id=dGAddress6>
+          <!-- <option value 'KS'>Kansas</option> -->
+        </select>
     </div>
-    <div class="large-3 medium-3 cell">
+  </div>
+
+  <div class="grid-x grid-padding-x">
+    <div class="large-6 medium-6 cell">
       <label>Zip Code</label>
       <input id=dGAddress7 type="text" placeholder="Zip?" />
     </div>
-    <div class="large-3 medium-3 cell">
+    <div class="large-6 medium-6 cell">
       <label>Country</label>
-      <input id=dGAddress8 type="text" placeholder="USA" />
+      <select id=dGAddress8>
+        <option value 'US'>United States</option>
+      </select>
     </div>
   </div>
     <div class="grid-x grid-padding-x">
@@ -521,9 +528,45 @@ function buildPage(){
   //pTemp.style.visibility = "hidden";
 }
 
+function stateExclude(code){
+    var excludeList = ["AA","AE","AP","AS","FM","GU"];
+    for(var i=0; i < excludeList.length; i++){
+      if(code == excludeList[i]) return true;
+    }
+    return false;
+}
+
 function moveCountryData(){
   countryList = JSON.parse(document.getElementById("countryList").innerHTML);
+  dGAddress6 = document.getElementById("dGAddress6");
+  dGAddress8 = document.getElementById("dGAddress8");
   console.log(countryList);
+  var us_index = 0;
+  for(var i=0; i < countryList.length; i++){
+    if(countryList[i]["code"] == "US"){
+      us_index = i;
+      break;
+    }
+  }
+
+  for(var i=0; i < countryList[us_index]["states"].length; i++){
+    if(stateExclude(countryList[us_index]["states"][i]["code"])) continue;
+    var option = document.createElement("option");
+    option.text = countryList[us_index]["states"][i]["name"];
+    option.value = countryList[us_index]["states"][i]["code"];
+    dGAddress6.add(option);
+  }
+
+  CountryInclude = [{"country":"United States", "code":"US"}, {"country":"Israel", "code":"IS"}];
+  for(var i=0; i < CountryInclude.length; i++){
+    option = document.createElement("option");
+    option.text = CountryInclude[i]["country"];
+    option.value = CountryInclude[i]["code"];
+    dGAddress8.add(option);    
+  }
+
+  dGAddress6.selectedIndex = 0;
+  dGAddress8.selectedIndex = 0;
 }
 ///////////////////////////////////////////////////////////////////
 //testing...
