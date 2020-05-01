@@ -1,8 +1,9 @@
 <?php
 require 'apiBase.php';
+require 'apiky.php'
+
 $FILE_NAME = "./api/countries.api";
 
-$apiKey = 'aj8lew54-qdnh-aam0:cswl-uizia5v89ov4';
 $pf = new PrintfulApiClient($apiKey);
 
 

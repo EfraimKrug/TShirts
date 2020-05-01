@@ -1,5 +1,6 @@
 <?php
 require 'apiBase.php';
+require 'apiky.php'
 // require 'apiTry.php';
 //liana S. at printful - customer service...  liana@printful.com
 //
@@ -22,7 +23,6 @@ $itemArray[1]->quantity = (int)$_REQUEST['quantity'];
 $data->recipient = $recipient;
 $data->items = $itemArray;
 
-$apiKey = 'aj8lew54-qdnh-aam0:cswl-uizia5v89ov4';
 $pf = new PrintfulApiClient($apiKey);
 try {
     $estimate = $pf->post('orders/estimate-costs', $data);

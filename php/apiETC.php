@@ -1,5 +1,6 @@
 <?php
 require 'apiBase.php';
+require 'apiky.php'
 
 $ID = 0;
 $path = "";
@@ -7,7 +8,6 @@ $path = "";
 if(array_key_exists('path', $_REQUEST)) $path = urldecode($_REQUEST['path']);
 if(array_key_exists('ID', $_REQUEST)) $ID = urldecode($_REQUEST['ID']);
 
-$apiKey = 'aj8lew54-qdnh-aam0:cswl-uizia5v89ov4';
 $pf = new PrintfulApiClient($apiKey);
 try {
 
