@@ -1,6 +1,6 @@
 <?php
 require 'apiBase.php';
-require 'apiky.php'
+require 'apiky.php';
 // require 'apiTry.php';
 //liana S. at printful - customer service...  liana@printful.com
 //
