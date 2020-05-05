@@ -111,12 +111,115 @@ function getValues(sfx){
   return [eName.innerHTML, eCount.options[eCount.selectedIndex].text, ePrice.innerHTML];
 }
 
+function getVariantID(externalID, color, size){
+  for(p in PRINTFUL_DATA){
+      if(PRINTFUL_DATA[p]["other_info"][0]["external_id"].trim() == externalID.substring(1).trim()){
+        for(var i=0; i < PRINTFUL_DATA[p]["other_info"].length; i++){
+          var name = PRINTFUL_DATA[p]["other_info"][i]["name"];
+          if(name.substring(name.lastIndexOf("-")+1,name.lastIndexOf("/")).trim() == color.trim() ){
+            if(PRINTFUL_DATA[p]["other_info"][i]["size"].trim() == size.trim() ){
+              return PRINTFUL_DATA[p]["other_info"][i]['id'];
+            }
+          }
+        }
+
+      }
+    }
+  return 0;
+}
+
+function getColorArray(prodExternalID, size){
+  colorArray = [];
+  for(var i=0; i < PRINTFUL_DATA[prodExternalID]["other_info"].length; i++){
+      if(PRINTFUL_DATA[prodExternalID]["other_info"][i]["size"].trim() == size.trim() ){
+          colorArray.push(PRINTFUL_DATA[prodExternalID]["other_info"][i]['color'].trim());
+    }
+  }
+  return colorArray;
+}
+
+function loadColorArray(colorArray, sfx){
+  var colorBar = document.getElementById("colorBar"+sfx);
+  var colorSpotDiv = document.getElementById("color"+sfx)
+  var colorSpot = colorSpotDiv.innerHTML.trim();
+  var colorStillHere = false;
+
+  while (colorBar.hasChildNodes()) {
+      colorBar.removeChild(colorBar.lastChild);
+  }
+
+  var pattern = "<div id='Color-~iter~~sfx~' class='colorButton'" +
+  " onclick=\"scoreColorButton('Color-~iter~~sfx~','~color~');\" " +
+  " hexval=#~hex~ prodid='#5e9ca2eb6aa6f5' " +
+  " style='background:~rgb~ " +
+  " none repeat scroll 0% 0%; color: ~rgb~ ;" +
+  " border: 2px solid ~brdColor~; padding: 3px;'>Co</div>";
+
+  for (var i=0; i < colorArray.length; i++){
+    line = pattern.replace(/~iter~/g, getTwoDigits(i));
+    if(colorSpot == colorArray[i].trim()){
+      colorStillHere = true;
+      line = line.replace(/~brdColor~/g, "white");
+    } else {
+      line = line.replace(/~brdColor~/g, "black");
+    }
+    line = line.replace(/~sfx~/g, sfx);
+    line = line.replace(/~color~/g, colorArray[i]);
+    line = line.replace(/~hex~/g, getHex(colorArray[i]));
+    line = line.replace(/~rgb~/g, getRGB(colorArray[i]));
+    colorBar.innerHTML += line;
+  }
+  if(!colorStillHere){colorSpotDiv.innerHTML = ""; }
+}
+
+function getSizeArray(prodExternalID, color){
+  sizeArray = [];
+  for(var i=0; i < PRINTFUL_DATA[prodExternalID]["other_info"].length; i++){
+      if(PRINTFUL_DATA[prodExternalID]["other_info"][i]["color"].trim() == color.trim() ){
+          sizeArray.push(PRINTFUL_DATA[prodExternalID]["other_info"][i]['size'].trim());
+    }
+  }
+  return sizeArray;
+}
+
+function loadSizeArray(sizeArray, sfx){
+  var currentSize = "";
+  var sizeStillHere = false;
+  var size = document.getElementById("size"+sfx).innerHTML;
+  var sizeCode = getSizeCode(size);
+  var titleBar = document.getElementById("titleBar"+sfx);
+  while (titleBar.hasChildNodes()) {
+      titleBar.removeChild(titleBar.lastChild);
+  }
+
+  var pattern = "<div id='~size~~sfx~' class='sizeButton' onclick=\"scoreButton('~size~~sfx~');\" prodid='#5e9ca2eb6aa6f5' style='background: ~bgcolor~ none repeat scroll 0% 0%; color: ~color~;'>~size~ </div>";
+
+  for (var i=0; i < sizeArray.length; i++){
+    line = pattern.replace(/~sfx~/g, sfx);
+    if(sizeArray[i] == sizeCode){
+      sizeStillHere = true;
+      line = line.replace(/~bgcolor~/g, "black");
+      line = line.replace(/~color~/g, "white");
+      currentSize = sizeArray[i] + sfx;
+    } else {
+      line = line.replace(/~bgcolor~/g, "white");
+      line = line.replace(/~color~/g, "black");
+    }
+    line = line.replace(/~size~/g, sizeArray[i]);
+    titleBar.innerHTML += line;
+  }
+  if(currentSize){
+    button = document.getElementById(currentSize);
+    button.chosen = true;
+  }
+
+  if(!sizeStillHere) size = "";
+}
 
 function submitForm(sfx){
   if(PAYMENT_BEING_PROCESSED) return;
   var payButton = document.getElementById("payButton");
   var submitButton = document.getElementById("sButton"+sfx);
-
 
   payButton.disabled = false;
 
@@ -124,6 +227,7 @@ function submitForm(sfx){
   if(!buttonR) return;
   var prodID = buttonR.getAttribute('prodID');
   var externalID = document.getElementById("externalID"+sfx).innerHTML;
+
   var color = document.getElementById("color"+sfx).innerHTML;
   // console.log(prodID);
   productValues = getValues(sfx);
@@ -131,10 +235,12 @@ function submitForm(sfx){
   // price = getPrice(buttonR.innerHTML, sfx);
   price = productValues[2].replace("$","");
   size = buttonR.innerHTML;
+  var variantID = getVariantID(externalID, color, size);
+  // console.log(variantID);
   // console.log(parseInt(productValues[1]));
 
   if(parseInt(productValues[1])){
-    addLine(productValues[0], productValues[1], size, price, externalID, color);
+    addLine(productValues[0], productValues[1], size, price, variantID, color);
     submitButton.classList.add('elementFade');
   }
 }
@@ -227,14 +333,23 @@ function verifyBillingData(){
 // need better background for order page...
 //
 
+// var orderIDCollection = [];
+// function collectOrderID(){
+//   var orderWork = document.getElementById("orderWork");
+//   console.log("collectOrderID: " + outDiv.innerHTML);
+//   orderIDCollection.push(outDiv.innerHTML);
+// }
+
 var merchPass = [];
 function storeOrder(){
   var outDiv = document.getElementById("outdiv");
+  var orderWork = document.getElementById("orderWork");
   var info = JSON.parse(outDiv.innerHTML);
+  orderIDCollection = [];
   // console.log(info);
   for (var row=0; row < merchPass.length; row++){
     sendString = formatOrder(info.accountID,info.targetID,merchPass[row][4],merchPass[row][5],merchPass[row][2],merchPass[row][1],merchPass[row][3],"false");
-    dbOrder("insert", outDiv, sendString.replace(/\s/g,""), function(){})
+    dbOrder("insert", orderWork, sendString.replace(/\s/g,""), function(){});
   }
 }
 
@@ -244,10 +359,10 @@ function storeAccount(email, merch, flag, name, street, city, state, zip, countr
   var parms = formatAccount(email, name, street, city, state, zip, country);
   dbAccount("insert", outDiv, parms, storeOrder);
 }
-
-function goToPayPal(){
-  // setUpPayPal(amount, pid, oid, yid, X, Y, type, rid);
-}
+//
+// function goToPayPal(){
+//   // setUpPayPal(amount, pid, oid, yid, X, Y, type, rid);
+// }
 ///////////////////////////////////////////////////////
 //formatOrderAPI
 //data - merch data
@@ -274,20 +389,37 @@ function formatOrderAPI(data){
   var merch = data[1];
   /////////////////////////////////////////////////////////////////////////
   for(entry in merch){
-    var external_id = merch[entry][4];
-    for(product in PRINTFUL_DATA){
-        for(var i=0; i < PRINTFUL_DATA[product]["other_info"].length; i++){
-          pexternal_id = "#" + PRINTFUL_DATA[product]["other_info"][i]["external_id"].trim();
-          if(external_id.trim() == pexternal_id){
+    var id = merch[entry][4];
+    // for(product in PRINTFUL_DATA){
+        // for(var i=0; i < PRINTFUL_DATA[product]["other_info"].length; i++){
+          // pexternal_id = "#" + PRINTFUL_DATA[product]["other_info"][i]["external_id"].trim();
+          // if(external_id.trim() == pexternal_id){
             // console.log(PRINTFUL_DATA[product]["other_info"][i]);
+            // console.log([merch[entry][1], id]);
             gather.push ({
-                  "sync_variant_id":PRINTFUL_DATA[product]["other_info"][i]["id"],
+                  "sync_variant_id":id,
                   "quantity":parseInt(merch[entry][1]),
               });
-            }
-          }
-        }
+            // }
+          // }
+        // }
       }
+
+  // for(entry in merch){
+  //   var external_id = merch[entry][4];
+  //   for(product in PRINTFUL_DATA){
+  //       for(var i=0; i < PRINTFUL_DATA[product]["other_info"].length; i++){
+  //         pexternal_id = "#" + PRINTFUL_DATA[product]["other_info"][i]["external_id"].trim();
+  //         if(external_id.trim() == pexternal_id){
+  //           // console.log(PRINTFUL_DATA[product]["other_info"][i]);
+  //           gather.push ({
+  //                 "sync_variant_id":PRINTFUL_DATA[product]["other_info"][i]["id"],
+  //                 "quantity":parseInt(merch[entry][1]),
+  //             });
+  //           }
+  //         }
+  //       }
+  //     }
   shippingData.recipient = {
         "name":storeAndChargePass[3],
         "address1":storeAndChargePass[4],
@@ -308,7 +440,7 @@ function formatOrderAPI(data){
 //                  I am passing this to php as a flat string...
 //                  In php it is built back into an object
 function fromOrderString(data){
-  console.log(data);
+  // console.log(data);
   var dataString = "name=" + data.recipient.name;
   dataString += "&address1=" + data.recipient.address1;
   dataString += "&city=" + data.recipient.city;
@@ -324,18 +456,19 @@ function fromOrderString(data){
       dataString += "&quantity" + i + "=" + data.items[i].quantity;
     }
   }
-  console.log(dataString);
+  // console.log(dataString);
   return dataString;
 }
 /////////////////////////////////////////////////////////////////////////
-//this variable is only used between this function and "storeAndCharge"
+//this variable is only used between this function and "storeAndChargeF"
 var storeAndChargePass = [];
 /////////////////////////////////////////////////////////////////////////
 //getOtherCharges organizes all the charges to present to customer
 //@param -
-//final call: getOrderEstimate - shipping data - and then callback:storeAndCharge()
+//final call: getOrderEstimate - shipping data - and then callback:storeAndChargeF()
 //
 function getOtherCharges(email,merch,toName,street,city,state,zip,country,callback){
+  // console.log("getOtherCharges");
   //storeAndChargePass = [email,merch,false,toName,street,city,state,zip,country,subTotal,shippingCharge,tax];
   storeAndChargePass = [email,merch,false,toName,street,city,state,zip,country];
   data = formatOrderAPI(storeAndChargePass);
@@ -353,6 +486,7 @@ function getOtherCharges(email,merch,toName,street,city,state,zip,country,callba
 //
 function getReadyForPayPal(flag){
   if(PAYMENT_BEING_PROCESSED) return;
+  // console.log("getReadyForPayPal");
   var dataGather = document.getElementById("dataGather");
   var shoppingTable = document.getElementById("shoppingTable");
   //Form submit/cancel... freeze until order is complete
@@ -440,17 +574,18 @@ function getReadyForPayPal(flag){
     //numberItems - number of items ordered from merch processing above
     PPnumber.innerHTML = " for " + numberItems + " items <br>Please check your email for verification.";
     // including shipping charges...
-    otherCharges = getOtherCharges(dGEMail.value, merch, dGMName.value, dGAddress4.value, dGAddress5.value, dGAddress6.options[dGAddress6.selectedIndex].value, dGAddress7.value, dGAddress8.options[dGAddress8.selectedIndex].value, storeAndCharge);
+    otherCharges = getOtherCharges(dGEMail.value, merch, dGMName.value, dGAddress4.value, dGAddress5.value, dGAddress6.options[dGAddress6.selectedIndex].value, dGAddress7.value, dGAddress8.options[dGAddress8.selectedIndex].value, storeAndChargeF);
   }
 }
 
 ////////////////////////////////////////////////////////////////////////sel.options[sel.selectedIndex].text
-//storeAndCharge - call back function from api call for order estimate
+//storeAndChargeF - call back function from api call for order estimate
 //
-function storeAndCharge(){
+function storeAndChargeF(){
+  // console.log("storeAndChargeF (call back from orderestimate)");
   parms = storeAndChargePass;
   var outShipping = JSON.parse(document.getElementById("outShipping").innerHTML);
-  console.log(outShipping);
+  // console.log(outShipping);
 
   // var subTotal = outShipping.costs.subtotal; // oops! this is cost...
   var tax = outShipping.costs.tax;
@@ -463,13 +598,14 @@ function storeAndCharge(){
   paypalElt = document.getElementById("paypalElt");
   paypalElt.style.display="block";
   var totalAmt = calcShoppingCartTotal(0);
-
+  // console.log(totalAmt);
   document.getElementById("PPsubTotal").innerHTML = " sub total: " + addDecimal(totalAmt) + " ";
   document.getElementById("PPshipping").innerHTML = " shipping: " + addDecimal(shippingCharge) + " ";
   document.getElementById("PPtax").innerHTML = " tax: " + addDecimal(tax) + " ";
 
+  // console.log([totalAmt, shippingCharge, tax]);
   var grandTotal = ((totalAmt * 100) + (shippingCharge * 100) + (tax * 100))/100;
-
+  // console.log(grandTotal);
   // console.log([totalAmt,parms[0]])
   setUpPayPal(grandTotal, parms[0]);
 }

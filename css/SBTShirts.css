@@ -2,6 +2,12 @@ body {
     background-color: white;
 }
 
+.Thanks {
+  margin: 4%;
+  padding: 2%;
+  font-size: 1.25em;
+  border: 1px solid orange;
+}
 .decreaseCount {
   font-size:.8em;
   font-weight: bold;
@@ -143,7 +149,7 @@ img {
   display:inline;
 }
 
-#outdiv, #outDiv1, #outDiv2, #outShipping, #countryList {
+#outdiv, #outDiv, #outDiv1, #outDiv2, #outShipping, #countryList, #orderWork {
   display:none;
   visibility: hidden;
 }
@@ -203,7 +209,7 @@ img {
 
 .sizeButton, .colorButton {
   padding: 1px;
-  margin: 1px;
+  margin: 0px;
   width: 2%;
   height: 2%;
   display: inline;
@@ -280,4 +286,13 @@ td {
 
 .oneColumn {
   width: 20%;
+}
+
+#splashScreen {
+  position:absolute;
+  top: 1%;
+  left: 1%;
+  width: 90%;
+  height: 90%;
+  z-index: 999;
 }

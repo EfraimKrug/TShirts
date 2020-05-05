@@ -1,5 +1,5 @@
 <?php
-require 'apiky.php'
+require 'apiky.php';
 // namespace Printful\Exceptions;
 
 use Exception;

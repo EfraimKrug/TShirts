@@ -1,7 +1,7 @@
 
 
 // @param id: may function as an id or an entire object request
-
+var holdOrderForLater = "";
 function apiCall(outDiv, callback, level="list", id=0) {
   // console.log("apiCall:" + level);
   // console.log(id);
@@ -27,6 +27,16 @@ function apiCall(outDiv, callback, level="list", id=0) {
       // headerParam = "application/json;charset=UTF-8";
       parms = JSON.stringify(id);
       parms = parms.replace(/{/g, "[~").replace(/}/g,"~]");
+      // console.log(phpProg + parms);
+      holdOrderForLater = parms;
+    }
+  if(level == "order"){
+      phpProg = "cgi-bin/apiOrder.php";
+      // console.log(holdOrderForLater);
+      if(holdOrderForLater){
+        parms = holdOrderForLater;
+        holdOrderForLater = "";
+      }
     }
   if(level == "countries"){
       phpProg = "cgi-bin/apiCountries.php";
@@ -55,8 +65,9 @@ function apiCall(outDiv, callback, level="list", id=0) {
       returnVal = this.status;
   };
 
+  // console.log("reader to fire..." + phpProg);
+  // console.log(parms);
   xhttp.open("POST", phpProg, true);
   xhttp.setRequestHeader("Content-Type", headerParam);
-  console.log(parms);
   xhttp.send(parms);
 }

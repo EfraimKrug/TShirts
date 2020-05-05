@@ -1,6 +1,6 @@
 <?php
 require 'apiBase.php';
-require 'apiky.php'
+require 'apiky.php';
 
 $stillRequired = FALSE;
 $ID = 0;

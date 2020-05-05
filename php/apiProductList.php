@@ -1,6 +1,6 @@
 <?php
 require 'apiBase.php';
-require 'apiky.php'
+require 'apiky.php';
 
 $FILE_NAME = "./api/productList.api";
 $stillRequired = FALSE;

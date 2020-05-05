@@ -49,6 +49,7 @@ var COLOR_CODES = [{"COLOR":"Black", "HEX":"27262b","RGB":"rgb(39, 38, 43)"},
 {"COLOR":"Ash", "HEX":"EEF0F2","RGB":"rgb(238, 240, 242)"},
 {"COLOR":"Sand", "HEX":"d4cab4","RGB":"rgb(212, 202, 180)"},
 {"COLOR":"White", "HEX":"e2e3de","RGB":"rgb(226, 227, 222)"}];
+
 function getHex(color){
   for(var i=0; i<COLOR_CODES.length; i++){
     if(COLOR_CODES[i].COLOR.toLowerCase().trim() == color.toLowerCase().trim()) return COLOR_CODES[i].HEX;
@@ -58,5 +59,11 @@ function getHex(color){
 function getColor(hex){
   for(var i=0; i<COLOR_CODES.length; i++){
     if(COLOR_CODES[i].HEX.toLowerCase().trim() == hex.toLowerCase().trim()) return COLOR_CODES[i].COLOR;
+  }
+}
+
+function getRGB(color){
+  for(var i=0; i<COLOR_CODES.length; i++){
+    if(COLOR_CODES[i].COLOR.toLowerCase().trim() == color.toLowerCase().trim()) return COLOR_CODES[i].RGB;
   }
 }

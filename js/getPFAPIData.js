@@ -69,8 +69,8 @@ function getProduct(){
 //@param callback - where next?
 //
 function getOrderEstimate(outShipping, data, callback){
-  console.log("getOrderEstimate...");
-  console.log(data);
+  // console.log("getOrderEstimate...");
+  // console.log(data);
   apiCall(outShipping, callback, "estimate", data);
 }
 

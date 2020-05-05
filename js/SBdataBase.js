@@ -31,6 +31,7 @@ function dbGo(TableName, type, outDiv, parms, callback) {
   //   default:                  func = doNothing; break;
   // }
   // console.log(["before POST", type, outDiv, parms, phpProg]);
+  // console.log(phpProg + "?" + parms);
   xhttp.open("POST", phpProg, true);
   xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xhttp.send("S0c1al=B0nd1ng&" + parms);

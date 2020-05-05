@@ -194,17 +194,21 @@
 <!-- end of paypal form -->
 <!-- end shopping cart -->
 </body>
+<!-- splash screen -->
+<div id=splashScreen><img src="./images/GroceryStore03.png"/></div>
 <!-- area for API work -->
 <div id=outDiv1></div>
 <div id=outDiv2></div>
+<!-- counties -->
+<div id=countryList></div>
 <!-- end area for API work -->
 <!-- area for database return -->
+<div id=outDiv></div>
 <div id=outdiv></div>
-<!-- end area for database return -->
+<!-- area for order ids return -->
+<div id=orderWork></div>
 <!-- area for shipping est return -->
 <div id=outShipping></div>
-<!-- end area for shipping est return -->
-<div id=countryList></div>
 
 <script src="js/SBdataBase.js"></script>
 <script src="js/SBpayPal.js"></script>
@@ -212,8 +216,8 @@
 <script src="js/oldJS2.js"></script>
 <script src="js/productSkel.js"></script>
 <script src="js/colorCodes.js"></script>
-
-<script src="js/dummyShipping.js"></script>
+<script src="js/doMail.js"></script>
+<!-- <script src="js/dummyShipping.js"></script> -->
 
 <script>
 PAYMENT_BEING_PROCESSED = false;
@@ -405,6 +409,10 @@ function sortSizes(size_array){
   return sorted_array;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+//getProductDetails - gets color and size details
+//@param data - comes from PrintFulAPI
+//
 function getProductDetails(data){
   var color_array = [];
   var size_array = [];
@@ -477,6 +485,7 @@ function createNewProduct(sfx, side, data, prodID){
   // console.log(data);
   product.innerHTML = pSKEL;
   touchUp(sfx);
+  // console.log(product.innerHTML);
   work = document.getElementById("product-list");
   // console.log(work.innerHTML);
   work.appendChild(product);
@@ -521,11 +530,16 @@ function buildPage(){
   // get list of countries/States
   countryList = document.getElementById("countryList");
   apiCall(countryList, moveCountryData, "countries", "");
-  // console.log(PRINTFUL_DATA);
+
+  showInConsole();
   // console.log(CSPColl);
   // pTemp = document.getElementById("product-XX");
   // pTemp.parentNode.removeChild(pTemp);
   //pTemp.style.visibility = "hidden";
+}
+
+function showInConsole(){
+    console.log(PRINTFUL_DATA);
 }
 
 function stateExclude(code){
@@ -540,7 +554,7 @@ function moveCountryData(){
   countryList = JSON.parse(document.getElementById("countryList").innerHTML);
   dGAddress6 = document.getElementById("dGAddress6");
   dGAddress8 = document.getElementById("dGAddress8");
-  console.log(countryList);
+  // console.log(countryList);
   var us_index = 0;
   for(var i=0; i < countryList.length; i++){
     if(countryList[i]["code"] == "US"){
@@ -562,7 +576,7 @@ function moveCountryData(){
     option = document.createElement("option");
     option.text = CountryInclude[i]["country"];
     option.value = CountryInclude[i]["code"];
-    dGAddress8.add(option);    
+    dGAddress8.add(option);
   }
 
   dGAddress6.selectedIndex = 0;
@@ -575,6 +589,8 @@ function moveCountryData(){
 //
 // var GOT_DATA = false;
 function finalFunction(){
+  var splashScreen = document.getElementById("splashScreen");
+  splashScreen.style.display = "none";
   buildPage();
   // if(GOT_DATA) return;
   // GOT_DATA = true;

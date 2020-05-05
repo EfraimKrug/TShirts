@@ -10,30 +10,42 @@ function getSize(idS){
   if (idS == '5XL') return "Five Times Extra Large";
 }
 
-function getPriceArray(sfx){
-  var priceArray = [0,0,0,0,0,0,0,0,0];
-  if(sfx == '-00') priceArray = ["$31.50","$31.50","$31.50","$31.50","$31.50","$33.50","",""];
-  if(sfx == '-01') priceArray = ["","$37.50","$37.50","$37.50","$37.50","$39.50","$41.50","$43.50"];
-  if(sfx == '-02') priceArray = ["$31.50","$31.50","$31.50","$31.50","$31.50","$33.50","",""];
-  if(sfx == '-03') priceArray = ["$26.50","$26.50","$26.50","$26.50","$26.50","$28.50","$30.00","$33.00"];
-  if(sfx == '-04') priceArray = ["","$44.50","$44.50","$44.50","$44.50","$47.50","",""];
-  if(sfx == '-05') priceArray = ["$26.50","$26.50","$26.50","$26.50","$26.50","$28.50","$30.00","$33.00"];
-  if(sfx == '-06') priceArray = ["","$33.00","$33.00","$33.00","$33.00","$35.00","",""];
-  return priceArray;
+function getSizeCode(size){
+  if (size == 'Extra Small') return "XS";
+  if (size == 'Small') return "S";
+  if (size == 'Medium') return "M";
+  if (size == 'Large') return "L";
+  if (size == 'Extra Large') return "XL";
+  if (size == 'Double Extra Large') return "2XL";
+  if (size == 'Triple Extra Large') return "3XL";
+  if (size == 'Four Times Extra Large') return "4XL";
+  if (size == 'Five Times Extra Large') return "5XL";
 }
 
-function getPrice(ids,sfx){
-  priceArray = getPriceArray(sfx);
-  ids = ids.trim();
-  if (ids == 'XS') return priceArray[0];
-  if (ids == 'S') return priceArray[1];
-  if (ids == 'M') return priceArray[2];
-  if (ids == 'L') return priceArray[3];
-  if (ids == 'XL') return priceArray[4];
-  if (ids == '2XL') return priceArray[5];
-  if (ids == '3XL') return priceArray[6];
-  if (ids == '4XL') return priceArray[7];
-}
+// function getPriceArray(sfx){
+//   var priceArray = [0,0,0,0,0,0,0,0,0];
+//   if(sfx == '-00') priceArray = ["$31.50","$31.50","$31.50","$31.50","$31.50","$33.50","",""];
+//   if(sfx == '-01') priceArray = ["","$37.50","$37.50","$37.50","$37.50","$39.50","$41.50","$43.50"];
+//   if(sfx == '-02') priceArray = ["$31.50","$31.50","$31.50","$31.50","$31.50","$33.50","",""];
+//   if(sfx == '-03') priceArray = ["$26.50","$26.50","$26.50","$26.50","$26.50","$28.50","$30.00","$33.00"];
+//   if(sfx == '-04') priceArray = ["","$44.50","$44.50","$44.50","$44.50","$47.50","",""];
+//   if(sfx == '-05') priceArray = ["$26.50","$26.50","$26.50","$26.50","$26.50","$28.50","$30.00","$33.00"];
+//   if(sfx == '-06') priceArray = ["","$33.00","$33.00","$33.00","$33.00","$35.00","",""];
+//   return priceArray;
+// }
+
+// function getPrice(ids,sfx){
+//   priceArray = getPriceArray(sfx);
+//   ids = ids.trim();
+//   if (ids == 'XS') return priceArray[0];
+//   if (ids == 'S') return priceArray[1];
+//   if (ids == 'M') return priceArray[2];
+//   if (ids == 'L') return priceArray[3];
+//   if (ids == 'XL') return priceArray[4];
+//   if (ids == '2XL') return priceArray[5];
+//   if (ids == '3XL') return priceArray[6];
+//   if (ids == '4XL') return priceArray[7];
+// }
 
 function getTwoDigits(i){
   if(i < 10) return "0" + i;
@@ -92,7 +104,11 @@ function scoreColorButton(id, clr){
     var prodID = prod.innerHTML;
     var frontImg = document.getElementById("frontImg"+sfx);
     frontImg.src = extractVariantFile(clr.replace(/\*/g, " "), PRINTFUL_DATA[prodID]);
-    frontImg.style.background = '#' + button.getAttribute('hexVAL');
+    frontImg.style.background = '#' + getHex(color.innerHTML);
+
+    var prodExternalID = document.getElementById("productNumber"+sfx).innerHTML;
+    loadSizeArray(getSizeInfo(prodExternalID, clr.replace(/\*/g, " ")), sfx);
+
 }
 
 // some of these array entries will be udefined
@@ -136,8 +152,24 @@ function scoreButton(id){
     button.style.color = "white";
     button.chosen = true;
     size.innerHTML = getSize(idS);
+
     // priceTag.innerHTML = getPrice(idS,sfx);
     setPricing(idS, sfx);
+    var prodExternalID = document.getElementById("productNumber"+sfx).innerHTML;
+    loadColorArray(getColorInfo(prodExternalID, idS), sfx);
+}
+
+function getColorInfo(prodExternalID, size){
+  var colorArray = getColorArray(prodExternalID, size);
+  // console.log(colorArray);
+  return colorArray;
+}
+
+function getSizeInfo(prodExternalID, color){
+  // console.log(color);
+  var sizeArray = getSizeArray(prodExternalID, color);
+  // console.log(sizeArray);
+  return sizeArray;
 }
 
 BACK_CLICK = [false,false,false,false,false,false,false,false,false];
