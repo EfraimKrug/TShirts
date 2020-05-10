@@ -1,0 +1,30 @@
+</head>
+<body>
+    <div class="grid-x grid-padding-x">
+      <div class="large-12 cell">
+        <div class=pageTitle>
+          Physical Distancing, and Social BONDING!
+          <br>Buy a shirt! Spread the word!
+          <!-- <div type=button onclick=fillUp();>Fill the page</div> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-x grid-padding-x">
+      <div  id="product-list-hold" class="large-8 medium-8 cell">
+
+          <div  id="product-list" class="large-8 medium-8 cell">
+          <div class="grid-x grid-padding-x">
+            <div class="large-8 medium-8 cell">
+              <div class=Stats>
+              <br><br>
+              Hi there,
+              <br><br>
+              These pictures are really what is happening with COVID right now.
+              I update the data about once a week. The one thing I can tell you
+              is that the data is the closest thing we Americans have to accurate.
+              <br><br>
+              It has been vetted through the CDC and Johns Hopkins... among others.
+              <br><br>
+              <div class="grid-x grid-padding-x">
+              <div class="large-4 medium-4 cell">

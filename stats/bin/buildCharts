@@ -1,0 +1,20 @@
+#########################################################################################
+# Download files from kaggle... then run this and upload 'charts.html' to domain.com
+# building COVID charts for TShirt site
+#########################################################################################
+rm -f ~/WEBSITES/TShirts/stats/data/time_series_covid_19_deaths_US.csv
+rm -f ~/WEBSITES/TShirts/stats/data/time_series_covid_19_confirmed_US.csv
+############
+unzip -d ~/WEBSITES/TShirts/stats/data/ /home/efraim/Downloads/time_series_covid_19_deaths_US.csv.zip
+unzip -d ~/WEBSITES/TShirts/stats/data/ /home/efraim/Downloads/time_series_covid_19_confirmed_US.csv.zip
+############
+rm -f /home/efraim/Downloads/time_series_covid_19_deaths_US.csv.zip
+rm -f /home/efraim/Downloads/time_series_covid_19_confirmed_US.csv.zip
+############
+echo files unzipped
+cd ~/WEBSITES/TShirts/stats
+del charts.html
+echo building charts.html
+python buildCharts.py > charts.html
+echo moving charts.html
+mv charts.html ../charts.html

@@ -1,0 +1,44 @@
+</div></div>
+<br><br>
+<div id="curve_chart" style="width: 900px; height: 500px"></div>
+<br><br>
+Sincerely,
+<br><br>
+Efraim Krug<br>
+<a href = "mailto: PhysicalDistanceSocialBonding@GMail.com">PhysicalDistanceSocialBonding@GMail.com</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id=menuBar>
+<table class=menuTable>
+<tr>
+<td  class=menuBar><a class=menuLink href='home.html'>Home</a></td>
+<td  class=menuBar><a class=menuLink href='blogs.html'>Blogs</a></td>
+<td  class=menuBar><a class=menuLink href='PDSocialBonding.html'>Shirts</a></td>
+<td  class=menuBar><a class=menuLink href='suggestions.html'>Suggestions</a></td>
+<td  class=menuBar><a id='scrollDownMsg' class=menuLink  href='#' onclick='scrollPage();'>Scroll Down</a></td>
+</tr>
+</table>
+</div>
+</body>
+<!-- splash screen -->
+<div id=splashScreen><img src="./images/GroceryStore03.png"/></div>
+
+<script src="js/SBdataBase.js"></script>
+<script src="js/colorCodes.js"></script>
+
+<script>
+var splashScreen = document.getElementById("splashScreen");
+menuBar = document.getElementById("menuBar");
+menuBar.style.visibility = 'visible';
+menuBar.style.display = 'block';
+function scrollPage(){
+var scrollDownMsg = document.getElementById("scrollDownMsg");
+scrollDownMsg.innerHTML = "Scroll!";
+scrollscrollDownMsg.style.color = "red";
+}
+
+</script>

@@ -1,0 +1,23 @@
+#########################################################################################
+# Download files from kaggle... then run this and upload 'charts.html' to domain.com
+# building COVID charts for TShirt site
+#########################################################################################
+rm -f ~/WEBSITES/TShirts/stats/data/time_series_covid_19_deaths.csv
+rm -f ~/WEBSITES/TShirts/stats/data/time_series_covid_19_confirmed.csv
+rm -f ~/WEBSITES/TShirts/stats/data/time_series_covid_19_recovered.csv
+############
+mv  /home/efraim/Downloads/time_series_covid_19_deaths.csv    ~/WEBSITES/TShirts/stats/data/time_series_covid_19_deaths.csv
+mv  /home/efraim/Downloads/time_series_covid_19_confirmed.csv ~/WEBSITES/TShirts/stats/data/time_series_covid_19_confirmed.csv
+mv  /home/efraim/Downloads/time_series_covid_19_recovered.csv ~/WEBSITES/TShirts/stats/data/time_series_covid_19_recovered.csv
+############
+rm -f /home/efraim/Downloads/time_series_covid_19_deaths.csv
+rm -f /home/efraim/Downloads/time_series_covid_19_confirmed.csv
+rm -f /home/efraim/Downloads/time_series_covid_19_recovered.csv
+############
+#echo files unzipped
+cd ~/WEBSITES/TShirts/stats
+del chartsWorld.html
+echo building chartsWorld.html
+python buildChartsWorld.py > chartsWorld.html
+echo moving chartsWorld.html
+mv chartsWorld.html ../chartsWorld.html

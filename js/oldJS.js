@@ -242,6 +242,7 @@ function submitForm(sfx){
   if(parseInt(productValues[1])){
     addLine(productValues[0], productValues[1], size, price, variantID, color);
     submitButton.classList.add('elementFade');
+    turnOffSizing();
   }
 }
 

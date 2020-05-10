@@ -1,4 +1,3 @@
-
 var productSkel = "<!-- begin product~sfx~ -->" +
 "<div  id='product~sfx~' class='large-8 medium-8 cell'>" +
 "<div class='grid-x grid-padding-x'>" +
@@ -39,21 +38,24 @@ var productSkel = "<!-- begin product~sfx~ -->" +
 "                </div>" +
 "              </div>" +
 "              <!-- beginning of the picture and order button section -->" +
+ "           <div class='grid-x grid-padding-x'>  <div class='large-8 medium-8 cell sideBy'> " +
 "                    <div class=sideBy onclick='showBack(1, \"~sfx~\")' onmouseover='showBack(0, \"~sfx~\")' onmouseout='hideBack(\"~sfx~\")'>" +
 "                      <img id=frontImg~sfx~ src='~front~'/>" +
 "                    </div>" +
+ "              </div>  " +
+ "              <div class='large-4 medium-4 cell sideBy'>" +
+ "              <div id=back~sfx~ class='sideBy noshow'>" +
+ "                <img id=backImg~sfx~ class=back src='~back~'/>" +
+ "              </div><span id=shirtBack~sfx~ class='shirtBack noshow'>(Back)</span>" +
+ "              </div>" +
+ "              </div>" +
+ "              </div>" +
+ "              </div>" +
+ "              </div>" +
+ "              </div>" +
 "              <div id=sButton~sfx~ class=submitButton onclick='submitForm(\"~sfx~\");'>Add to Cart</div>" +
 "              <!-- end of the picture and order button section -->" +
-"            </div>" +
-"    </div>" +
-"  </div>" +
-"  <div class='large-3 medium-3 cell'>" +
-"    <div id=back~sfx~ class='sideBy noshow'>" +
-"        <img id=backImg~sfx~ class=back src='~back~'/>" +
-"    </div>" +
-"  </div>" +
 "" +
-"</div>" +
 "" +
 "<hr />" +
 "</div><!-- end product~sfx~ -->'";

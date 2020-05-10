@@ -124,7 +124,7 @@ function actionAfterPayment(USDamount, total, email, details){
   }
 }
 
-function setUpPayPal(total, email){
+function __setUpPayPal(total, email){
   details = {};
   details.amtPaid = total;
   details.pmtStatus = "TESTSTATUS";
@@ -148,7 +148,7 @@ function extractData(obj, key, value){
     return obj;
 }
 
-function __setUpPayPal(total, email){
+function setUpPayPal(total, email){
     // console.log("setUpPayPal:");
     // console.log([total,email]);
     var output = document.getElementById("output");

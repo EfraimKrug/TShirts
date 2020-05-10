@@ -104,7 +104,7 @@ function scoreColorButton(id, clr){
     var prodID = prod.innerHTML;
     var frontImg = document.getElementById("frontImg"+sfx);
     frontImg.src = extractVariantFile(clr.replace(/\*/g, " "), PRINTFUL_DATA[prodID]);
-    frontImg.style.background = '#' + getHex(color.innerHTML);
+    // frontImg.style.background = '#' + getHex(color.innerHTML);
 
     var prodExternalID = document.getElementById("productNumber"+sfx).innerHTML;
     loadSizeArray(getSizeInfo(prodExternalID, clr.replace(/\*/g, " ")), sfx);
@@ -196,9 +196,11 @@ function showBack(sw, sfx){
 
   var back = document.getElementById("back"+sfx);
   var backImg = document.getElementById("backImg"+sfx);
+  var shirtBack = document.getElementById("shirtBack"+sfx);
   back.style.background = frontImg.style.background;
   backImg.style.background = frontImg.style.background;
   if(back.classList.contains("noshow")){
+      shirtBack.classList.remove("noshow");
       back.classList.remove("noshow");
     }
 }
@@ -207,7 +209,9 @@ function hideBack(sfx){
   var i = parseInt(sfx.substring(1));
   if(BACK_CLICK[i]) return;
   var back = document.getElementById("back"+sfx);
+  var shirtBack = document.getElementById("shirtBack"+sfx);
   back.classList.add("noshow");
+  shirtBack.classList.add("noshow");
 }
 
 function checkFields(sfx){

@@ -7,7 +7,20 @@ body {
   padding: 2%;
   font-size: 1.25em;
   border: 1px solid orange;
+  z-index: 99;
 }
+
+.About, .Home, .Blog, .Suggestions, .Stats {
+  position:relative;
+  margin: 4%;
+  padding: 2%;
+  font-size: 1.25em;
+  border: 2px solid orange;
+  background-color: tan;
+  color: maroon;
+  z-index: 299;
+}
+
 .decreaseCount {
   font-size:.8em;
   font-weight: bold;
@@ -25,7 +38,7 @@ body {
   position: fixed;
   width: 40%;
   height: 20%;
-  top: 5%;
+  top: 20%;
   right: 5%;
   visibility: hidden;
   /*border: 2px solid red;*/
@@ -50,8 +63,8 @@ img {
 }
 
 .back {
-    height: 20%;
-    width: 35%;
+    /* height: 20%;
+    width: 35%; */
     display: inline-block;
     vertical-align: top;
 }
@@ -161,8 +174,17 @@ img {
 .pageTitle {
     font-size: 2em;
     color: maroon;
-    margin-left: 3%;
     margin-top: 3%;
+    margin-left: 3%;
+}
+
+@media screen and (max-width:700px), and (max-device-width:700px)
+{
+  .pageTitle {
+      font-size: 2em;
+      color: maroon;
+      margin-top: 10%;
+  }
 }
 
 .dataGather {
@@ -172,6 +194,11 @@ img {
 
 .shirtType {
   font-size:1.5em;
+  color:maroon;
+}
+
+.shirtBack {
+  font-size:.75em;
   color:maroon;
 }
 
@@ -185,6 +212,11 @@ img {
 
 .productList {
   display:inline;
+}
+
+#product-list-XX-hold{
+    margin:0px;
+    padding:0px;
 }
 
 .product {
@@ -294,5 +326,108 @@ td {
   left: 1%;
   width: 90%;
   height: 90%;
-  z-index: 999;
+  z-index: 199;
+}
+
+#sizeChart {
+  display: none;
+  position:fixed;
+  top: 5%;
+  right:2%;
+  margin: 1%;
+  padding: 2%;
+  z-index: 9;
+  visibility: hidden;
+  background-color: lightgrey;
+  border: 2px solid maroon;
+}
+#sizePic {
+  display: none;
+  position:fixed;
+  visibility:hidden;
+  top: 10%;
+  right:20px;
+  z-index: 8;
+}
+
+#labelPic {
+  display: none;
+  position:fixed;
+  top: 5%;
+  right:20px;
+  visibility: hidden;
+  border:2px solid black;
+  z-index: 8;
+}
+
+.mchart {
+  padding-left:40px;
+  padding-right:40px;
+  color: maroon;
+  text-align: center;
+}
+
+#menuBar {
+  position:fixed;
+  top:2px;
+  left: 1%;
+  width: 100%;
+  z-index:399;
+  /* margin-bottom: 2%; */
+}
+.menuBar {
+  /* background-color:orange; */
+  width:17%;
+  /* padding-top:2%;
+  padding-bottom: 0%; */
+  border-bottom: 1px solid maroon;
+  border-top: 1px solid maroon;
+}
+.menuLink {
+  /* background-color:orange; */
+  color: maroon;
+  font-size:1.25em;
+  /* font-weight: bold; */
+  /* width:35%; */
+}
+.menuTable {
+  background-color:orange;
+  margin:0px;
+  width:60%
+}
+
+#altMenuTable {
+  display:none;
+  position:fixed;
+  top:2px;
+  left: 25%;
+  width: 10%;
+  z-index:401;
+}
+/* #menuBar {
+  position:fixed;
+  top: 30%;
+  left: 0px;
+  border: 2px solid maroon;
+  display:none;
+  z-index: 299;
+}
+
+.menuBar {
+  border: 1px solid maroon;
+  padding-top:10%;
+  padding-bottom: 10%;
+}
+
+.menuLink {
+  color: orange;
+  font-size:.75em;
+}
+
+.menuTable {
+  margin:0px;
+} */
+
+#curve_chart {
+  border:4px solid tan;
 }
