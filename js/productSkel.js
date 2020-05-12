@@ -53,7 +53,7 @@ var productSkel = "<!-- begin product~sfx~ -->" +
  "              </div>" +
  "              </div>" +
  "              </div>" +
-"              <div id=sButton~sfx~ class=submitButton onclick='submitForm(\"~sfx~\");'>Add to Cart</div>" +
+"              <div id=sButton~sfx~ class=submitButton onclick='submitForm(\"~sfx~\", false);'>Add to Cart</div>" +
 "              <!-- end of the picture and order button section -->" +
 "" +
 "" +

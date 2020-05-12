@@ -20,7 +20,7 @@
   <div class="grid-container">
     <div class="grid-x grid-padding-x">
       <div class="large-12 cell">
-        <div class=pageTitle>
+        <div id=pageTitle class=pageTitle>
           Physical Distancing, and Social BONDING!
           <br>Buy a shirt! Spread the word!
           <!-- <div type=button onclick=fillUp();>Fill the page</div> -->
@@ -29,11 +29,11 @@
     </div>
 
     <div class="grid-x grid-padding-x">
-      <div  id="product-list-hold" class="large-8 medium-8 cell">
+      <div  id="product-list-hold" class="large-12 medium-12 cell">
 
-          <div  id="product-list" class="large-8 medium-8 cell">
+          <div  id="product-list" class="large-12 medium-12 cell">
           <div class="grid-x grid-padding-x">
-            <div class="large-5 medium-5 cell">
+            <div class="large-4 medium-4 cell">
               <div id="product-list-XX-hold" class="primary callout">
                 <!-- this is where the product goes -->
 <!-- starting -->
@@ -249,16 +249,42 @@
 <div id=orderWork></div>
 <!-- area for shipping est return -->
 <div id=outShipping></div>
-
 <script src="js/SBdataBase.js"></script>
 <script src="js/SBpayPal.js"></script>
 <script src="js/oldJS.js"></script>
 <script src="js/oldJS2.js"></script>
-<script src="js/productSkel.js"></script>
+<script src="js/productSkelWork.js"></script>
 <script src="js/colorCodes.js"></script>
 <script src="js/doMail.js"></script>
 <!-- <script src="js/dummyShipping.js"></script> -->
+<script>
+// #bigPicture-00, #bigPicture-01, #bigPicture-02, #bigPicture-03,
+// #bigPicture-04, #bigPicture-05, #bigPicture-06, #bigPicture-07,
+// #bigPicture-08, #bigPicture-09, #bigPicture-10, #bigPicture-11
+// {
+//   /* postion:relative; */
+//   display: none;
+//   width:140%;
+//   height: 140%;
+//   /* border:2px solid red; */
+// }
+</script>
+<style>
 
+  #bigPicture-00, #bigPicture-01, #bigPicture-02, #bigPicture-03,
+  #bigPicture-04, #bigPicture-05, #bigPicture-06, #bigPicture-07,
+  #bigPicture-08, #bigPicture-09, #bigPicture-10, #bigPicture-11
+  {
+    position:fixed;
+    left:40%;
+    top:5%;
+    display:none;
+    width:80%;
+    height:80%;
+    z-index:599;
+  }
+
+</style>
 <script>
 PAYMENT_BEING_PROCESSED = false;
 // function submitForm(sfx){
@@ -332,13 +358,9 @@ function extractVariantData(key, apiSource){
 function extractVariantPrice(size, apiSource){
   if(apiSource["other_info"]){
     for(i in apiSource["other_info"]){
-        // size may be embedded in the name attribute...
-        if(apiSource["other_info"][i]["name"].indexOf(size.replace(/_/g, " ").trim()) > -1 ){
+        if(apiSource["other_info"][i]["size"].trim() == size.trim()){
           return apiSource["other_info"][i]["retail_price"].trim()
         }
-        // if(apiSource["other_info"][i]["size"].trim() == size.trim()){
-        //   return apiSource["other_info"][i]["retail_price"].trim()
-        // }
       }
     }
   return "";
@@ -346,17 +368,20 @@ function extractVariantPrice(size, apiSource){
 
 function extractVariantFile(color, apiSource){
   var backup = "";
+  var preview = "";
   if(apiSource["other_info"]){
     for(i in apiSource["other_info"]){
         if(apiSource["other_info"][i]["color"].trim() == color.trim()){
-          for(var j=0; j<3; j++){
-            if(apiSource["other_info"][i]["files"][j]["type"] == "default"){
-              return apiSource["other_info"][i]["files"][j]["url"];
-            }
+          for(var j=0; j < apiSource["other_info"][i]["files"].length; j++){
             if(apiSource["other_info"][i]["files"][j]["type"] == "preview"){
+              preview = apiSource["other_info"][i]["files"][j]["url"];
+            }
+            if(apiSource["other_info"][i]["files"][j]["type"] == "default"){
               backup = apiSource["other_info"][i]["files"][j]["url"];
             }
           }
+          if(preview) return preview;
+          if(backup) return backup;
         }
       }
       return backup;
@@ -364,23 +389,6 @@ function extractVariantFile(color, apiSource){
   return "";
 }
 
-function fakeSizing(sfx){
-  var buttonList = getButtonList(sfx);
-  var size = document.getElementById("size"+sfx);
-
-  for(i=0; i < buttonList.length; i++){
-    if(!buttonList[i])continue;
-    buttonList[i].style.background = "white";
-    buttonList[i].style.color = "black";
-    buttonList[i].chosen = false;
-  }
-
-  var button = document.getElementById(id);
-  button.style.background = "black";
-  button.style.color = "white";
-  button.chosen = true;
-  size.innerHTML = getSize(idS);
-}
 
 ///////////////////////////////////////////////
 //addSizes
@@ -388,20 +396,13 @@ function fakeSizing(sfx){
 //@param front - file name for front image
 //@param back - file name for back image
 //
-var sizeIDList = [];
 function addSizes(sizes, sfx, pSKEL){
   // var size = "<div id=XS-01 class=sizeButton onclick=scoreButton('XS-01'); prodID='#5e9ca2eb6aa6f5'>XS </div>";
-  var sizeTemplate = "<div id=~size~~sfx~ class=sizeButton onclick=scoreButtonStuff('~size~~sfx~'); prodID='#5e9ca2eb6aa6f5'>~sizeEnglish~ </div>";
+  var sizeTemplate = "<div id=~size~~sfx~ class=sizeButton onclick=scoreButton('~size~~sfx~'); prodID='#5e9ca2eb6aa6f5'>~size~ </div>";
   sizeButtons = "";
   for (s in sizes){
-    str = sizes[s].replace(/\s/g,"_");
-    var sizeCalc = "~size~~sfx~";
-    sizeCalc = sizeCalc.replace(/~size~/g, str).replace(/~sfx~/g, sfx);
-    sizeIDList.push(sizeCalc);
-    sizeButtons += sizeTemplate.replace(/~size~/g, str).replace(/~sfx~/g, sfx).replace(/~sizeEnglish~/, sizes[s]);
-    // if(sizes[s].length > 13) sizeButtons += "<br>";
+    sizeButtons += sizeTemplate.replace(/~size~/g, sizes[s]).replace(/~sfx~/g, sfx);
   }
-
   pSKEL = pSKEL.replace("~size~array~",sizeButtons);
   return pSKEL;
   // titleBar = document.getElementById("titleBar" + sfx);
@@ -409,21 +410,20 @@ function addSizes(sizes, sfx, pSKEL){
   // titleBar.innerHTML = newHTML + sizeButton;
 }
 
+
 function colorButton(id,color){
   colorButton = document.getElementById(id);
 
   alert(id,color);
 }
 
-var colorIDList = [];
 function addColors(colors, sfx, pSKEL){
   // var colorArray = [];
   // var arr = [];
   // var newHTML = "<div class=sideBy></div>";
   var newHTML = "";
   var colCount = 0;
-  var colorTemplete = "<div id=Color~col~~sfx~ class=colorButton onclick=scoreColorButton('Color~col~~sfx~','~color~'); hexVAL=\"~hex~\" prodID=\"#5e9ca2eb6aa6f5\" style=\"background-color:#~hex~;color:#~hex~;border:2px solid black;padding:3px;\">Co</div>";
-
+  var colorTemplete = "<div id=Color~col~~sfx~ class=colorButton onclick=scoreColorButtonWork('Color~col~~sfx~','~color~'); hexVAL=\"~hex~\" prodID=\"#5e9ca2eb6aa6f5\" style=\"background-color:#~hex~;color:#~hex~;border:2px solid black;padding:3px;\">Co</div>";
 
   // colorBar = document.getElementById("colorBar" + sfx);
   // CBar = document.getElementById("colorBar-00");
@@ -431,11 +431,8 @@ function addColors(colors, sfx, pSKEL){
   for(c in colors){
     co = colors[c].replace(/\s/g,'*');
     newHTML += colorTemplete.replace(/~sfx~/g, sfx).replace(/~color~/, co).replace(/~hex~/g,getHex(colors[c])).replace(/~col~/g,getSuffix(colCount));
-    // colorArray.push([colors[c],getHex(colors[c])]);
-    var colorCalc = "Color~col~~sfx~";
-    colorCalc = colorCalc.replace(/~col~/g,getSuffix(colCount)).replace(/~sfx~/g, sfx);
-    colorIDList.push(colorCalc);
     colCount++;
+    // colorArray.push([colors[c],getHex(colors[c])]);
   }
   // colorBar.innerHTML = newHTML;
   pSKEL = pSKEL.replace(/~color~array~/, newHTML);
@@ -488,38 +485,6 @@ function sortSizes(size_array){
 function getProductDetails(data){
   var color_array = [];
   var size_array = [];
-  var nameHold = "";
-
-  if(data['id'] == "173895465"){
-    for(entry in data["other_info"]){
-      nameHold = data['other_info'][entry]['name'];
-      // console.log(data['other_info']);
-      // console.log(nameHold.substring(nameHold.indexOf('-'), nameHold.length).trim());
-      name = nameHold.substring(0, nameHold.indexOf('-')).trim();
-      sizeHold = data['other_info'][entry]['size'];
-      size = sizeHold.substring(sizeHold.indexOf("(")+1, sizeHold.length).trim();
-      sizeHold = data['other_info'][entry]['size'];
-      color = sizeHold.substring(sizeHold.indexOf("(")+1, sizeHold.indexOf("coating")).trim();
-      color_array.push(color);
-      size_array.push(size);
-    }
-    // console.log({"colors": color_array, "sizes": size_array});
-    return {"colors": color_array, "sizes": size_array};
-  }
-
-  if(data['id'] == "173895949"){  // mug
-    for(entry in data["other_info"]){
-      nameHold = data['other_info'][entry]['name'];
-      // console.log(data['other_info']);
-      // console.log(nameHold.substring(nameHold.indexOf('-'), nameHold.length).trim());
-      name = nameHold.substring(0, nameHold.indexOf('-')).trim();
-      size = nameHold.substring(nameHold.indexOf('-')+1, nameHold.length).trim();
-      color_array.push("white");
-      size_array.push(size);
-    }
-    console.log({"colors": color_array, "sizes": size_array});
-    return {"colors": color_array, "sizes": size_array};
-  }
 
   for(entry in data["other_info"]){
       c = data["other_info"][entry]["color"].trim();
@@ -527,7 +492,6 @@ function getProductDetails(data){
       if (notInArray(c, color_array)) color_array.push(c);
       if (notInArray(s, size_array)) size_array.push(s);
   }
-  console.log(color_array);
   return {"colors": color_array, "sizes": sortSizes(size_array)};
 }
 
@@ -549,72 +513,96 @@ function addExternalID(externalID,pSKEL){
     return pSKEL;
 }
 
-function scoreButtonStuff(id){
-  var idS = id.substring(0,id.length-3);
-  var sfx = id.substring(id.length-3,id.length);
-
-  for(var i=0; i < sizeIDList.length; i++){
-    if(sizeIDList[i] == id){
-      scoreButtonID = document.getElementById(id);
-      scoreButtonID.style.border = '2px solid black';
-      suffix = sizeIDList[i].substring(sizeIDList[i].length - 3, sizeIDList[i].length);
-      color = document.getElementById("color" + suffix);
-      color.innerHTML = sizeIDList[i].substring(0,13);
-      if(sizeIDList[i].indexOf("24K") > -1) color.innerHTML = sizeIDList[i].substring(0,8);
-      color.innerHTML = color.innerHTML.replace(/_/g, " ");
-    }
-    else {
-      scoreButtonID = document.getElementById(sizeIDList[i]);
-      scoreButtonID.style.border = '2px solid white';
-    }
-  }
-  setPricing(idS, sfx);
-}
-
-//////////////////////////////////////////////////////////
-// changing the way the necklace is presented
-function setColorConsiderations(colorIDList, prodID){
-  if(prodID != 173895465) return;
-  for(var i=0; i < colorIDList.length; i++){
-    elt = document.getElementById(colorIDList[i]);
-    elt.className = "colorButtonAlt";
-  }
-}
-
-//////////////////////////////////////////////////////////
-// changing the way the necklace is presented
-function setSizeConsiderations(sizeIDList, prodID){
-  if(prodID != 173895465) return;
-  for(var i=0; i < sizeIDList.length; i++){
-    elt = document.getElementById(sizeIDList[i]);
-    elt.className = "sizeButtonAlt";
-  }
-}
-
-////////////////////////////////////////////////////////
-//changeSubmitFunction
-//The function changes the parameter in the call to
-//submit. The submit determines how to process sizes
-//based on this parameter.
-//@param change - "true" or varaible name...
-//@param pSKEL - skel forming the project from
-//
-function changeSubmitFunction(change, pSKEL){
-  pSKEL = pSKEL.replace("false", change);
+function  changeShowBack(pSKEL){
+  // pSKEL = pSKEL.replace(/showBack/g, "showBackWork");
   return pSKEL;
+  // console.log(pSKEL);
 }
+
+function setupBigPicture(sfx){
+  var bigPicture = document.getElementById("bigPicture"+sfx);
+  var bigPictureSpot = document.getElementById("bigPictureSpot"+sfx);
+  if(!bigPictureSpot){
+    var bigPictureSpot = document.createElement("IMG");                 // Create a <li> node
+  }
+  bigPicture.style.display = "inline";
+  bigPictureSpot.id = 'bigPictureSpot'+sfx;
+  bigPicture.appendChild(bigPictureSpot);
+  return bigPicture;
+}
+
+function scoreColorButtonWork(id, clr){
+    var idS = id.substring(0,id.length-3);
+    var sfx = id.substring(id.length-3,id.length);
+    bigPicture = setupBigPicture(sfx);
+    var bigPictureSpot = document.getElementById("bigPictureSpot"+sfx);
+    bigPicture.style.display = "block";
+    bigPicture.style.width = "140%";
+    bigPicture.style.height = "140%";
+
+    colorAllButtons(sfx);
+
+    var button = document.getElementById(id);
+    button.style.background = '#' + button.getAttribute('hexVAL');
+    button.style.color = '#' + button.getAttribute('hexVAL');
+    button.style.border = "4px solid white";
+    button.chosen = true;
+    var color = document.getElementById("color"+sfx);
+    color.innerHTML = clr.replace(/\*/g, " ");
+
+    var prod = document.getElementById("productNumber"+sfx);
+    var prodID = prod.innerHTML;
+    var frontImg = document.getElementById("frontImg"+sfx);
+    frontImg.src = extractVariantFile(clr.replace(/\*/g, " "), PRINTFUL_DATA[prodID]);
+    bigPictureSpot.src = frontImg.src;
+    setTimeout(function(){
+      bigPicture.style.width   = "2%";
+      bigPicture.style.height  = "2%";
+      bigPicture.style.display = "none";
+      bigPictureSpot.style.display = "none";
+      if(bigPicture.childNodes[0]) bigPicture.removeChild(bigPicture.childNodes[0]);
+    }, 3000);
+    // frontImg.style.background = '#' + getHex(color.innerHTML);
+
+    var prodExternalID = document.getElementById("productNumber"+sfx).innerHTML;
+    loadSizeArray(getSizeInfo(prodExternalID, clr.replace(/\*/g, " ")), sfx);
+
+}
+
+
+// BACK_CLICK = [false,false,false,false,false,false,false,false,false];
+//
+// function showBackWork(sw, sfx){
+//   // alert("HERE");
+//   var bigPicture = document.getElementById("bigPicture"+sfx);
+//   var bigPictureSpot = document.getElementById("bigPictureSpot"+sfx);
+//   if(!bigPictureSpot){
+//     bigPicture.style.display = "inline";
+//     var bigPictureSpot = document.createElement("IMG");                 // Create a <li> node
+//     bigPictureSpot.id = 'bigPictureSpot'+sfx;
+//     // var textnode = document.createTextNode("BIG PICTURE");         // Create a text node
+//     // node.appendChild(textnode);                              // Append the text to <li>
+//     bigPicture.appendChild(bigPictureSpot);
+//   }
+//   //
+//   var i = parseInt(sfx.substring(1));
+//   BACK_CLICK[i] = false;
+//   if(sw){
+//     BACK_CLICK[i] = true;
+//     var prodID = getCurrentProduct(sfx);
+//     var frontImage = extractData("thumbnail_url", PRINTFUL_DATA[prodID]);
+//     imageData = extractVariantData("files", PRINTFUL_DATA[prodID]);
+//     for(var i=0; i < imageData.length; i++){
+//       if(imageData[i]["type"] == "preview"){
+//         frontImage = imageData[i]["url"];
+//         fImage = document.getElementById("frontImg"+sfx);
+//         fImage.src = frontImage;
+//       }
+//     }
+//   }
+// }
 
 function createNewProduct(sfx, side, data, prodID){
-  // prodIDArray = [173895465,173895745, 173895949];
-  prodIDArray = [173895465, 173895745];
-
-  // console.log("createNewProduct: " + prodID);
-  continueSW = false;
-  for (var i=0; i < prodIDArray.length; i++){
-    if (prodID == prodIDArray[i]) continueSW = true;
-  }
-
-  if(!continueSW) return;
   //var productSkel = document.getElementById("product-00");
   // var productXX = document.getElementById("product" + sfx);
   // var hd = happyDoc;
@@ -650,7 +638,7 @@ function createNewProduct(sfx, side, data, prodID){
   // addColors(colorArray,sfx);
   pSKEL = addTitle(sfx, extractData("name", data), pSKEL);
   pSKEL = keepProdID(sfx, prodID, pSKEL);
-  pSKEL = changeSubmitFunction("true", pSKEL);
+  pSKEL = changeShowBack(pSKEL);
   // addPrice(sfx, extractVariantData("retail_price", data));
   // addPrice("-01", data["other_info"][0]["retail_price"]);
   // console.log(data);
@@ -661,13 +649,10 @@ function createNewProduct(sfx, side, data, prodID){
   // console.log(work.innerHTML);
   work.appendChild(product);
   // console.log(pSKEL);
-  setSizeConsiderations(sizeIDList, prodID);
-  setColorConsiderations(colorIDList, prodID)
 }
-
 </script>
 <!-- api work -->
-<script src="js/PrintFulAPIStuff.js"></script>
+<script src="js/PrintFulAPI.js"></script>
 <script src="js/getPFAPIData.js"></script>
 <script src="js/menu.js"></script>
 <!-- area for API work -->
@@ -687,11 +672,21 @@ function flipSide(side){
 var PAGE_MAX = 8;
 function buildPage(){
   // alert("build page");
+  dropList = [169150005,170108821];
   count = 0;
   leftSide = false;
+  continueSw = false;
   // var CSPColl = {};
 
   for (post in PRINTFUL_DATA){
+    for(var i=0; i<dropList.length; i++)
+        if(dropList[i] == post) continueSw = true;
+
+    if(continueSw){
+      continueSw = false;
+      continue;
+    }
+
     sfx = getSuffix(count);
     count++;
     // console.log("extacting: " + post);
@@ -767,9 +762,13 @@ function finalFunction(){
   var splashScreen = document.getElementById("splashScreen");
   splashScreen.style.display = "none";
   buildPage();
-  labelPic = document.getElementById("labelPic");
-  labelPic.style.visibility = 'visible';
-  labelPic.style.display = "block";
+  //array: [w,h]
+  var screen_size = getScreenDimenstions();
+  if(screen_size[0] > 700){
+    labelPic = document.getElementById("labelPic");
+    labelPic.style.visibility = 'visible';
+    labelPic.style.display = "block";
+  }
 
   menuBar = document.getElementById("menuBar");
   menuBar.style.visibility = 'visible';
@@ -834,12 +833,11 @@ function turnOffSizing(){
 }
 
 // var CURRENT_PRODUCT = 0;
-function scrollPage(){
-  var scrollDownMsg = document.getElementById("scrollDownMsg");
-  scrollDownMsg.innerHTML = "Don't Click!<br>Scroll!";
-  scrollscrollDownMsg.style.color = "red";
-  // elmnt.scrollIntoView();
-  // CURRENT_PRODUCT++;
+
+function getScreenDimenstions(){
+    var width  = window.innerWidth  || document.documentElement.clientWidth  || document.body.clientWidth;
+    var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    return [width, height];
 }
 
 </script>

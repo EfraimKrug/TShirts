@@ -38,23 +38,24 @@ var productSkel = "<!-- begin product~sfx~ -->" +
 "                </div>" +
 "              </div>" +
 "              <!-- beginning of the picture and order button section -->" +
- "           <div class='grid-x grid-padding-x sideBy'>  <div class='large-8 medium-8 cell sideBy'> " +
+ "           <div class='grid-x grid-padding-x'>  <div class='large-8 medium-8 cell sideBy'> " +
 "                    <div class=sideBy onclick='showBack(1, \"~sfx~\")' onmouseover='showBack(0, \"~sfx~\")' onmouseout='hideBack(\"~sfx~\")'>" +
 "                      <img id=frontImg~sfx~ src='~front~'/>" +
 "                    </div>" +
  "              </div>  " +
+ "              <div class='large-4 medium-4 cell sideBy'>" +
+ "              <div id=back~sfx~ class='sideBy noshow'>" +
+ "                <img id=backImg~sfx~ class=back src='~back~'/>" +
+ "              </div><span id=shirtBack~sfx~ class='shirtBack noshow'>(Back)</span>" +
  "              </div>" +
- "              <div class='large-2 medium-2 cell sideBy'>" +
  "              </div>" +
  "              </div>" +
  "              </div>" +
  "              </div>" +
- "              <div class='sideBy'>" +
- "              <span id=shirtBack~sfx~ class='shirtBack noshow'>(Back)</span>" +
  "              </div>" +
- "              <div  id=back~sfx~>  <img id=backImg~sfx~ class=back src='~back~'/> </div>" +
 "              <div id=sButton~sfx~ class=submitButton onclick='submitForm(\"~sfx~\", false);'>Add to Cart</div>" +
 "              <!-- end of the picture and order button section -->" +
+"" +
 "" +
 "<hr />" +
 "</div><!-- end product~sfx~ -->'" +

@@ -216,25 +216,30 @@ function loadSizeArray(sizeArray, sfx){
   if(!sizeStillHere) size = "";
 }
 
-function submitForm(sfx){
+function submitForm(sfx, altSwitch){
   if(PAYMENT_BEING_PROCESSED) return;
   var payButton = document.getElementById("payButton");
   var submitButton = document.getElementById("sButton"+sfx);
 
   payButton.disabled = false;
 
-  buttonR = checkFields(sfx);
-  if(!buttonR) return;
-  var prodID = buttonR.getAttribute('prodID');
-  var externalID = document.getElementById("externalID"+sfx).innerHTML;
+  if(!altSwitch){
+    buttonR = checkFields(sfx);
+    if(!buttonR) return;
+    var prodID = buttonR.getAttribute('prodID');
+    size = buttonR.innerHTML;
+  } else {
+    var prodID = document.getElementById("productNumber"+sfx);
+  }
 
+  var externalID = document.getElementById("externalID"+sfx).innerHTML;
   var color = document.getElementById("color"+sfx).innerHTML;
+  if(!color) return;
   // console.log(prodID);
   productValues = getValues(sfx);
   // console.log(buttonR.innerHTML);
   // price = getPrice(buttonR.innerHTML, sfx);
   price = productValues[2].replace("$","");
-  size = buttonR.innerHTML;
   var variantID = getVariantID(externalID, color, size);
   // console.log(variantID);
   // console.log(parseInt(productValues[1]));
