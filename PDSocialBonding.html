@@ -254,16 +254,60 @@
 <script src="js/SBpayPal.js"></script>
 <script src="js/oldJS.js"></script>
 <script src="js/oldJS2.js"></script>
-<script src="js/productSkel.js"></script>
+<script src="js/productSkelWk.js"></script>
 <script src="js/colorCodes.js"></script>
 <script src="js/doMail.js"></script>
 <!-- <script src="js/dummyShipping.js"></script> -->
-
+<style>
+</style>
 <script>
 PAYMENT_BEING_PROCESSED = false;
 // function submitForm(sfx){
 //   alert(sfx);
 // }
+//////////////////////////////////////////////////////////////
+//scoreColorButton - fires when color is clicked
+//@param id: 'Color~col~~sfx~' "Color" + 2-digit index + 2-digit suffix
+//            e.g. Color-05-02 (fifth color for 2nd product)
+//@param clr: the color in English - with "*" in for spaces...
+//
+function scoreColorButtonWork(id, clr){
+    var idS = id.substring(0,id.length-3);
+    var sfx = id.substring(id.length-3,id.length);
+
+    var bigPicture = document.getElementById("bigPicture"+sfx);
+    bigPicture.style.display = "block";
+    bigPicture.style.width = "110%";
+    bigPicture.style.height = "110%";
+    bigPicture.style.top = "0px";
+    bigPicture.style.right = "0px";
+    bigPicture.style.padding = "2%";
+    bigPicture.style.backgroundColor = "maroon";
+    colorAllButtons(sfx);
+
+    var button = document.getElementById(id);
+    button.style.background = '#' + button.getAttribute('hexVAL');
+    button.style.color = '#' + button.getAttribute('hexVAL');
+    button.style.border = "4px solid white";
+    button.chosen = true;
+    var color = document.getElementById("color"+sfx);
+    color.innerHTML = clr.replace(/\*/g, " ");
+
+    var prod = document.getElementById("productNumber"+sfx);
+    var prodID = prod.innerHTML;
+    var frontImg = document.getElementById("frontImg"+sfx);
+    frontImg.src = extractVariantFile(clr.replace(/\*/g, " "), PRINTFUL_DATA[prodID]);
+    bigPicture.innerHTML = "<img src='" + frontImg.src + "'/>";
+    setTimeout(function(){
+      bigPicture.style.display = "none";
+    }, 3000);
+
+    // frontImg.style.background = '#' + getHex(color.innerHTML);
+
+    var prodExternalID = document.getElementById("productNumber"+sfx).innerHTML;
+    loadSizeArray(getSizeInfo(prodExternalID, clr.replace(/\*/g, " ")), sfx);
+
+}
 
 ///////////////////////////////////////////////
 //changeImages
@@ -346,7 +390,7 @@ function extractVariantFile(color, apiSource){
   if(apiSource["other_info"]){
     for(i in apiSource["other_info"]){
         if(apiSource["other_info"][i]["color"].trim() == color.trim()){
-          for(var j=0; j<3; j++){
+          for(var j=0; j < apiSource["other_info"][i]["files"].length; j++){
             if(apiSource["other_info"][i]["files"][j]["type"] == "preview"){
               preview = apiSource["other_info"][i]["files"][j]["url"];
             }
@@ -397,7 +441,7 @@ function addColors(colors, sfx, pSKEL){
   // var newHTML = "<div class=sideBy></div>";
   var newHTML = "";
   var colCount = 0;
-  var colorTemplete = "<div id=Color~col~~sfx~ class=colorButton onclick=scoreColorButton('Color~col~~sfx~','~color~'); hexVAL=\"~hex~\" prodID=\"#5e9ca2eb6aa6f5\" style=\"background-color:#~hex~;color:#~hex~;border:2px solid black;padding:3px;\">Co</div>";
+  var colorTemplete = "<div id=Color~col~~sfx~ class=colorButton onclick=scoreColorButtonWork('Color~col~~sfx~','~color~'); hexVAL=\"~hex~\" prodID=\"#5e9ca2eb6aa6f5\" style=\"background-color:#~hex~;color:#~hex~;border:2px solid black;padding:3px;\">Co</div>";
 
   // colorBar = document.getElementById("colorBar" + sfx);
   // CBar = document.getElementById("colorBar-00");
@@ -555,12 +599,23 @@ function flipSide(side){
 
 var PAGE_MAX = 8;
 function buildPage(){
+  dropList = [169150005,170108821];
+
   // alert("build page");
   count = 0;
   leftSide = false;
+  continueSw = false;
   // var CSPColl = {};
 
   for (post in PRINTFUL_DATA){
+    for(var i=0; i<dropList.length; i++)
+        if(dropList[i] == post) continueSw = true;
+
+    if(continueSw){
+      continueSw = false;
+      continue;
+    }
+
     sfx = getSuffix(count);
     count++;
     // console.log("extacting: " + post);

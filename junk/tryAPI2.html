@@ -1,0 +1,139 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Trying API work</title>
+</head>
+<body>
+  <style>
+  #outDiv, #outDiv2 {
+    visibility: hidden;
+  }
+  </style>
+  <h1>Playing with API</h1>
+
+  <div id=tableDiv>
+    <table id=table>
+      <tr class=tr>
+        <td class=td>id</td><td class=td>external id</td><td class=td>name</td><td class=td>variants</td>
+        <td class=td>synced</td><td class=td>url</td><td class=td></td><td class=td></td>
+      </tr>
+    </table>
+    <table id=table02>
+      <tr class=tr>
+        <td class=td>external id</td><td class=td>variant id</td><td class=td>retail price</td><td class=td>name</td>
+        <td class=td>size</td><td class=td>color</td><td class=td>files</td>
+      </tr>
+    </table>
+  </div>
+<script src="js/PrintFulAPI.js"></script>
+<script src="js/getPFAPIData.js"></script>
+<script>
+</script>
+<style>
+.td {
+  border:1px solid blue;
+}
+</style>
+<div id=clickBait></div>
+<div id=outDiv></div>
+<div id=outDiv2></div>
+
+<script>
+function buildOrder(variant_id=17){
+  alert(variant_id);
+}
+// variantKeys = [];
+function getETC(){
+  var listJ = JSON.parse(outDiv.innerHTML.trim());
+  // console.log(listJ);
+  // for (p in listJ['sync_variant']){
+  // console.log(listJ);
+    // variantKeys.push(listJ['sync_variants'][p]['id']);
+  // }
+}
+
+// variantKeys = [];
+function getVariant(){
+  var listJ = JSON.parse(outDiv.innerHTML.trim());
+  // console.log(listJ);
+  // for (p in listJ['sync_variant']){
+    console.log(listJ['sync_variant']['retail_price']);
+    console.log(listJ['sync_variant']['name']);
+    console.log(listJ['sync_variant']['external_id']);
+    // variantKeys.push(listJ['sync_variants'][p]['id']);
+  // }
+}
+
+function checkOrderCollection(collection, key){
+  if(!collection.length) return true;
+  // console.log(collection.length);
+  for(var i=0; i < collection.length; i++){
+    if(key == collection[i]["variant_id"]) return false;
+  }
+  return true;
+}
+
+// variantKeys = [];
+orderDataCollection = [];
+
+function _createOrder(vID){
+  var order = createOrder(vID);
+  console.log(JSON.stringify(order));
+  apiCall(outDiv, soVDone, "estimate", JSON.stringify(order));
+}
+
+function createItem(i){
+  var item = {};
+  item.variant_id = orderDataCollection[i]["variant_id"];
+  item.quantity = 1;
+  item.files = orderDataCollection[i]["files"];
+  return item;
+}
+
+var ONE_TIME = false;
+function soDone(){
+  if(ONE_TIME) return;
+  outDiv = document.getElementById("outDiv");
+  console.log(outDiv.innerHTML);
+  alert("I am so done!");
+  // buildClickBait();
+  ONE_TIME = true;
+}
+
+function createOrder(variant_id){
+    var order = {};
+    order.items = [];
+    order.recipient = {
+        "name": "Shlomo Shmo",
+        "address1": "183 Honeydew Avenue",
+        "city": "Lawrence",
+        "state_code": "KS",
+        "country_code": "US",
+        "zip": "66045"
+    };
+    for(i=0; i < orderDataCollection.length; i++){
+      if(orderDataCollection[i]["variant_id"] == variant_id){
+          order.items.push(createItem(i));
+          break;
+      }
+    }
+    // if(order.items){
+      //apiCall(outDiv, soDone, "estimate", order);
+      // console.log(order);
+      return order;
+    // }
+}
+
+
+///////////////////////////////////////////////////////////////////
+//testing...
+//dataObj can not be passed back directly because
+// this is all asyncronous... remember.
+var outDiv = document.getElementById("outDiv");
+var outDiv2 = document.getElementById("outDiv2");
+getPrintFulAPIData(outDiv,outDiv2);
+</script>
+</body>
+</html>

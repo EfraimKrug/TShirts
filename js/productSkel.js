@@ -58,4 +58,5 @@ var productSkel = "<!-- begin product~sfx~ -->" +
 "" +
 "" +
 "<hr />" +
-"</div><!-- end product~sfx~ -->'";
+"</div><!-- end product~sfx~ -->'" +
+"<div id=bigPicture~sfx~></div>";
