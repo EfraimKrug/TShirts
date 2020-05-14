@@ -88,29 +88,51 @@ function colorAllButtons(sfx){
 //@param clr: the color in English - with "*" in for spaces...
 //
 function scoreColorButton(id, clr){
-    var idS = id.substring(0,id.length-3);
-    var sfx = id.substring(id.length-3,id.length);
-    colorAllButtons(sfx);
+  var idS = id.substring(0,id.length-3);
+  var sfx = id.substring(id.length-3,id.length);
 
-    var button = document.getElementById(id);
-    button.style.background = '#' + button.getAttribute('hexVAL');
-    button.style.color = '#' + button.getAttribute('hexVAL');
-    button.style.border = "4px solid white";
-    button.chosen = true;
-    var color = document.getElementById("color"+sfx);
-    color.innerHTML = clr.replace(/\*/g, " ");
+  var bigPicture = document.getElementById("bigPicture"+sfx);
+  bigPicture.style.display = "block";
+  bigPicture.style.width = "110%";
+  bigPicture.style.height = "110%";
+  bigPicture.style.top = "0px";
+  bigPicture.style.right = "0px";
+  bigPicture.style.padding = "2%";
+  bigPicture.style.backgroundColor = "maroon";
+  colorAllButtons(sfx);
 
-    var prod = document.getElementById("productNumber"+sfx);
-    var prodID = prod.innerHTML;
-    var frontImg = document.getElementById("frontImg"+sfx);
-    frontImg.src = extractVariantFile(clr.replace(/\*/g, " "), PRINTFUL_DATA[prodID]);
-    // frontImg.style.background = '#' + getHex(color.innerHTML);
+  var button = document.getElementById(id);
+  button.style.background = '#' + button.getAttribute('hexVAL');
+  button.style.color = '#' + button.getAttribute('hexVAL');
+  button.style.border = "4px solid white";
+  button.chosen = true;
+  var color = document.getElementById("color"+sfx);
+  color.innerHTML = clr.replace(/\*/g, " ");
 
-    var prodExternalID = document.getElementById("productNumber"+sfx).innerHTML;
-    loadSizeArray(getSizeInfo(prodExternalID, clr.replace(/\*/g, " ")), sfx);
+  var prod = document.getElementById("productNumber"+sfx);
+  var prodID = prod.innerHTML;
+  var frontImg = document.getElementById("frontImg"+sfx);
+  frontImg.src = extractVariantFile(clr.replace(/\*/g, " "), PRINTFUL_DATA[prodID]);
+  bigPicture.innerHTML = "<img src='" + frontImg.src + "'/>";
+  bigPicture.onclick = closeBigPicture;
+  setTimeout(function(){
+    bigPicture.style.display = "none";
+  }, 7000);
+
+  var prodExternalID = document.getElementById("productNumber"+sfx).innerHTML;
+  loadSizeArray(getSizeInfo(prodExternalID, clr.replace(/\*/g, " ")), sfx);
 
 }
 
+function closeBigPicture(){
+  for(var i=0; i < 15; i++){
+    var sfx = getSuffix(i);
+    var bigPicture = document.getElementById("bigPicture"+sfx);
+    if(bigPicture){
+      bigPicture.style.display = "none";
+    }
+  }
+}
 // some of these array entries will be udefined
 function getButtonList(sfx){
   var buttonList = [];

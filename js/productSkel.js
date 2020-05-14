@@ -20,7 +20,7 @@ var productSkel = "<!-- begin product~sfx~ -->" +
 "                    <div id=size~sfx~> </div>" +
 "                    <div id=priceTag~sfx~> </div>" +
 "                    <div id=shirtName~sfx~ class=shirtType> ~name~ </div>" +
-"                    <div id=externalID~sfx~ class=externalID>#~externalID~ </div>" +
+"                    <div id=externalID~sfx~ class=externalID onclick='displayProductDescription(~prodNum~)'>Description</div>" +
 "                  </div>" +
 "                </div>" +
 "" +

@@ -1,0 +1,36 @@
+#pdsbDesc0 {
+  display:none;
+  position:fixed;
+  border:2px solid orange;
+  background-color: tan;
+  color:maroon;
+  max-width:40%;
+  padding:2%;
+  z-index: 699;
+  align-content: right;
+}
+
+#pdsbDesc1 {
+  font-size:1em;
+  text-decoration:underline;
+  margin-bottom: 2%;
+}
+#pdsbDesc2 {
+  font-size:.75em;
+  font-variant-caps: small-caps;
+}
+#pdsbDesc3 {
+  font-size:.75em;
+}
+#pdsbDesc3 > li {
+  list-style-type: square;
+  padding-left: 5%;
+  line-height: 1.7em;
+}
+#pdsbExit {
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    /* border-top: 50px solid #000000; */
+    border-left: 50px solid transparent;
+}

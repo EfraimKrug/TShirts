@@ -3,6 +3,8 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import pops
+from pops import getPop
 ##########################################################################
 #   Stats from Influenza in America:
 #   Population: 327,200,000
@@ -54,7 +56,7 @@ def getConfirmed():
             r0 = cleanUp(r[0])
             if r1 not in coll:
                 coll[r1] = {}
-
+                # coll[r1]["population"] = getPop(r1)
             coll[r1][r0] = {}
             coll[r1][r0]["confirmed"] = []
             coll[r1][r0]["recovered"] = []
@@ -72,6 +74,7 @@ def getDeaths():
             r0 = cleanUp(r[0])
             if r1 not in coll:
                 coll[r1] = {}
+                # coll[r1]["population"] = getPop(r1)
             if r0 not in coll[r1]:
                 coll[r1][r0] = {}
 
@@ -90,6 +93,7 @@ def getRecovered():
             r0 = cleanUp(r[0])
             if r1 not in coll:
                 coll[r1] = {}
+                # coll[r1]["population"] = getPop(r1)
             if r0 not in coll[r1]:
                 coll[r1][r0] = {}
             if "recovered" not in coll[r1][r0]:
@@ -121,6 +125,7 @@ def formatState(stateName):
 
         print ( " var County = '" + county.replace('~','_').replace('-','_') + "';" )
         # print(" var Population = " + coll[stateName][county]["population"] + ";")
+        # print("Population: " + str(getPop(stateName)))
         print("var data = google.visualization.arrayToDataTable([")
         print("['Day', 'Confirmed', 'Deaths', 'Recovered'],")
         for day in range(0, len(coll[stateName][county]["confirmed"])):
@@ -132,7 +137,11 @@ def formatState(stateName):
         print("]);")
         print("var options = {")
         # print("title: '" + stateName + " [" + county.replace('_',' ') + " county](Population: " + str(coll[stateName][county]["population"]) + ")',")
-        print("title: '" + stateName + " [" + county.replace('_',' ') + " county])',")
+        popO = "Unknown"
+        if getPop(stateName):
+            popO = getPop(stateName)
+
+        print("title: '" + stateName + " [" + county.replace('_',' ') + " population: " + str(popO) + "])',")
         print("curveType: 'function',")
         print("legend: { position: 'bottom' }")
         print("};")

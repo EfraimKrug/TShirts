@@ -67,3 +67,7 @@ function ppLog(type, outDiv, parms, callback){
   // console.log([type, outDiv, parms]);
   dbGo("SBPayPal", type, outDiv, parms, callback);
 }
+
+function dbMail(type, outDiv, parms, callback){
+  dbGo("SBMail", type, outDiv, parms, callback);
+}

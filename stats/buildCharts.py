@@ -43,18 +43,18 @@ now_dt = datetime.today()
 coll = {}
 def getConfirmed():
     global coll
-    with open('./data/time_series_covid_19_confirmed.csv', mode='r') as f:
+    with open('./data/time_series_covid_19_confirmed_US.csv', mode='r') as f:
         csv_reader = csv.reader(f, delimiter=',')
 
         for r in csv_reader:
-            r2 = r[2].replace(' ','_').replace('.','').replace("'",'')
-            r1 = r[1].replace(' ','_').replace('.','').replace("'",'')
-            if r2 not in coll:
-                coll[r2] = {}
-            coll[r2][r1] = {}
-            coll[r2][r1]["confirmed"] = []
+            r6 = r[6].replace(' ','_').replace('.','').replace("'",'')
+            r5 = r[5].replace(' ','_').replace('.','').replace("'",'')
+            if r6 not in coll:
+                coll[r6] = {}
+            coll[r6][r5] = {}
+            coll[r6][r5]["confirmed"] = []
             for s in range (11, len(r)):
-                coll[r2][r1]["confirmed"].append(r[s])
+                coll[r6][r5]["confirmed"].append(r[s])
 
 
 def getDeaths():
@@ -63,34 +63,34 @@ def getDeaths():
         csv_reader = csv.reader(f, delimiter=',')
 
         for r in csv_reader:
-            r2 = r[2].replace(' ','_').replace('.','').replace("'",'')
-            r1 = r[1].replace(' ','_').replace('.','').replace("'",'')
-            if r2 not in coll:
-                coll[r2] = {}
-            if r1 not in coll[r2]:
-                coll[r2][r1] = {}
+            r6 = r[6].replace(' ','_').replace('.','').replace("'",'')
+            r5 = r[5].replace(' ','_').replace('.','').replace("'",'')
+            if r6 not in coll:
+                coll[r6] = {}
+            if r5 not in coll[r6]:
+                coll[r6][r5] = {}
 
-            coll[r2][r1]["deaths"] = []
-            coll[r2][r1]["population"] = r[11]
+            coll[r6][r5]["deaths"] = []
+            coll[r6][r5]["population"] = r[11]
             for s in range (12, len(r)):
-                coll[r2][r1]["deaths"].append(r[s])
+                coll[r6][r5]["deaths"].append(r[s])
 
-def getRecovered():
-    global coll
-    with open('./data/time_series_covid_19_deaths_US.csv', mode='r') as f:
-        csv_reader = csv.reader(f, delimiter=',')
-
-        for r in csv_reader:
-            r2 = r[2].replace(' ','_').replace('.','').replace("'",'')
-            r1 = r[1].replace(' ','_').replace('.','').replace("'",'')
-            if r2 not in coll:
-                coll[r2] = {}
-            if r1 not in coll[r2]:
-                coll[r2][r1] = {}
-
-            coll[r2][r1]["recovered"] = []
-            for s in range (12, len(r)):
-                coll[r2][r1]["recovered"].append(r[s])
+# def getRecovered():
+#     global coll
+#     with open('./data/time_series_covid_19_deaths_US.csv', mode='r') as f:
+#         csv_reader = csv.reader(f, delimiter=',')
+#
+#         for r in csv_reader:
+#             r6 = r[2].replace(' ','_').replace('.','').replace("'",'')
+#             r5 = r[1].replace(' ','_').replace('.','').replace("'",'')
+#             if r6 not in coll:
+#                 coll[r6] = {}
+#             if r5 not in coll[r6]:
+#                 coll[r6][r5] = {}
+#
+#             coll[r6][r5]["recovered"] = []
+#             for s in range (12, len(r)):
+#                 coll[r6][r5]["recovered"].append(r[s])
 
 
 def formatDropDown():
@@ -121,7 +121,10 @@ def formatState(stateName):
         print("")
         print ("function drawChart" + stateName.replace('~','_').replace('-','_') + "_" + county.replace('~','_').replace('-','_') + "(){")
         print ( " var County = '" + county.replace('~','_').replace('-','_') + "';" )
-        print(" var Population = " + coll[stateName][county]["population"] + ";")
+        pop = "Unknown"
+        if ("population" in coll[stateName][county]):
+            pop = coll[stateName][county]["population"]
+        print(" var Population = " + pop + ";")
         print("var data = google.visualization.arrayToDataTable([")
         print("['Day', 'Confirmed', 'Deaths'],")
         for day in range(0, len(coll[stateName][county]["confirmed"])):

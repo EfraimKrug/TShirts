@@ -8,6 +8,7 @@
   <link rel="stylesheet" type="text/css" href="css/foundation.css">
   <link rel="stylesheet" type="text/css" href="css/app.css">
   <link rel="stylesheet" type="text/css" href="css/SBTShirts.css" />
+  <link rel="stylesheet" type="text/css" href="css/PDSBVariantDesc.css" />
   <!-- google beginning -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
@@ -233,6 +234,15 @@
   </table>
 </div>
 <!-- end menu work -->
+<!-- beinning of variant desciptions -->
+<div id=pdsbDesc0 onclick="closeDesc();">
+<div id=pdsbExit onclick="closeDesc();">X</div>
+<div id=pdsbDesc1></div>
+<div id=pdsbDesc2></div>
+<div id=pdsbDesc3></div>
+</div>
+<!-- end html for the descriptions -->
+
 </body>
 <!-- splash screen -->
 <div id=splashScreen><img src="./images/GroceryStore03.png"/></div>
@@ -254,61 +264,26 @@
 <script src="js/SBpayPal.js"></script>
 <script src="js/oldJS.js"></script>
 <script src="js/oldJS2.js"></script>
-<script src="js/productSkelWk.js"></script>
+<script src="js/productSkelWork.js"></script>
 <script src="js/colorCodes.js"></script>
 <script src="js/doMail.js"></script>
-<!-- <script src="js/dummyShipping.js"></script> -->
+<!-- javascript - dealing with JSON descriptions -->
+<script src="js/json/PDSBVariantDescDisplayCode.js"></script>
+<script src="js/json/PDSBVariantDescCode.js"></script>
+<script src="js/json/PDSBVariantDesc.js"></script>
+<!-- end of description JSON -->
 <style>
 </style>
 <script>
-PAYMENT_BEING_PROCESSED = false;
-// function submitForm(sfx){
-//   alert(sfx);
-// }
-//////////////////////////////////////////////////////////////
-//scoreColorButton - fires when color is clicked
-//@param id: 'Color~col~~sfx~' "Color" + 2-digit index + 2-digit suffix
-//            e.g. Color-05-02 (fifth color for 2nd product)
-//@param clr: the color in English - with "*" in for spaces...
-//
-function scoreColorButtonWork(id, clr){
-    var idS = id.substring(0,id.length-3);
-    var sfx = id.substring(id.length-3,id.length);
-
-    var bigPicture = document.getElementById("bigPicture"+sfx);
-    bigPicture.style.display = "block";
-    bigPicture.style.width = "110%";
-    bigPicture.style.height = "110%";
-    bigPicture.style.top = "0px";
-    bigPicture.style.right = "0px";
-    bigPicture.style.padding = "2%";
-    bigPicture.style.backgroundColor = "maroon";
-    colorAllButtons(sfx);
-
-    var button = document.getElementById(id);
-    button.style.background = '#' + button.getAttribute('hexVAL');
-    button.style.color = '#' + button.getAttribute('hexVAL');
-    button.style.border = "4px solid white";
-    button.chosen = true;
-    var color = document.getElementById("color"+sfx);
-    color.innerHTML = clr.replace(/\*/g, " ");
-
-    var prod = document.getElementById("productNumber"+sfx);
-    var prodID = prod.innerHTML;
-    var frontImg = document.getElementById("frontImg"+sfx);
-    frontImg.src = extractVariantFile(clr.replace(/\*/g, " "), PRINTFUL_DATA[prodID]);
-    bigPicture.innerHTML = "<img src='" + frontImg.src + "'/>";
-    setTimeout(function(){
-      bigPicture.style.display = "none";
-    }, 3000);
-
-    // frontImg.style.background = '#' + getHex(color.innerHTML);
-
-    var prodExternalID = document.getElementById("productNumber"+sfx).innerHTML;
-    loadSizeArray(getSizeInfo(prodExternalID, clr.replace(/\*/g, " ")), sfx);
-
+function displayProductDescription(p){
+  formatProdDesc(p);
+  openDesc();
+  placeMent();
 }
-
+</script>
+<script>
+PAYMENT_BEING_PROCESSED = false;
+//
 ///////////////////////////////////////////////
 //changeImages
 //@param sfx product suffix e.g. "-02"
@@ -441,7 +416,7 @@ function addColors(colors, sfx, pSKEL){
   // var newHTML = "<div class=sideBy></div>";
   var newHTML = "";
   var colCount = 0;
-  var colorTemplete = "<div id=Color~col~~sfx~ class=colorButton onclick=scoreColorButtonWork('Color~col~~sfx~','~color~'); hexVAL=\"~hex~\" prodID=\"#5e9ca2eb6aa6f5\" style=\"background-color:#~hex~;color:#~hex~;border:2px solid black;padding:3px;\">Co</div>";
+  var colorTemplete = "<div id=Color~col~~sfx~ class=colorButton onclick=scoreColorButton('Color~col~~sfx~','~color~'); hexVAL=\"~hex~\" prodID=\"#5e9ca2eb6aa6f5\" style=\"background-color:#~hex~;color:#~hex~;border:2px solid black;padding:3px;\">Co</div>";
 
   // colorBar = document.getElementById("colorBar" + sfx);
   // CBar = document.getElementById("colorBar-00");
