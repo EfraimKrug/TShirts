@@ -1,73 +1,71 @@
+/////////////////////////////////////////////////////////////////
+//apiCall
+//callback - is the function to call back to at the end...
+//           this function must accommodate the data return
+//@param level - guides the program
+//@param id - usually an id, for 'orders' it is an object
+//
+//usage:
+//x = doApiCall(callback, "level", "id").setupCall();
+//x.xhttpSend();
+//
+function doApiCall(callback, level="list", idInk=0){
+    var APIFunk = {
+      headerParam:"application/x-www-form-urlencoded",
+      holdOrderForLater:"",
+      phpProg:"",
+      parms:"",
 
+      xhttp:"",
+      returnVal:"",
+      outData:"",
+      idIn:idInk,
+      setupCall: function(){
+        switch(level){
+          case "list":      APIFunk.setParms("apiProductList", "");
+                            break;
+          case "product":   APIFunk.setParms("apiProduct", "ID=" + this.idIn);
+                            break;
+          case "variant":   APIFunk.setParms("apiVariant", "ID=" + this.idIn);
+                            break;
+          case "files":     APIFunk.setParms("apiETC", "path=files&ID=" + this.idIn);
+                            break;
+          case "estimate":  APIFunk.setParms("apiOrderEstimate", JSON.stringify(this.idIn).replace(/{/g, "[~").replace(/}/g,"~]"));
+                            this.holdOrderForLater = this.parms;
+                            break;
+          case "order":     APIFunk.setParms("apiOrder", this.holdOrderForLater);
+                            this.holdOrderForLater = "";
+                            break;
+          case "countries": APIFunk.setParms("apiCountries", "");
+                            break;
+                      };
+                    },
+          setParms:function(phpP, parmsIN){
+              this.phpProg = "cgi-bin/" + phpP + ".php";
+              this.parms = parmsIN;
+            },
+          xhttpSend:function(){
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200){
+                this.outData = this.responseText;
+                if (this.outData.indexOf("Exception") < 0)
+                  if(typeof(callback) == 'function'){ callback(this.outData); }
+                returnVal = 0;
+              }
+              else
+                returnVal = this.status;
+            };
+            xhttp.open("POST", this.phpProg, true);
+            xhttp.setRequestHeader("Content-Type", this.headerParam);
+            xhttp.send(this.parms);
+            }
+          };
+  return APIFunk;
+}
 
-// @param id: may function as an id or an entire object request
-var holdOrderForLater = "";
-function apiCall(outDiv, callback, level="list", id=0) {
-  // console.log("apiCall:" + level);
-  // console.log(id);
-  headerParam = "application/x-www-form-urlencoded";
-  if(level == "variants") return;
-  var phpProg = "";
-  var parms = "";
-  if(level == "list") phpProg = "cgi-bin/apiProductList.php";
-  if(level == "product"){
-      phpProg = "cgi-bin/apiProduct.php";
-      parms = "ID=" + id;
-    }
-  if(level == "variant"){
-      phpProg = "cgi-bin/apiVariant.php";
-      parms = "ID=" + id;
-    }
-  if(level == "files"){
-      phpProg = "cgi-bin/apiETC.php";
-      parms = "path=files&ID=" + id;
-    }
-  if(level == "estimate"){
-      phpProg = "cgi-bin/apiOrderEstimate.php";
-      // headerParam = "application/json;charset=UTF-8";
-      parms = JSON.stringify(id);
-      parms = parms.replace(/{/g, "[~").replace(/}/g,"~]");
-      // console.log(phpProg + parms);
-      holdOrderForLater = parms;
-    }
-  if(level == "order"){
-      phpProg = "cgi-bin/apiOrder.php";
-      // console.log(holdOrderForLater);
-      if(holdOrderForLater){
-        parms = holdOrderForLater;
-        holdOrderForLater = "";
-      }
-    }
-  if(level == "countries"){
-      phpProg = "cgi-bin/apiCountries.php";
-      parms = "";
-    }
-
-
-  var xhttp;
-  var returnVal;
-  var outData = "";
-  var func = "";
-
-  xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200){
-      outData = this.responseText;
-      outDiv.innerHTML = outData;
-      if (outData.indexOf("Exception") < 0){
-        if(typeof(callback) == 'function'){
-          callback(outData);
-        }
-      }
-      returnVal = 0;
-    }
-    else
-      returnVal = this.status;
-  };
-
-  // console.log("reader to fire..." + phpProg);
-  // console.log(parms);
-  xhttp.open("POST", phpProg, true);
-  xhttp.setRequestHeader("Content-Type", headerParam);
-  xhttp.send(parms);
+function apiCall(callback, level="list", id=0){
+  var apiC = doApiCall(callback, level, id);
+  apiC.setupCall();
+  apiC.xhttpSend();
 }

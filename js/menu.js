@@ -1,7 +1,9 @@
 
 menuBar = document.getElementById("menuBar");
-menuBar.style.visibility = 'visible';
-menuBar.style.display = 'block';
+if(menuBar){
+  menuBar.style.visibility = 'visible';
+  menuBar.style.display = 'block';
+}
 
 function scrollPage(){
   var scrollDownMsg = document.getElementById("scrollDownMsg");

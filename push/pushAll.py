@@ -7,32 +7,32 @@ ftp.cwd('public_html')
 html = ["about.html","blogs.html","chartsWorld.html","home.html","index.html","paidOops.html","paidThanks.html","PDSocialBonding.html","suggestions.html"]
 for f in html:
   print f
-  ftp.storbinary('STOR ' + f, open(f, 'rb'))
+  ftp.storbinary('STOR ' + f, open('../' + f, 'rb'))
 
 ftp.cwd('css')
 css = ["PDSBVariantDesc.css","SBTShirts.css"]
 for f in css:
   print f
-  ftp.storbinary('STOR ' + f, open('css/' + f, 'rb'))
+  ftp.storbinary('STOR ' + f, open('../css/' + f, 'rb'))
 
 ftp.cwd('../js')
 
 js = ["colorCodes.js","dataCollection.js","doMail.js","getPFAPIData.js","HTMLTemplates.js","menu.js","oldJS2.js","PDSBAction.js","PDSBProductDisplay.js","PDSBUtilities.js","PrintFulAPI.js","productSkel.js","SBdataBase.js","SBpayPal.js","sizingInfo.js"]
 for f in js:
   print f
-  ftp.storbinary('STOR ' + f, open('js/' + f, 'rb'))
+  ftp.storbinary('STOR ' + f, open('../js/' + f, 'rb'))
 
 ftp.cwd('json')
-jsjson = ["PDSBDesc.js","PDSBVariantDescCode.js",PDSBVariantDescDisplayC"ode.js",PDSBVariantDesc.js"]
+jsjson = ["PDSBDesc.js","PDSBVariantDescCode.js","PDSBVariantDescDisplayCode.js","PDSBVariantDesc.js"]
 for f in jsjson:
   print f
-  ftp.storbinary('STOR ' + f, open('js/json/' + f, 'rb'))
+  ftp.storbinary('STOR ' + f, open('../js/json/' + f, 'rb'))
 
 ftp.cwd('../../template')
 template = ["descriptions.html","menu.html","pageTop.html","prepPayForm.html","prepPayPal.html","productDivs.html","shoppingCart.html","sizingChart.html"]
 for f in template:
   print f
-  ftp.storbinary('STOR ' + f, open('template/' + f, 'rb'))
+  ftp.storbinary('STOR ' + f, open('../template/' + f, 'rb'))
 
 
 #
