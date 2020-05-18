@@ -1,0 +1,483 @@
+.: 
+total 
+-rw-rw-r-- about.html
+-rw-rw-r-- blogs.html
+-rw-r--r-- chartsWorld.html
+drwxrwxr-x css
+-rw-rw-r-- descWork.html
+-rw-rw-r-- docPayPal.txt
+-rw-rw-r-- doc.txt
+-rw-rw-r-- FoundationIndex.html
+-rw-rw-r-- ftpFiles.py
+-rw-rw-r-- home.html
+drwxrwxr-x images
+-rw-rw-r-- index.html
+drwxrwxr-x js
+drwxrwxr-x junk
+-rw-rw-r-- nrnhy2.html
+-rw-rw-r-- nrnhy.html
+-rw-r--r-- out
+-rw-rw-r-- paidOops.html
+-rw-rw-r-- paidThanks.html
+-rw-r--r-- PDSocialBondingHold.html
+-rw-rw-r-- PDSocialBonding.html
+-rw-rw-r-- PDSocialBondingStuff.html
+-rw-rw-r-- PDSocialBondingWork.html
+drwxrwxr-x php
+drwxrwxr-x push
+drwxrwxr-x stats
+-rw-rw-r-- stats.html
+-rw-rw-r-- suggestions.html
+-rw-rw-r-- Suggestions.odt
+drwxr-xr-x text
+ 
+./css: 
+total 
+-rw-r--r-- app.css
+-rw-r--r-- foundation.css
+-rw-r--r-- foundation.min.css
+-rw-rw-r-- ftpMove.py
+-rw-rw-r-- PDSBVariantDesc.css
+-rw-r--r-- SBTShirts.css
+ 
+./images: 
+total 
+-rw-rw-r-- earth-blue-planet-globe-planet-87651.jpeg
+-rw-rw-r-- FBook.gif
+-rw-rw-r-- FBook.xcf
+-rw-rw-r-- GroceryStore02.png
+-rw-rw-r-- GroceryStore03.png
+-rw-rw-r-- GroceryStore.png
+-rw-rw-r-- GroceryStoreWork.xcf
+-rw-rw-r-- measure.bmp
+-rw-rw-r-- measure.gif
+-rw-rw-r-- measureLabel.gif
+drwxrwxr-x mockups
+drwxrwxr-x NextGen
+ 
+./images/mockups: 
+total 
+-rw-rw-r-- as16_117_18825_orig.0.jpg
+-rw-rw-r-- everestlogocombo.jpg
+-rw-rw-r-- lunarlogocombo.jpg
+-rw-rw-r-- scubalogocombo.jpg
+-rw-rw-r-- skierlogocombo.jpg
+ 
+./images/NextGen: 
+total 
+-rw-rw-r-- 4Lines0001.png
+-rw-rw-r-- 4Lines0002.png
+-rw-rw-r-- 4Lines0003.png
+-rw-rw-r-- 4Lines0004.png
+-rw-rw-r-- 4Lines0005.png
+-rw-rw-r-- 4Lines0006.png
+-rw-rw-r-- 4Lines0007.png
+-rw-rw-r-- 4LinesB0001.png
+-rw-rw-r-- BackBlock004.png
+-rw-rw-r-- BackLines005.png
+-rw-rw-r-- BackLines006.png
+-rw-rw-r-- basic002.xcf
+-rw-rw-r-- basic.xcf
+-rw-rw-r-- OOCircle0001.png
+-rw-rw-r-- OOCircle0002.png
+-rw-rw-r-- OOCircle0003.png
+-rw-rw-r-- OOCircle0004.png
+-rw-rw-r-- OOCircleB0001.png
+-rw-rw-r-- OOCircleB0002.png
+-rw-rw-r-- PurpleBlock001.png
+-rw-rw-r-- PurpleBlock002.png
+-rw-rw-r-- PurpleBlock003.png
+-rw-rw-r-- PurpleBlock004.png
+-rw-rw-r-- PurpleBlock005.png
+-rw-rw-r-- PurpleBlock006.png
+-rw-rw-r-- PurpleBlock011.png
+-rw-rw-r-- PurpleBlock012.png
+-rw-rw-r-- PurpleBlock013.png
+-rw-rw-r-- PurpleBlock014.png
+-rw-rw-r-- PurpleBlock014.xcf
+-rw-rw-r-- PurpleBlock015.png
+-rw-rw-r-- PurpleCircle001.png
+-rw-rw-r-- PurpleCircle002.png
+-rw-rw-r-- PurpleCircle003.png
+-rw-rw-r-- PurpleCircle004.png
+-rw-rw-r-- PurpleCircle005.png
+-rw-rw-r-- PurpleCircle006.png
+-rw-rw-r-- PurpleLines001.png
+-rw-rw-r-- PurpleLines002.png
+-rw-rw-r-- PurpleLines003.png
+-rw-rw-r-- PurpleLines004.png
+-rw-rw-r-- PurpleLines005.png
+-rw-rw-r-- PurpleLines006.png
+ 
+./js: 
+total 
+-rw-rw-r-- colorCodes.js
+-rw-rw-r-- doMail.js
+-rw-rw-r-- ftpFiles.py
+-rw-rw-r-- ftpMove.py
+-rw-rw-r-- getPFAPIData.js
+drwxr-xr-x gooten-js
+drwxrwxr-x json
+-rw-rw-r-- menu.js
+-rw-rw-r-- oldJS2.js
+-rw-r--r-- oldJS.js
+-rw-rw-r-- PrintFulAPI.js
+-rw-rw-r-- PrintFulAPIStuff.js
+-rw-rw-r-- productSkel.js
+-rw-rw-r-- productSkelWork.js
+-rw-rw-r-- SBdataBase.js
+-rw-r--r-- SBpayPal.js
+ 
+./js/gooten-js: 
+total 
+-rw-r--r-- bower.json
+-rw-rw-r-- emkTry.html
+-rw-r--r-- Gruntfile.js
+-rw-r--r-- package.json
+-rw-r--r-- README.md
+drwxr-xr-x src
+ 
+./js/gooten-js/src: 
+total 
+drwxr-xr-x assets
+drwxr-xr-x grunt
+ 
+./js/gooten-js/src/assets: 
+total 
+-rw-r--r-- gtnfiles.json
+drwxr-xr-x js
+-rw-r--r-- karma.conf.js
+drwxr-xr-x web-tests
+ 
+./js/gooten-js/src/assets/js: 
+total 
+drwxr-xr-x lib
+drwxr-xr-x src
+drwxr-xr-x tests
+ 
+./js/gooten-js/src/assets/js/lib: 
+total 
+-rw-r--r-- braintree.js
+ 
+./js/gooten-js/src/assets/js/src: 
+total 
+-rw-r--r-- gtn.api.js
+-rw-r--r-- gtn.config.js
+-rw-r--r-- gtn.namespace.js
+-rw-r--r-- gtn.util.di.init.js
+-rw-r--r-- gtn.util.di.js
+-rw-r--r-- gtn.util.http.js
+-rw-r--r-- gtn.util.js
+ 
+./js/gooten-js/src/assets/js/tests: 
+total 
+-rw-r--r-- gtn.api.tests.js
+-rw-r--r-- gtn.config.tests.js
+ 
+./js/gooten-js/src/assets/web-tests: 
+total 
+drwxr-xr-x code
+ 
+./js/gooten-js/src/assets/web-tests/code: 
+total 
+-rw-r--r-- bags_reprodused.html
+-rw-r--r-- editor2.html
+-rw-r--r-- editor3.html
+ 
+./js/gooten-js/src/grunt: 
+total 
+-rw-r--r-- configuration.js
+-rw-r--r-- locations.js
+drwxr-xr-x tasks
+ 
+./js/gooten-js/src/grunt/tasks: 
+total 
+-rw-r--r-- contrib-clean.js
+-rw-r--r-- contrib-concat.js
+-rw-r--r-- contrib-uglify.js
+-rw-r--r-- exec.js
+-rw-r--r-- karma.js
+ 
+./js/json: 
+total 
+-rw-rw-r-- ftpMove.py
+-rw-rw-r-- PDSBDesc.js
+-rw-rw-r-- PDSBVariantDescCode.js
+-rw-rw-r-- PDSBVariantDescDisplayCode.js
+-rw-rw-r-- PDSBVariantDesc.js
+ 
+./junk: 
+total 
+-rw-rw-r-- dummyShipping.js
+-rw-rw-r-- dummyShippingTest.html
+drwxrwxr-x examples
+-rw-rw-r-- GCharts.html
+-rw-rw-r-- GChartstry.html
+drwxrwxr-x gooten
+-rw-r--r-- json2.php
+-rw-r--r-- json3.php
+-rw-r--r-- json.php
+-rw-rw-r-- junk.php
+-rw-rw-r-- measWork.html
+-rw-rw-r-- menuWork.html
+-rw-rw-r-- oldJSA.js
+-rw-rw-r-- payPalTry.html
+-rw-rw-r-- payPalTry.js
+-rw-rw-r-- PDSocialBondingA.html
+-rw-rw-r-- PDSocialBondingHold.html
+-rw-rw-r-- _PDSocialBonding.html
+-rw-rw-r-- PDSocialBondingWork.html
+drwxr-xr-x php-api-sdk
+-rw-rw-r-- productSkelA.js
+-rw-rw-r-- productSkelHold2.js
+-rw-rw-r-- productSkelHold.js
+-rw-rw-r-- productSkelWork.js
+-rw-r--r-- s2i.php
+-rw-rw-r-- SBTShirtsWork.css
+-rw-rw-r-- Shirts02.html
+-rw-rw-r-- Shirts03.html
+-rw-rw-r-- Shirts-bu001.html
+-rw-rw-r-- Shirts-bu002.html
+-rw-rw-r-- Shirts-bu003.html
+-rw-rw-r-- Shirts-bu004.html
+-rw-r--r-- ShirtsCV19.html
+-rw-rw-r-- ShirtsCV19Work.html
+-rw-rw-r-- Shirts.html
+-rw-rw-r-- ShirtsWork.html
+-rw-rw-r-- tryAPI2.html
+-rw-rw-r-- tryAPI3.html
+-rw-rw-r-- tryAPI.html
+-rw-r--r-- try.php
+-rw-rw-r-- work.html
+-rw-rw-r-- workingFile.html
+-rw-rw-r-- work.js
+ 
+./junk/examples: 
+total 
+-rw-rw-r-- callAPI2.php
+-rw-rw-r-- callAPI.php
+-rw-rw-r-- delete.php
+-rw-rw-r-- get.php
+-rw-rw-r-- post.php
+-rw-rw-r-- put.php
+ 
+./junk/gooten: 
+total 
+-rw-rw-r-- apiTry.php
+-rw-rw-r-- variants.php
+ 
+./junk/php-api-sdk: 
+total 
+-rw-r--r-- composer.json
+drwxr-xr-x examples
+-rw-r--r-- phpunit.xml
+-rw-r--r-- README.md
+drwxr-xr-x src
+drwxr-xr-x tests
+ 
+./junk/php-api-sdk/examples: 
+total 
+-rw-r--r-- orders.php
+-rw-r--r-- products.php
+-rw-r--r-- shipping-rates.php
+ 
+./junk/php-api-sdk/src: 
+total 
+drwxr-xr-x Exceptions
+-rw-r--r-- PrintfulApiClient.php
+-rw-r--r-- PrintfulMockupGenerator.php
+-rw-r--r-- PrintfulOrder.php
+-rw-r--r-- PrintfulTaxRates.php
+-rw-r--r-- PrintfulWebhook.php
+drwxr-xr-x Structures
+ 
+./junk/php-api-sdk/src/Exceptions: 
+total 
+-rw-r--r-- PrintfulApiException.php
+-rw-r--r-- PrintfulException.php
+ 
+./junk/php-api-sdk/src/Structures: 
+total 
+-rw-r--r-- AddressItem.php
+-rw-r--r-- BaseItem.php
+-rw-r--r-- CountryItem.php
+drwxr-xr-x Generator
+drwxr-xr-x Order
+-rw-r--r-- Placements.php
+drwxr-xr-x Shipment
+-rw-r--r-- StateItem.php
+-rw-r--r-- TaxRateItem.php
+drwxr-xr-x Webhook
+ 
+./junk/php-api-sdk/src/Structures/Generator: 
+total 
+-rw-r--r-- GenerationResultItem.php
+-rw-r--r-- MockupExtraItem.php
+-rw-r--r-- MockupGenerationFile.php
+-rw-r--r-- MockupGenerationParameters.php
+-rw-r--r-- MockupItem.php
+-rw-r--r-- MockupList.php
+-rw-r--r-- MockupPositionItem.php
+-rw-r--r-- PrintfileItem.php
+-rw-r--r-- ProductPrintfiles.php
+drwxr-xr-x Templates
+-rw-r--r-- VariantPlacementGroup.php
+-rw-r--r-- VariantPrintfileItem.php
+ 
+./junk/php-api-sdk/src/Structures/Generator/Templates: 
+total 
+-rw-r--r-- PlacementConflictItem.php
+-rw-r--r-- ProductTemplates.php
+-rw-r--r-- TemplateItem.php
+-rw-r--r-- VariantTemplateMappingItem.php
+ 
+./junk/php-api-sdk/src/Structures/Order: 
+total 
+-rw-r--r-- GiftItem.php
+-rw-r--r-- OrderCostGroup.php
+-rw-r--r-- OrderCostsItem.php
+-rw-r--r-- OrderCreationParameters.php
+-rw-r--r-- OrderItemCreationParameters.php
+-rw-r--r-- OrderItemFile.php
+-rw-r--r-- OrderItemOption.php
+-rw-r--r-- OrderLineItem.php
+-rw-r--r-- OrderList.php
+-rw-r--r-- Order.php
+-rw-r--r-- PackingSlipItem.php
+-rw-r--r-- ProductVariant.php
+-rw-r--r-- RecipientCreationParameters.php
+ 
+./junk/php-api-sdk/src/Structures/Shipment: 
+total 
+-rw-r--r-- ShipmentItem.php
+-rw-r--r-- Shipment.php
+ 
+./junk/php-api-sdk/src/Structures/Webhook: 
+total 
+-rw-r--r-- WebhookItem.php
+-rw-r--r-- WebhooksInfoItem.php
+ 
+./junk/php-api-sdk/tests: 
+total 
+-rw-r--r-- Credentials.php.dist
+drwxr-xr-x MockupGenerator
+drwxr-xr-x Order
+drwxr-xr-x TaxRates
+-rw-r--r-- TestCase.php
+drwxr-xr-x Webhooks
+ 
+./junk/php-api-sdk/tests/MockupGenerator: 
+total 
+-rw-r--r-- MockupGenerationTest.php
+-rw-r--r-- PrintfileGroupingTest.php
+-rw-r--r-- PrintfilesTest.php
+-rw-r--r-- TemplateTest.php
+ 
+./junk/php-api-sdk/tests/Order: 
+total 
+-rw-r--r-- OrderCreationAndRetrievalTest.php
+ 
+./junk/php-api-sdk/tests/TaxRates: 
+total 
+-rw-r--r-- TaxRatesTest.php
+ 
+./junk/php-api-sdk/tests/Webhooks: 
+total 
+-rw-r--r-- WebhooksConfigurationTest.php
+ 
+./php: 
+total 
+-rw-rw-r-- apiBase.php
+-rw-rw-r-- apiBaseStuff.php
+-rw-rw-r-- apiBaseStuffW.php
+-rw-r--r-- apiCountries.php
+-rw-rw-r-- apiCountriesStuff.php
+-rw-r--r-- apiETC.php
+-rw-r--r-- apiOrderEstimate.php
+-rw-rw-r-- apiOrderEstimateStuff.php
+-rw-rw-r-- apiOrder.php
+-rw-rw-r-- apiOrderStuff.php
+-rw-r--r-- apiProductList.php
+-rw-rw-r-- apiProductListStuff.php
+-rw-r--r-- apiProduct.php
+-rw-rw-r-- apiProductStuff.php
+-rw-r--r-- apiTry.php
+-rw-r--r-- apiVariant.php
+-rw-rw-r-- chkDB.php
+-rw-rw-r-- confirmEmail.php
+-rw-r--r-- data.json
+-rw-rw-r-- email.php
+-rw-rw-r-- ftpFiles.py
+-rw-rw-r-- fwapi.php
+-rw-rw-r-- insertSBAccounts.php
+-rw-rw-r-- insertSBMail.php
+-rw-rw-r-- insertSBOrders.php
+-rw-rw-r-- insertSBPayPal.php
+-rw-rw-r-- openSBDB.php
+-rw-rw-r-- selectSBAccounts.php
+-rw-rw-r-- selectSBOrders.php
+-rw-rw-r-- testEmail.php
+-rw-rw-r-- updateSBOrders.php
+ 
+./push: 
+total 
+-rw-rw-r-- blog.py
+-rw-rw-r-- css.py
+-rw-rw-r-- shirts.py
+-rw-rw-r-- sugg.py
+ 
+./stats: 
+total 
+drwxrwxr-x bin
+-rw-rw-r-- buildCharts.py
+-rw-rw-r-- buildChartsWorld.py
+-rw-r--r-- charts.html
+drwxr-xr-x data
+-rw-rw-r-- ftpCharts.py
+-rw-rw-r-- ftpChartsWorld.py
+-rw-r--r-- __init__.py
+-rw-r--r-- oldCharts.html
+-rw-rw-r-- PART1.USE
+-rw-rw-r-- PART2.USE
+-rw-rw-r-- PART3.USE
+-rw-rw-r-- pops2.py
+-rw-r--r-- pops.json
+-rw-rw-r-- pops.py
+-rw-r--r-- pops.pyc
+-rw-rw-r-- pops.txt
+ 
+./stats/bin: 
+total 
+-rw-rw-r-- buildCharts
+-rw-rw-r-- buildChartsWorld
+ 
+./stats/data: 
+total 
+-rw-r--r-- popByCounty.csv
+-rw-rw-r-- time_series_covid_19_confirmed.csv
+-rw-r--r-- time_series_covid_19_confirmed_US.csv
+-rw-rw-r-- time_series_covid_19_deaths.csv
+-rw-r--r-- time_series_covid_19_deaths_US.csv
+-rw-rw-r-- time_series_covid_19_recovered.csv
+ 
+./text: 
+total 
+-rw-rw-r-- AboutUs.docx
+drwxr-xr-x blogs
+-rw-r--r-- cultures
+-rw-r--r-- doc001
+-rw-r--r-- doc002
+-rw-r--r-- doc002.docx
+-rw-rw-r-- Email002.docx
+-rw-rw-r-- Email002.odt
+-rw-rw-r-- FaceBook001.odt
+-rw-rw-r-- firstEmail.odt
+-rw-r--r-- NameThatThing
+ 
+./text/blogs: 
+total 
+-rw-rw-r-- blogs000B.docx
+-rw-rw-r-- blogs000.docx
+-rw-rw-r-- blogs001.docx
+-rw-rw-r-- blogs004.docx
+-rw-rw-r-- blogs005.docx

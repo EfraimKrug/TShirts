@@ -209,13 +209,14 @@ def removeEmptyCountries():
 
 
 def printPart2A():
-        print("Pick a state and country")
+        print("Country")
         print("<select id=state onchange='getState();'>")
         stateKeys = list(coll.keys())
         stateKeys.sort()
         for stateName in stateKeys:
             print("<option value = '" + stateName + "'>" + stateName.replace('_',' ') + "</option>")
         print("</select>")
+        print("State")
         print("<select id=county onchange='getCounty();'>")
         print("</select>")
 

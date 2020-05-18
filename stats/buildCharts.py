@@ -144,13 +144,14 @@ def formatState(stateName):
         print("</script>")
 
 def printPart2A():
-        print("Pick a state and country")
+        print("State")
         print("<select id=state onchange='getState();'>")
         stateKeys = list(coll.keys())
         stateKeys.sort()
         for stateName in stateKeys:
             print("<option value = '" + stateName + "'>" + stateName.replace('_',' ') + "</option>")
         print("</select>")
+        print("County")
         print("<select id=county onchange='getCounty();'>")
         print("</select>")
 

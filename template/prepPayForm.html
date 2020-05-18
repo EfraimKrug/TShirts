@@ -1,0 +1,70 @@
+<!-- begin dev form -->
+<div id=dataGather>
+<h5>Please give us some information...</h5>
+<form>
+  <div class="grid-x grid-padding-x">
+    <div class="large-12 cell">
+      <label>Name (Billing)</label>
+      <input id=dGName type="text" placeholder="Who's paying?" />
+    </div>
+  </div>
+  <div class="grid-x grid-padding-x">
+    <div class="large-12 cell">
+      <label>Email</label>
+      <input id=dGEMail type="text" placeholder="We really do need your email address!" />
+    </div>
+  </div>
+  <div class="grid-x grid-padding-x">
+    <div class="large-12 cell">
+      <label>Verify Email</label>
+      <input id=dGVerEMail type="text" placeholder="If it is not correct - we can't find you!" />
+    </div>
+  </div>
+
+  <div class="grid-x grid-padding-x">
+    <div class="large-12 cell">
+      <label>Name (recepient)</label>
+      <input id=dGMName type="text" placeholder="Who gets it?" />
+    </div>
+  </div>
+  <div class="grid-x grid-padding-x">
+    <div class="large-12 cell">
+      <label>Street Address</label>
+      <input id=dGAddress4 type="text" placeholder="Where do we send it?" />
+    </div>
+  </div>
+
+  <div class="grid-x grid-padding-x">
+    <div class="large-6 medium-6 cell">
+      <label>City</label>
+      <input id=dGAddress5 type="text" placeholder="City?" />
+    </div>
+    <div class="large-6 medium-6 cell">
+        <label>State</label>
+        <select id=dGAddress6>
+          <!-- <option value 'KS'>Kansas</option> -->
+        </select>
+    </div>
+  </div>
+
+  <div class="grid-x grid-padding-x">
+    <div class="large-6 medium-6 cell">
+      <label>Zip Code</label>
+      <input id=dGAddress7 type="text" placeholder="Zip?" />
+    </div>
+    <div class="large-6 medium-6 cell">
+      <label>Country</label>
+      <select id=dGAddress8>
+        <!-- <option value 'US'>United States</option> -->
+      </select>
+    </div>
+  </div>
+    <div class="grid-x grid-padding-x">
+      <div class="large-12 cell">
+        <span id=dGSubmit class=submitButton onclick="getReadyForPayPal(1);">Pay Now</span><span class=cancelButton id=dGCancel onclick="getReadyForPayPal(0);">Go Back</span>
+      </div>
+    </div>
+</form>
+</div>
+
+<!-- end dev form -->

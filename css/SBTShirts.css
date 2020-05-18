@@ -21,6 +21,17 @@ body {
   z-index: 299;
 }
 
+.Suggestions {
+ position:relative;
+ margin: 4%;
+ padding: 2%;
+ font-size: 1.1em;
+ border: 2px solid orange;
+ background-color: tan;
+ color: maroon;
+ z-index: 299;
+}
+
 .decreaseCount {
   font-size:.8em;
   font-weight: bold;
@@ -154,12 +165,14 @@ img {
 
 #paypalElt {
   position: fixed;
+  width:30%;
   left: 20px;
   top: 40px;
   border: 2px solid orange;
   background-color:black;
   color: tan;
   display:none;
+  padding: 3%;
   z-index: 799;
 }
 
@@ -170,7 +183,7 @@ img {
 
 .ppal {
   font-size:1.25em;
-  color:maroon;
+  color:tan;
   display:inline;
 }
 
@@ -181,6 +194,13 @@ img {
 
 #product-00 {
   visibility: visible;
+}
+
+.suggestionTitle {
+    font-size: 1.5em;
+    color: maroon;
+    margin-top: 3%;
+    /* margin-left: 3%; */
 }
 
 .pageTitle {
