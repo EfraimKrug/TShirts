@@ -10,6 +10,9 @@
 
 IMAGE_SHOWING = "label";
 function openSizes(){
+  changeBody();
+  // body = document.getElementById("product-list");
+  // body.onclick = closeAllSizing();
   if(IMAGE_SHOWING == "picture"){
     sizeChart = document.getElementById("sizeChart");
     sizeChart.style.visibility = 'visible';
@@ -40,6 +43,40 @@ function closeSizes(){
   IMAGE_SHOWING = "pictureDown";
 }
 
+function changeBody(){
+  var body = document.getElementById('product-list');
+  var sizingWork = document.getElementById('sizingWork');
+
+  body.addEventListener("click", closeAllSizing);
+  // body.addEventListener("click", function ELClose () {
+  //   closeAllSizing();
+  //   }, false);
+  sizingWork.addEventListener("click", function (ev) {
+    // alert("sizingWork");
+    ev.stopPropagation(); //this is important! If removed, you'll get both alerts
+    }, false);
+
+}
+/////////////////////////////////////////////////////////
+//closeAllSizing
+//@fired - from click on body - return to normal
+//
+function closeAllSizing(){
+  IMAGE_SHOWING = "label";
+  var body = document.getElementById('product-list');
+  body.removeEventListener("click", closeAllSizing);
+  // body.onclick = "";
+  //
+  sizeChart = document.getElementById("sizeChart");
+  sizeChart.style.display = "none";
+
+  sizePic = document.getElementById("sizePic");
+  sizePic.style.display = "none";
+
+  labelPic = document.getElementById("labelPic");
+  labelPic.style.display = "block";
+  labelPic.style.visibility = 'visible';
+}
 /////////////////////////////////////////////////////////////
 //turnOffSizing
 //

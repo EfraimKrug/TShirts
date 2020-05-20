@@ -7,7 +7,7 @@
   <title>Social Bonding</title>
   <link rel="stylesheet" type="text/css" href="css/foundation.css">
   <link rel="stylesheet" type="text/css" href="css/app.css">
-  <link rel="stylesheet" type="text/css" href="css/SBTShirtsRW.css" />
+  <link rel="stylesheet" type="text/css" href="css/SBTShirts.css" />
   <link rel="stylesheet" type="text/css" href="css/PDSBVariantDesc.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- paypal beginning -->
@@ -17,17 +17,21 @@
 <body>
   <div class="grid-container">
 <div w3-include-html="template/pageTop.html"></div>
+
+
     <div class="grid-x grid-padding-x">
       <div  id="product-list-hold" class="large-8 medium-8 cell">
 
-          <div  id="product-list" class="large-8 medium-8 cell">
+          <div  id="product-list" class="large-12 medium-12 cell">
           <div class="grid-x grid-padding-x">
-            <div class="large-5 medium-5 cell">
+            <div class="large-12 medium-12 cell">
               <div id="product-list-XX-hold" class="primary callout">
                   <!-- this is where the product goes -->
                   <div w3-include-html="template/productDivs.html"></div>
               </div>
             </div><!-- end product-list -->
+
+
           <!-- beginning right side... -->
           <div w3-include-html="template/shoppingCart.html"></div>
           <div w3-include-html="template/sizingChart.html"></div>
@@ -81,10 +85,10 @@ function includeHTML() {
 <script src="js/PDSBUtilities.js"></script>
 <script src="js/SBdataBase.js"></script>
 <script src="js/SBpayPal.js"></script>
-<script src="js/oldJSRW.js"></script>
+<!-- <script src="js/oldJS.js"></script> -->
 <script src="js/oldJS2RW.js"></script>
 <script src="js/HTMLTemplates.js"></script>
-<script src="js/colorCodesRW.js"></script>
+<script src="js/colorCodes.js"></script>
 <script src="js/doMail.js"></script>
 <script src="js/PDSBProductDisplay.js"></script>
 <!-- javascript - dealing with JSON descriptions -->
@@ -101,14 +105,12 @@ PAYMENT_BEING_PROCESSED = false;
 
 </script>
 <!-- api work -->
-<script src="js/PrintFulAPIRW.js"></script>
-<script src="js/getPFAPIDataRW.js"></script>
-<script src="js/menuRW.js"></script>
-<script src="js/sizingInfo.js"></script>
+<script src="js/PrintFulAPI.js"></script>
+<script src="js/getPFAPIData.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/sizingInfoRW.js"></script>
 <script src="js/dataCollection.js"></script>
 <script>
-
-
 </script>
 
 </html>
@@ -133,6 +135,9 @@ function finalFunction(apiData){
   menuBar = document.getElementById("menuBar");
   menuBar.style.visibility = 'visible';
   menuBar.style.display = 'block';
+  var menuHeight = document.getElementById('menuBar').clientHeight;
+  var pageTitle = document.getElementById('pageTitle');
+  if(menuHeight > 40) pageTitle.style.margin = "7%";
 }
 
 includeHTML();

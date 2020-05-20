@@ -12,6 +12,7 @@
 //
 function getReadyForPayPal(flag){
   //Form submit/cancel... freeze until order is complete
+  // console.log('getReadyForPayPal - dataCollection.js');
   if(PAYMENT_BEING_PROCESSED) return;
 
   var dataGather = document.getElementById("dataGather");
@@ -85,6 +86,8 @@ function getReadyForPayPal(flag){
     var totalCart = document.getElementById("total");
     var PPprice = document.getElementById("PPprice");
     var PPnumber = document.getElementById("PPnumber");
+    var paypalElt = document.getElementById("paypalElt");
+
     var totalAmt = calcShoppingCartTotal(0);
 
     PPprice.innerHTML = "$" + totalAmt;
@@ -98,6 +101,7 @@ function getReadyForPayPal(flag){
 //storeAndChargeF - call back function from api call for order estimate
 //
 function storeAndChargeF(outShippingData){
+  // console.log('storeAndChargeF - dataCollection.js');
   parms = storeAndChargePass;
 
   var outShipping = JSON.parse(outShippingData);
@@ -112,9 +116,9 @@ function storeAndChargeF(outShippingData){
   paypalElt.style.display="block";
   var totalAmt = calcShoppingCartTotal(0);
 
-  document.getElementById("PPsubTotal").innerHTML = " sub total: " + addDecimal(totalAmt) + " ";
-  document.getElementById("PPshipping").innerHTML = " shipping: " + addDecimal(shippingCharge) + " ";
-  document.getElementById("PPtax").innerHTML = " tax: " + addDecimal(tax) + " ";
+  document.getElementById("PPsubTotal").innerHTML = "<br>sub total: " + addDecimal(totalAmt) + " ";
+  document.getElementById("PPshipping").innerHTML = "<br>shipping: " + addDecimal(shippingCharge) + " ";
+  if(tax > 0) document.getElementById("PPtax").innerHTML = "<br>tax: " + addDecimal(tax) + " ";
 
   var grandTotal = ((totalAmt * 100) + (shippingCharge * 100) + (tax * 100))/100;
   setUpPayPal(grandTotal, parms[0]);
@@ -175,6 +179,7 @@ function moveCountryData(countryData){
 //getCustomerInfo - open form to get name/email info
 //form click launches dataGather process...getReadyForPayPal()
 function getCustomerInfo(){
+  // console.log('getCustomerInfo - dataCollection.js');
   if (!calcShoppingCartTotal()) return;
   var totalCart = document.getElementById("total");
   var dataGather = document.getElementById("dataGather");
@@ -354,6 +359,7 @@ function fromOrderString(data){
 //
 var storeAndChargePass = [];
 function getOtherCharges(email,merch,toName,street,city,state,zip,country,callback){
+  // console.log('getOtherCharges - dataCollection.js');
   // console.log("getOtherCharges");
   //storeAndChargePass = [email,merch,false,toName,street,city,state,zip,country,subTotal,shippingCharge,tax];
   storeAndChargePass = [email,merch,false,toName,street,city,state,zip,country];

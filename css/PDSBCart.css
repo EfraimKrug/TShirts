@@ -1,0 +1,29 @@
+
+    img {
+      border:0px;
+    }
+
+    #shoppingCart {
+      z-index:799;
+    }
+
+    #dataGather {
+      height: 220%;
+      width: 150%;
+      z-index:899;
+    }
+
+    #paypalElt {
+      height: 150%;
+      width: 150%;
+      z-index:999;
+    }
+
+    #pageTitle {
+      visibility: hidden;
+    }
+
+    .grid-container {
+      display:block;
+      width:100%;
+    }

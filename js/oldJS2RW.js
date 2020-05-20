@@ -144,12 +144,13 @@ function scoreColorButton(id, clr, sizeArray){
 
   var bigPicture = document.getElementById("bigPicture"+sfx);
   bigPicture.style.display = "block";
-  bigPicture.style.width = "110%";
-  bigPicture.style.height = "110%";
-  bigPicture.style.top = "0px";
-  bigPicture.style.right = "0px";
+  bigPicture.style.width = "60%";
+  bigPicture.style.height = "60%";
+  bigPicture.style.top = "10%";
+  bigPicture.style.right = "2%";
   bigPicture.style.padding = "2%";
-  bigPicture.style.backgroundColor = "maroon";
+  bigPicture.style.border = "0px";
+  // bigPicture.style.backgroundColor = "maroon";
   colorAllButtons(sfx);
 
   var color = document.getElementById('color'+sfx);
@@ -169,7 +170,7 @@ function scoreColorButton(id, clr, sizeArray){
   var frontImg = document.getElementById("frontImg"+sfx);
   // frontImg.src = extractVariantFile(clr.replace(/\*/g, " "), PRINTFUL_DATA[prodID]);
   // bigPicture.innerHTML = "<img src='" + frontImg.src + "'/>";
-  bigPicture.innerHTML = "<img src='" + button.getAttribute("preview"+sfx) + "'/>";
+  bigPicture.innerHTML = "<img class=noborder src='" + button.getAttribute("preview"+sfx) + "'/>";
   bigPicture.onclick = closeBigPicture;
   displayProperSizes(sizeArray, sfx);
 
@@ -262,19 +263,20 @@ BACK_CLICK = [false,false,false,false,false,false,false,false,false];
 function showBack(sw, sfx){
   var i = parseInt(sfx.substring(1));
   BACK_CLICK[i] = false;
-  if(sw){
-    BACK_CLICK[i] = true;
-    var prodID = getCurrentProduct(sfx);
-    var frontImage = extractData("thumbnail_url", PRINTFUL_DATA[prodID]);
-    imageData = extractVariantData("files", PRINTFUL_DATA[prodID]);
-    for(var i=0; i < imageData.length; i++){
-      if(imageData[i]["type"] == "preview"){
-        frontImage = imageData[i]["url"];
-        fImage = document.getElementById("frontImg"+sfx);
-        fImage.src = frontImage;
-      }
-    }
-  }
+  if(sw) BACK_CLICK[i] = true;
+  // if(sw){
+  //   BACK_CLICK[i] = true;
+  //   var prodID = getCurrentProduct(sfx);
+  //   var frontImage = extractData("thumbnail_url", PRINTFUL_DATA[prodID]);
+  //   imageData = extractVariantData("files", PRINTFUL_DATA[prodID]);
+  //   for(var i=0; i < imageData.length; i++){
+  //     if(imageData[i]["type"] == "preview"){
+  //       frontImage = imageData[i]["url"];
+  //       fImage = document.getElementById("frontImg"+sfx);
+  //       fImage.src = frontImage;
+  //     }
+  //   }
+  // }
   // alert(opps);
   //get the color from the front...
   var frontImg = document.getElementById("frontImg"+sfx);
