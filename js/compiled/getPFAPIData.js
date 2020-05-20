@@ -1,0 +1,1 @@
+function getPFApiData(f){var c={},d=0,e={getOrderEstimate:function(a,b){apiCall(b,"estimate",a)},getEachProd:function(a){a=JSON.parse(a.trim());c.ProductList=a;c.Products=[];d=a.length;for(var b=0;b<a.length;b++)apiCall(e.getTheProd,"product",a[b].id)},getTheProd:function(a){a=JSON.parse(a);c.Products.push(a);d--;d||f(c)},getProdList:function(){apiCall(e.getEachProd)}};return e};

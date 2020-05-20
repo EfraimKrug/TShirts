@@ -1,0 +1,2 @@
+function getDesc(c){return{getProdIDs:function(){for(var d=[],b=0;b<c.length;b++)d.push(c[b].ProdID);return d},getProdName:function(d){for(var b="",a=0;a<c.length;a++)d==c[a].ProdID&&(b=c[a].Name);return b},getProdMyName:function(d){for(var b="",a=0;a<c.length;a++)d==c[a].ProdID&&(b=c[a].MyName);return b},getProdBullets:function(d){for(var b=[],a=0;a<c.length;a++)d==c[a].ProdID&&(b=c[a].Description.Bullets);return b},getProdDesc:function(d){for(var b="",a=0;a<c.length;a++)d==c[a].ProdID&&(b=c[a].Description.Text);
+return b}}};

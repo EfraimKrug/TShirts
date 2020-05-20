@@ -1,0 +1,162 @@
+.:
+           about.html
+           blogs.html
+           chartsWorld.html
+           ftpFiles.py
+           home.html
+           index.html
+           paidOops.html
+           paidThanks.html
+           PDSocialBonding.html
+           stats.html
+           suggestions.html
+
+./css:
+           app.css
+           foundation.css
+           foundation.min.css
+           PDSBVariantDesc.css
+           SBTShirts.css
+
+./images:
+           earth-blue-planet-globe-planet-87651.jpeg
+           FBook.gif
+           FBook.xcf
+           GroceryStore03.png
+           measure.bmp
+           measure.gif
+           measureLabel.gif
+
+./images/mockups:
+           everestlogocombo.jpg
+           lunarlogocombo.jpg
+           scubalogocombo.jpg
+           skierlogocombo.jpg
+
+./images/NextGen:
+           4Lines0001.png
+           4Lines0002.png
+           4Lines0003.png
+           4Lines0004.png
+           4Lines0005.png
+           4Lines0006.png
+           4Lines0007.png
+           4LinesB0001.png
+           BackBlock004.png
+           BackLines005.png
+           BackLines006.png
+           OOCircle0001.png
+           OOCircle0002.png
+           OOCircle0003.png
+           OOCircle0004.png
+           OOCircleB0001.png
+           OOCircleB0002.png
+           PurpleBlock001.png
+           PurpleBlock002.png
+           PurpleBlock003.png
+           PurpleBlock004.png
+           PurpleBlock005.png
+           PurpleBlock006.png
+           PurpleBlock011.png
+           PurpleBlock012.png
+           PurpleBlock013.png
+           PurpleBlock014.png
+           PurpleBlock015.png
+           PurpleCircle001.png
+           PurpleCircle002.png
+           PurpleCircle003.png
+           PurpleCircle004.png
+           PurpleCircle005.png
+           PurpleCircle006.png
+           PurpleLines001.png
+           PurpleLines002.png
+           PurpleLines003.png
+           PurpleLines004.png
+           PurpleLines005.png
+           PurpleLines006.png
+
+./js:
+           colorCodes.js
+           doMail.js
+           getPFAPIData.js
+           menu.js
+           oldJS2.js
+           oldJS.js
+           PrintFulAPI.js
+           PrintFulAPIStuff.js
+           productSkel.js
+           SBdataBase.js
+           SBpayPal.js
+
+./js/json:
+           PDSBDesc.js
+           PDSBVariantDescCode.js
+           PDSBVariantDescDisplayCode.js
+           PDSBVariantDesc.js
+
+
+./php:
+           apiBase.php
+           apiBaseStuff.php
+           apiBaseStuffW.php
+           apiCountries.php
+           apiCountriesStuff.php
+           apiETC.php
+           apiOrderEstimate.php
+           apiOrderEstimateStuff.php
+           apiOrder.php
+           apiOrderStuff.php
+           apiProductList.php
+           apiProductListStuff.php
+           apiProduct.php
+           apiProductStuff.php
+           apiVariant.php
+           chkDB.php
+           confirmEmail.php
+           data.json
+           email.php
+           insertSBAccounts.php
+           insertSBMail.php
+           insertSBOrders.php
+           insertSBPayPal.php
+           openSBDB.php
+           selectSBAccounts.php
+           selectSBOrders.php
+           updateSBOrders.php
+
+./stats:
+           buildCharts.py
+           buildChartsWorld.py
+           charts.html
+           oldCharts.html
+           PART1.USE
+           PART2.USE
+           PART3.USE
+           pops2.py
+           pops.json
+           pops.py
+           pops.pyc
+           pops.txt
+
+./stats/data:
+           popByCounty.csv
+           time_series_covid_19_confirmed.csv
+           time_series_covid_19_confirmed_US.csv
+           time_series_covid_19_deaths.csv
+           time_series_covid_19_deaths_US.csv
+           time_series_covid_19_recovered.csv
+
+./text:
+           AboutUs.docx
+           doc002.docx
+           Email002.docx
+           Email002.odt
+           FaceBook001.odt
+           firstEmail.odt
+
+./text/blogs:
+           blogs000B.docx
+           blogs000.docx
+           blogs001.docx
+           blogs004.docx
+           blogs005.docx
