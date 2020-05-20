@@ -1,0 +1,150 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N-R-N-H-Y</title>
+<style>
+#worldMap {
+  border:2px solid black;
+  width: 248px;
+  height: 700px;
+  padding:2%;
+
+  margin-left:30%;
+}
+
+#neshama {
+  width:95%;
+  height:30%;
+  margin:2%;
+  margin-top:5%;
+}
+#ruach {
+  width:95%;
+  height:30%;
+  margin:2%;
+  margin-top:5%;
+}
+#nefesh {
+  width:95%;
+  height:30%;
+  margin:2%;
+  margin-top:5%;
+}
+
+#nneshama,#rneshama,#fneshama {
+  width:97%;
+  height:30%;
+  border:2px solid pink;
+  padding:2%;
+  display:none;
+}
+
+#nnneshama,#nrneshama,#nfneshama,#rnneshama,#rrneshama,#rfneshama,#fnneshama,#frneshama,#ffneshama {
+  width:97%;
+  height:30%;
+  border:2px solid pink;
+  display:none;
+}
+
+#nruach,#rruach,#fruach {
+  width:97%;
+  height:30%;
+  border:2px solid pink;
+  padding:2%;
+  display:none;
+}
+
+#nnruach,#nrruach,#nfruach,#rnruach,#rrruach,#rfruach,#fnruach,#frruach,#ffruach {
+  width:97%;
+  height:30%;
+  border:2px solid pink;
+  display:none;
+}
+
+
+#nnefesh,#rnefesh,#fnefesh {
+  width:97%;
+  height:30%;
+  border:2px solid pink;
+  padding-left:2%;
+  padding-right:2%;
+  display:none;
+}
+
+#nnnefesh,#nrnefesh,#nfnefesh,#rnnefesh,#rrnefesh,#rfnefesh,#fnnefesh,#frnefesh,#ffnefesh {
+  width:97%;
+  height:30%;
+  border:2px solid pink;
+  display:none;
+}
+
+.neshama {
+  background-color:grey;
+}
+.ruach {
+  background-color:blue;
+}
+.nefesh {
+  background-color:red;
+}
+
+</style>
+</head>
+
+<body bgcolor=tan>
+<div id=worldMap>
+<div id=neshama class=neshama onclick=neshamaClick("nneshama","nruach","nnefesh")>
+  <div id=nneshama class=neshama>
+    <div id=nnneshama class=neshama></div>
+    <div id=nnruach class=ruach></div>
+    <div id=nnnefesh class=nefesh></div>
+  </div>
+  <div id=nruach class=ruach  onclick=neshamaClick("rnneshama","rnruach","rnnefesh")>
+    <div id=rnneshama class=neshama></div>
+    <div id=rnruach class=ruach onclick=neshamaClick("nrneshama")></div>
+    <div id=rnnefesh class=nefesh></div>
+  </div>
+  <div id=nnefesh class=nefesh>
+    <div id=fnneshama class=neshama></div>
+    <div id=fnruach class=ruach></div>
+    <div id=fnnefesh class=nefesh></div>
+  </div>
+</div>
+<div id=ruach class=ruach onclick=neshamaClick("rneshama","rruach","rnefesh")>
+  <div id=rneshama class=neshama>
+    <div id=nrneshama class=neshama></div>
+    <div id=nrruach class=ruach></div>
+    <div id=nrnefesh class=nefesh></div>
+  </div>
+  <div id=rruach class=ruach>
+    <div id=rrneshama class=neshama></div>
+    <div id=rrruach class=ruach></div>
+    <div id=rrnefesh class=nefesh></div>
+  </div>
+  <div id=rnefesh class=nefesh>
+    <div id=frneshama class=neshama></div>
+    <div id=frruach class=ruach></div>
+    <div id=frnefesh class=nefesh></div>
+  </div>
+</div>
+<div id=nefesh class=nefesh onclick=neshamaClick("fneshama","fruach","fnefesh")>
+  <div id=fneshama class=neshama></div>
+  <div id=fruach class=ruach></div>
+  <div id=fnefesh class=nefesh></div>
+</div>
+</div>
+</body>
+<script>
+function neshamaClick(n1,n2,n3){
+  n1 = document.getElementById(n1);
+  n2 = document.getElementById(n2);
+  n3 = document.getElementById(n3);
+  n1.style.display = 'block';
+  n2.style.display = 'block';
+  n3.style.display = 'block';
+}
+</script>
+</html>
