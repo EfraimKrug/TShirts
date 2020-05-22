@@ -6,145 +6,243 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>N-R-N-H-Y</title>
 <style>
-#worldMap {
+#wholeWorld {
+    border:2px solid black;
+    width: 70%;
+    height: 100%;
+    padding:2%;
+    margin-left:2%;
+    background-color: gold;
+    color:green;
+    display:block;
+}
+
+#Beriah,#Yetzirah,#Assiyah {
   border:2px solid black;
-  width: 248px;
-  height: 700px;
   padding:2%;
-
-  margin-left:30%;
+  margin-left:3%;
+  color:maroon;
+  display:inline-block;
 }
 
-#neshama {
-  width:95%;
-  height:30%;
-  margin:2%;
-  margin-top:5%;
-}
-#ruach {
-  width:95%;
-  height:30%;
-  margin:2%;
-  margin-top:5%;
-}
-#nefesh {
-  width:95%;
-  height:30%;
+#Bneshama,#Yneshama,#Aneshama {
+  width:218px;
   margin:2%;
   margin-top:5%;
 }
 
-#nneshama,#rneshama,#fneshama {
+#Bruach,#Yruach,#Aruach {
+  width:218px;
+  margin:2%;
+  margin-top:5%;
+}
+#Bnefesh,#Ynefesh,#Anefesh {
+  width:218px;
+  margin:2%;
+  margin-top:5%;
+}
+
+#BNneshama,#BRneshama,#BFneshama,#YNneshama,#YRneshama,#YFneshama,#ANneshama,#ARneshama,#AFneshama {
   width:97%;
   height:30%;
-  border:2px solid pink;
+  border:2px solid red;
   padding:2%;
   display:none;
 }
 
-#nnneshama,#nrneshama,#nfneshama,#rnneshama,#rrneshama,#rfneshama,#fnneshama,#frneshama,#ffneshama {
+#BNruach,#BRruach,#BFruach,#YNruach,#YRruach,#YFruach,#ANruach,#ARruach,#AFruach {
   width:97%;
   height:30%;
-  border:2px solid pink;
-  display:none;
-}
-
-#nruach,#rruach,#fruach {
-  width:97%;
-  height:30%;
-  border:2px solid pink;
+  border:2px solid blue;
   padding:2%;
   display:none;
 }
 
-#nnruach,#nrruach,#nfruach,#rnruach,#rrruach,#rfruach,#fnruach,#frruach,#ffruach {
+#BNnefesh,#BRnefesh,#BFnefesh,#YNnefesh,#YRnefesh,#YFnefesh,#ANnefesh,#ARnefesh,#AFnefesh {
   width:97%;
   height:30%;
-  border:2px solid pink;
-  display:none;
-}
-
-
-#nnefesh,#rnefesh,#fnefesh {
-  width:97%;
-  height:30%;
-  border:2px solid pink;
-  padding-left:2%;
-  padding-right:2%;
-  display:none;
-}
-
-#nnnefesh,#nrnefesh,#nfnefesh,#rnnefesh,#rrnefesh,#rfnefesh,#fnnefesh,#frnefesh,#ffnefesh {
-  width:97%;
-  height:30%;
-  border:2px solid pink;
+  border:2px solid black;
+  padding:2%;
   display:none;
 }
 
 .neshama {
-  background-color:grey;
+  background-color:lightgrey;
 }
 .ruach {
-  background-color:blue;
+  background-color:turquoise;
 }
 .nefesh {
-  background-color:red;
+  background-color:pink;
 }
 
 </style>
 </head>
 
 <body bgcolor=tan>
-<div id=worldMap>
-<div id=neshama class=neshama onclick=neshamaClick("nneshama","nruach","nnefesh")>
-  <div id=nneshama class=neshama>
-    <div id=nnneshama class=neshama></div>
-    <div id=nnruach class=ruach></div>
-    <div id=nnnefesh class=nefesh></div>
+<div id=wholeWorld onclick=doAll()>Kol haOlam
+<div id=Beriah class=neshama>Beriah
+  <div id=Bneshama class=neshama onclick=turnOn3("BNneshama","BNruach","BNnefesh")>Neshama
+    <div id=BNneshama class=neshama></div>
+    <div id=BNruach class=ruach onclick=turnOn2("BNruach","YNneshama","YNruach","yellow")></div>
+    <div id=BNnefesh class=nefesh onclick=turnOn2("BNnefesh","ANneshama","ANruach","purple")></div>
   </div>
-  <div id=nruach class=ruach  onclick=neshamaClick("rnneshama","rnruach","rnnefesh")>
-    <div id=rnneshama class=neshama></div>
-    <div id=rnruach class=ruach onclick=neshamaClick("nrneshama")></div>
-    <div id=rnnefesh class=nefesh></div>
+  <div id=Bruach class=ruach onclick=turnOn3("BRneshama","BRruach","BRnefesh")>Ruach
+    <div id=BRneshama class=neshama></div>
+    <div id=BRruach class=ruach onclick=turnOn2("BRruach","YRneshama","YRruach","yellow")></div>
+    <div id=BRnefesh class=nefesh onclick=turnOn2("BRnefesh","ARneshama","ARruach","purple")></div>
   </div>
-  <div id=nnefesh class=nefesh>
-    <div id=fnneshama class=neshama></div>
-    <div id=fnruach class=ruach></div>
-    <div id=fnnefesh class=nefesh></div>
-  </div>
-</div>
-<div id=ruach class=ruach onclick=neshamaClick("rneshama","rruach","rnefesh")>
-  <div id=rneshama class=neshama>
-    <div id=nrneshama class=neshama></div>
-    <div id=nrruach class=ruach></div>
-    <div id=nrnefesh class=nefesh></div>
-  </div>
-  <div id=rruach class=ruach>
-    <div id=rrneshama class=neshama></div>
-    <div id=rrruach class=ruach></div>
-    <div id=rrnefesh class=nefesh></div>
-  </div>
-  <div id=rnefesh class=nefesh>
-    <div id=frneshama class=neshama></div>
-    <div id=frruach class=ruach></div>
-    <div id=frnefesh class=nefesh></div>
+  <div id=Bnefesh class=nefesh onclick=turnOn3("BFneshama","BFruach","BFnefesh")>Nefesh
+    <div id=BFneshama class=neshama></div>
+    <div id=BFruach class=ruach onclick=turnOn2("BFruach","YFneshama","YFruach","yellow")></div>
+    <div id=BFnefesh class=nefesh onclick=turnOn2("BFnefesh","AFneshama","AFruach","purple")></div>
   </div>
 </div>
-<div id=nefesh class=nefesh onclick=neshamaClick("fneshama","fruach","fnefesh")>
-  <div id=fneshama class=neshama></div>
-  <div id=fruach class=ruach></div>
-  <div id=fnefesh class=nefesh></div>
+<div id=Yetzirah class=ruach>Yetzirah
+  <div id=Yneshama class=neshama onclick=turnOn3("YNneshama","YNruach","YNnefesh")>Neshama
+    <div id=YNneshama class=neshama></div>
+    <div id=YNruach class=ruach></div>
+    <div id=YNnefesh class=nefesh></div>
+  </div>
+  <div id=Yruach class=ruach onclick=turnOn3("YRneshama","YRruach","YRnefesh")>Ruach
+    <div id=YRneshama class=neshama></div>
+    <div id=YRruach class=ruach></div>
+    <div id=YRnefesh class=nefesh></div>
+  </div>
+  <div id=Ynefesh class=nefesh onclick=turnOn3("YFneshama","YFruach","YFnefesh")>Nefesh
+    <div id=YFneshama class=neshama></div>
+    <div id=YFruach class=ruach></div>
+    <div id=YFnefesh class=nefesh></div>
+  </div>
+</div>
+<div id=Assiyah class=nefesh>Assiyah
+  <div id=Aneshama class=neshama onclick=turnOn3("ANneshama","ANruach","ANnefesh")>Neshama
+    <div id=ANneshama class=neshama></div>
+    <div id=ANruach class=ruach></div>
+    <div id=ANnefesh class=nefesh></div>
+  </div>
+  <div id=Aruach class=ruach onclick=turnOn3("ARneshama","ARruach","ARnefesh")>Ruach
+    <div id=ARneshama class=neshama></div>
+    <div id=ARruach class=ruach></div>
+    <div id=ARnefesh class=nefesh></div>
+  </div>
+  <div id=Anefesh class=nefesh onclick=turnOn3("AFneshama","AFruach","AFnefesh")>Nefesh
+    <div id=AFneshama class=neshama></div>
+    <div id=AFruach class=ruach></div>
+    <div id=AFnefesh class=nefesh></div>
+  </div>
 </div>
 </div>
+
 </body>
 <script>
-function neshamaClick(n1,n2,n3){
+function turnOn3(n1,n2,n3,flag){
   n1 = document.getElementById(n1);
   n2 = document.getElementById(n2);
   n3 = document.getElementById(n3);
   n1.style.display = 'block';
   n2.style.display = 'block';
   n3.style.display = 'block';
+  if(flag){
+    n1.style.border = "4px solid yellow";
+    n2.style.border = "4px solid yellow";
+    n3.style.border = "4px solid yellow";
+  }
+}
+function turnOn2(n1,n2,n3,flag){
+  n1 = document.getElementById(n1);
+  n2 = document.getElementById(n2);
+  n3 = document.getElementById(n3);
+  n1.style.display = 'block';
+  n2.style.display = 'block';
+  n3.style.display = 'block';
+  if(flag){
+    n1.style.border = "5px solid " + flag;
+    n1.style.width = "93%";
+    n2.style.border = "5px solid " + flag;
+    n2.style.width = "93%";
+    n3.style.backgroundColor = flag;
+    n3.style.opacity = .4;
+  }
+}
+function writeThem(arr){
+    for(var i=0; i<arr.length; i++){
+      elt = document.getElementById(arr[i]);
+      n0 = arr[i].substring(0,1);
+      n1 = arr[i].substring(1,2);
+      name1 = "";
+      name0 = "";
+      switch(n0){case 'B':name0="d'Briah";break;case 'Y':name0="d'Yetzirah";break; case 'A':name0="d'Assiyah";break;}
+      switch(n1){case 'N':name1="Neshama";break;case 'R':name1="Ruach";break; case 'F':name1="Nefesh";break;}
+      name2 = arr[i].substring(2);
+      elt.innerHTML = name2 + " d'" + name1 + " " + name0;
+      elt.style.color = "black";
+    }
+}
+
+function pair06(){
+  turnOn2("BFnefesh","AFneshama","AFruach","purple");
+  writeThem(["BFnefesh","AFneshama","AFruach"]);
+  wholeWorld = document.getElementById("wholeWorld");
+  // wholeWorld.style.backgroundColor = "purple";
+  // wholeWorld.style.color = "yellow";
+}
+
+function pair05(){
+  turnOn2("BFruach","YFneshama","YFruach","yellow");
+  writeThem(["BFruach","YFneshama","YFruach"]);
+  wholeWorld = document.getElementById("wholeWorld");
+  // wholeWorld.style.backgroundColor = "yellow";
+  // wholeWorld.style.color = "purple";
+  setTimeout(pair06, 3000);
+}
+
+function pair04(){
+  turnOn2("BRnefesh","ARneshama","ARruach","purple");
+  writeThem(["BRnefesh","ARneshama","ARruach"]);
+  wholeWorld = document.getElementById("wholeWorld");
+  // wholeWorld.style.backgroundColor = "purple";
+  // wholeWorld.style.color = "yellow";
+  setTimeout(pair05, 3000);
+}
+
+function pair03(){
+  turnOn2("BRruach","YRneshama","YRruach","yellow");
+  writeThem(["BRruach","YRneshama","YRruach"]);
+  wholeWorld = document.getElementById("wholeWorld");
+  // wholeWorld.style.backgroundColor = "yellow";
+  // wholeWorld.style.color = "purple";
+  setTimeout(pair04, 3000);
+}
+
+function pair02(){
+  turnOn2("BNnefesh","ANneshama","ANruach","purple");
+  writeThem(["BNnefesh","ANneshama","ANruach"]);
+  wholeWorld = document.getElementById("wholeWorld");
+  // wholeWorld.style.backgroundColor = "purple";
+  // wholeWorld.style.color = "yellow";
+  setTimeout(pair03, 3000);
+}
+
+function pair01(){
+  turnOn2("BNruach","YNneshama","YNruach","yellow");
+  writeThem(["BNruach","YNneshama","YNruach"]);
+  wholeWorld = document.getElementById("wholeWorld");
+  // wholeWorld.style.backgroundColor = "yellow";
+  // wholeWorld.style.color = "purple";
+  setTimeout(pair02, 3000);
+}
+
+function doAll(){
+  names = ["neshama","ruach","nefesh"];
+  prefixes = ["BN","BR","BF","YN","YR","YF","AN","AR","AF"];
+  for(var i=0;i<prefixes.length;i++){
+        name1 = prefixes[i]+names[0];
+        name2 = prefixes[i]+names[1];
+        name3 = prefixes[i]+names[2];
+        turnOn3(name1,name2,name3);
+    }
+  setTimeout(pair01, 3000);
 }
 </script>
 </html>

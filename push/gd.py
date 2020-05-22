@@ -4,7 +4,7 @@ ftp = FTP('ftp.namethatthing.site')
 ftp.login('EfraimFTP','G00dSh@bb0s')
 ftp.cwd('public_html')
 
-html = ["PDSocialBonding.html"]
+html = ["nrnhy.html","nrnhy3.html","nrnhy2.html"]
 for f in html:
   print f
   ftp.storbinary('STOR ' + f, open('../' + f, 'rb'))

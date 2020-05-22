@@ -1,0 +1,17 @@
+from ftplib import FTP
+
+ftp = FTP('ftp.namethatthing.site')
+ftp.login('EfraimFTP','G00dSh@bb0s')
+ftp.cwd('public_html')
+ftp.storbinary('STOR newPDSocialBonding.html', open('../newPDSocialBonding.html', 'rb'))
+ftp.cwd('js')
+# ftp.storbinary('STOR newPrintFulAPI.js', open('../js/newPrintFulAPI.js', 'rb'))
+ftp.storbinary('STOR newPDSBProductDisplay.js', open('../js/newPDSBProductDisplay.js', 'rb'))
+ftp.cwd('../cgi-bin')
+# ftp.storbinary('STOR newApiProductList.php', open('../php/newApiProductList.php', 'rb'))
+# ftp.storbinary('STOR newApiProduct.php', open('../php/newApiProduct.php', 'rb'))
+ftp.cwd('../css')
+#ftp.storbinary('STOR PDSBCart.css', open('../css/PDSBCart.css', 'rb'))
+ftp.cwd('../template')
+#ftp.storbinary('STOR prepPayPal.html', open('../template/prepPayPal.html', 'rb'))
+ftp.quit()
