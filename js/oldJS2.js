@@ -34,18 +34,10 @@ function getSizeCode(size){
 //   return priceArray;
 // }
 
-// function getPrice(ids,sfx){
-//   priceArray = getPriceArray(sfx);
-//   ids = ids.trim();
-//   if (ids == 'XS') return priceArray[0];
-//   if (ids == 'S') return priceArray[1];
-//   if (ids == 'M') return priceArray[2];
-//   if (ids == 'L') return priceArray[3];
-//   if (ids == 'XL') return priceArray[4];
-//   if (ids == '2XL') return priceArray[5];
-//   if (ids == '3XL') return priceArray[6];
-//   if (ids == '4XL') return priceArray[7];
-// }
+function getPrice(ids,sfx){
+  price = document.getElementById(ids + sfx);
+  return(price.getAttribute("price"));
+}
 
 function getTwoDigits(i){
   if(i < 10) return "0" + i;
@@ -237,7 +229,8 @@ function scoreButton(id, colorList){
     button.chosen = true;
     size.innerHTML = getSize(idS);
 
-    // priceTag.innerHTML = getPrice(idS,sfx);
+    priceTag = document.getElementById("priceTag"+sfx);
+    priceTag.innerHTML = " [$" + getPrice(idS,sfx) + "]";
     // setPricing(idS, sfx);
     // var prodExternalID = document.getElementById("productNumber"+sfx).innerHTML;
     // console.log(colorList);

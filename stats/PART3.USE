@@ -36,7 +36,7 @@ Efraim Krug<br>
 
 <script src="js/SBdataBase.js"></script>
 <script src="js/colorCodes.js"></script>
-
+<script src="js/menu.js"></script>
 <script>
 var splashScreen = document.getElementById("splashScreen");
 menuBar = document.getElementById("menuBar");
