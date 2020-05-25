@@ -63,6 +63,15 @@ var _$Desc = getDesc([{
         }
       },
       {
+        "ProdID":"177605943",
+        "Name":"Unisex Long Sleeve Tee | Bella + Canvas 3501",
+        "MyName":"Unisex Long Sleeve Tee",
+        "Description":{
+            "Text":"This Unisex Long Sleeve Tee is an instant bestseller, fit for both an everyday and business look. Made from 100% cotton and featuring a classic crew neck, it fits like a well-loved favorite.",
+            "Bullets": ["100% combed and ring-spun cotton","Heather colors are 52% combed and ring-spun cotton, 48% polyester","Athletic Heather is 90% combed and ring-spun cotton, 10% polyester","Fabric weight: 4.2 oz/y² (142.40 g/m²)","32 singles","Retail fit","Crew neck","Coverstitched collar","2 inch ribbed cuffs","Side-seamed","Tear-away label","Blank product sourced from Nicaragua, Honduras, Guatemala, or the US"]
+        }
+      },
+      {
         "ProdID":"170107445",
         "Name":"Men's Champion Hoodie",
         "MyName":"Champion Hoodie",

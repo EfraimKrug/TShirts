@@ -76,7 +76,7 @@
     <script src="js/HTMLTemplates.js"></script>
     <script src="js/colorCodes.js"></script>
     <script src="js/doMail.js"></script>
-    <script src="js/PDSBProductDisplay.js"></script>
+    <script src="js/PDSBProductDisplayGroup.js"></script>
     <!-- javascript - dealing with JSON descriptions -->
     <script src="js/json/PDSBVariantDescDisplayCode.js"></script>
     <script src="js/json/PDSBVariantDescCode.js"></script>
@@ -91,7 +91,7 @@
 
     </script>
     <!-- api work -->
-    <script src="js/PrintFulAPI.js"></script>
+    <script src="js/PrintFulAPIgp.js"></script>
     <script src="js/getPFAPIData.js"></script>
     <script src="js/menu.js"></script>
     <script src="js/sizingInfo.js"></script>
@@ -126,7 +126,7 @@
     function finalFunction(apiData){
       var splashScreen = document.getElementById("splashScreen");
       splashScreen.style.display = "none";
-      buildPage(apiData);
+      buildPage(apiData, [177605943]);
 
       for(var i=0; i  < PAGE_MAX; i++)touchUp(getSuffix(i));
 
@@ -143,13 +143,13 @@
       var menuHeight = document.getElementById('menuBar').clientHeight;
       var pageTitle = document.getElementById('pageTitle');
       if(menuHeight > 40) pageTitle.style.margin = "7%";
-
-      backView = document.getElementById("backImg-00");
-      backView.src = "./images/PDSBBack.gif";
+      backImg = document.getElementById("backImg-00");
+      backImg.src = "./images/PDSBBack.gif";
     }
 
     includeHTML();
     getPFApiData(finalFunction).getProdList();
+
     // alert([getScreenDimenstions()[0],getScreenDimenstions()[1]]);
     </script>
 <script>
