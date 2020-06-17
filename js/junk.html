@@ -1,0 +1,19 @@
+<html>
+<body>
+<script>
+total = "Total: $193.00";
+couponPerc = .05;
+console.log(total);
+totalPay = total.replace(/[^0-9,^\.]/g, "");
+console.log("[" + totalPay + "]");
+console.log(couponPerc);
+totalPay *= 100;
+takeOff = couponPerc * totalPay;
+totalPay -= takeOff.toFixed();
+totalPay /= 100;
+console.log(takeOff);
+console.log(totalPay);
+console.log("=========================");
+</script>
+</body>
+</html>

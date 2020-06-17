@@ -279,6 +279,7 @@ function showBack(sw, sfx){
   var shirtBack = document.getElementById("shirtBack"+sfx);
   back.style.background = frontImg.style.background;
   backImg.style.background = frontImg.style.background;
+
   if(back.classList.contains("noshow")){
       shirtBack.classList.remove("noshow");
       back.classList.remove("noshow");

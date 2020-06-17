@@ -34,11 +34,19 @@ function checkFields(sfx){
 //@return total amount from shopping cart
 //
 function calcShoppingCartTotal(formatFlag){
+  console.log("calcShoppingCartTotal");
+  var couponBox = document.getElementById("coupon");
+  var couponPerc = couponBox.getAttribute("perc");
+  couponPerc *= .01;
+  console.log(couponPerc);
   var shoppingCart = document.getElementById("shoppingCart");
   var payTotal = 0.00;
   for (var r=1; r < shoppingTable.rows.length; r++){
     payTotal += parseInt(shoppingTable.rows[r].cells[4].innerHTML * 100);
   }
+
+  takeOff = couponPerc * payTotal;
+  payTotal -= takeOff;
 
   if(formatFlag) return "Total: $" + addDecimal(payTotal/100);
   return addDecimal(payTotal/100);

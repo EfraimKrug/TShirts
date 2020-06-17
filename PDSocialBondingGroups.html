@@ -123,10 +123,28 @@
     </script>
 
     <script>
+    function querystring(key) {
+      var re=new RegExp('(?:\\?|&)'+key+'=(.*?)(?=&|$)','gi');
+      var r=[], m;
+      while ((m=re.exec(document.location.search)) != null) r[r.length]=m[1];
+      return r;
+    }
+// 178133553  - Antioch
+// 177605943  - Aletheia
+
     function finalFunction(apiData){
       var splashScreen = document.getElementById("splashScreen");
       splashScreen.style.display = "none";
-      buildPage(apiData, [177605943]);
+      var productID = querystring('productID');
+      // console.log("["+productID.length+"]");
+      if(productID.length > 0){
+        // console.log("if: " + productID);
+        buildPage(apiData, [productID]);
+      }
+      else {
+        // console.log("else: " + productID);
+        buildPage(apiData, [177605943]);
+      }
 
       for(var i=0; i  < PAGE_MAX; i++)touchUp(getSuffix(i));
 
@@ -149,15 +167,8 @@
 
     includeHTML();
     getPFApiData(finalFunction).getProdList();
-
     // alert([getScreenDimenstions()[0],getScreenDimenstions()[1]]);
     </script>
 <script>
 
-function querystring(key) {
-  var re=new RegExp('(?:\\?|&)'+key+'=(.*?)(?=&|$)','gi');
-  var r=[], m;
-  while ((m=re.exec(document.location.search)) != null) r[r.length]=m[1];
-  return r;
-}
 </script>

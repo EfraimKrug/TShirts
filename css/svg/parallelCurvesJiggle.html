@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<!--
+Lines:
+    MoveTo: M, m
+    LineTo: L, l, H, h, V, v
+    Cubic Bézier Curve: C, c, S, s
+    Quadratic Bézier Curve: Q, q, T, t
+    Elliptical Arc Curve: A, a
+    ClosePath: Z, z
+-->
+<body>
+  <style>
+  #goButton {
+    width: 5%;
+    height: 5%;
+    border:2px solid tan;
+    margin-left:20%;
+    padding:1%;
+    font-size:1.7em;
+  }
+  #field {
+    width:100%;
+    height:100%;
+    background-color: cyan;
+  }
+  </style>
+  <div id=goButton onclick=outLoop();>Click</div>
+
+<!-- A/C/Q
+A: (rx ry angle large-arc-flag sweep-flag x y)+
+a: (rx ry angle large-arc-flag sweep-flag dx dy)+
+C: Po′ = Pn = {x, y} ;Pcs = {x1, y1} ;Pce = {x2, y2} //
+c: Po′ = Pn = {xo + dx, yo + dy} ;Pcs = {xo + dx1, yo + dy1} ;Pce = {xo + dx2, yo + dy2}
+Q: Po′ = Pn = {x, y} Pc = {x1, y1}   //
+q: Po′ = Pn = {xo + dx, yo + dy} ;Pc = {xo + dx1, yo + dy1}
+-->
+
+<div id=field>
+  <svg xmlns:xlink="http://www.w3.org/2000/xlink" width=100% height=100%>
+
+      <path d="M50,50 Q50,200 200,20"
+            style="stroke:blue; fill:none; stroke-width:4"/>
+      <path d="M58,58 Q50,200 200,32"
+            style="stroke:green; fill:none; stroke-width:4"/>
+      <path d="M66,66 Q50,200 200,44"
+            style="stroke:red; fill:none; stroke-width:4"/>
+      <path d="M74,74 Q50,200 200,56"
+            style="stroke:black; fill:none; stroke-width:4"/>
+      <path d="M2,5 C20,95 95,-90 170,140"
+            style="stroke:maroon; fill:none; stroke-width:2"/>
+      <path d="M6,9 C24,99 99,-86 182,140"
+            style="stroke:tan; fill:none; stroke-width:2"/>
+      <path d="M10,13 C28,103 103,-82 194,140"
+            style="stroke:maroon; fill:none; stroke-width:2"/>
+      <path d="M200,75 c127,79 554,-98 981,-30"
+            style="stroke:maroon; fill:none; stroke-width:2"/>
+      <path d="M200,75 c127,79 554,-98 981,-30"
+            style="stroke:maroon; fill:none; stroke-width:2"/>
+
+      <path d="M208,83 c135,87 562,-82 984,-10"
+            style="stroke:blue; fill:none; stroke-width:2"/>
+      <path id=path1 d="M204,79 c131,83 558,-90 989,-22"
+            style="stroke:red; fill:none; stroke-width:2"/>
+      <path d="M200,75 c127,79 554,-98 981,-30"
+            style="stroke:maroon; fill:none; stroke-width:2"/>
+
+      <path d="M1250,50 A1030,50 0 0,1 1200,100 Z"
+            style="stroke:blue; fill:pink; stroke-width:2; opacity:75%"/>
+      <path id=newStairs d="M1212,81"
+            style="stroke:red; fill:none; stroke-width:2;"/>
+
+
+  </svg>
+</div>
+
+<script>
+
+
+function fixSVG(){
+  var flag = false;
+  var path1 = document.getElementById("path1");
+  newStairs = document.getElementById("newStairs");
+  var count = 0;
+  // var path2 = document.getElementById("path2");
+  var steps = "";
+  var steps2 = "";
+
+  function changeIt(){
+    // var p = path2.getAttribute("d");
+    flag = !flag;
+    if(flag){
+      s = "M206,81 c133,85 560,-88 991,-20";
+      if(count < 7) steps += " v5 ";
+      steps2 += " v1 ";
+    }
+    else {
+      s = "M204,79 c131,83 558,-90 989,-22";
+      if(count < 7) steps += " h15 ";
+      steps2 += " h -16 ";
+    }
+
+    nsPath = newStairs.getAttribute("d");
+    nsPath += steps2;
+    newStairs.setAttribute("d", nsPath);
+
+    path1.setAttribute("d", s+steps);
+    count++;
+    // path2.setAttribute("d", p);
+  }
+
+  return changeIt;
+}
+
+function outLoop(){
+  var changeIt = fixSVG();
+
+  for (var i = 0; i < 18; i++){
+    setTimeout(changeIt, 12*i);
+    setTimeout(changeIt, 24*i);
+  }
+}
+
+</script>
+</body>
+</html>
+<!--
+A30,30 0 0,1 35,20
+M110,110
+L100,0
+-->

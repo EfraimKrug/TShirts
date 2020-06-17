@@ -10,6 +10,7 @@
 //x.xhttpSend();
 //
 function doApiCall(callback, level="list", idInk=0, prefix=""){
+    console.log("doApiCall");
     var APIFunk = {
       headerParam:"application/x-www-form-urlencoded",
       holdOrderForLater:"",
@@ -46,6 +47,7 @@ function doApiCall(callback, level="list", idInk=0, prefix=""){
               this.phpProg = "cgi-bin/" + phpP + ".php";
               console.log(this.phpProg);
               this.parms = parmsIN;
+              console.log(this.parms);
             },
           xhttpSend:function(){
             xhttp = new XMLHttpRequest();
@@ -68,6 +70,7 @@ function doApiCall(callback, level="list", idInk=0, prefix=""){
 }
 
 function apiCall(callback, level="list", id=0, prefix="new"){
+  console.log("apiCall");
   var apiC = doApiCall(callback, level, id, prefix);
   apiC.setupCall();
   apiC.xhttpSend();

@@ -8,7 +8,7 @@ function newBuildPage(apiData){
   count = 0;
   leftSide = false;
   continueSw = false;
-  // console.log(apiData);
+  console.log(apiData);
   for (var j=0; j < apiData['ProductList'].length; j++){
     for(var i=0; i<dropList.length; i++)
         if(dropList[i] == apiData['ProductList'][j]['id']) continueSw = true;
@@ -23,13 +23,14 @@ function newBuildPage(apiData){
     variantData = getVariantData(apiData, apiData['ProductList'][j]['id']);
     product = {};
     names = [];
+    console.log(variantData);
     for(var k=0; k < variantData.length; k++){
       product.id = variantData[k]['id'];
       files = [];
       for(var m=0; m < variantData[k]['files'].length; m++){
         files.push({'type':variantData[k]['files'][m]['type'], 'preview_url':variantData[k]['files'][m]['preview_url']})
       }
-      names.push([variantData[k]['variant_id'],variantData[k]['name'].trim(),variantData[k]['retail_price'],files]);
+      names.push([variantData[k]['variant_id'],variantData[k]['name'].trim(),variantData[k]['retail_price'],files,variantData[k]['id']]);
     }
 
     cutOff = 0;
@@ -69,7 +70,7 @@ function newBuildPage(apiData){
   }
   // see dataCollection for details...
   // get list of countries/States
-  // console.log("getting country info...");
+  console.log("getting country info...");
   countryList = document.getElementById("countryList");
   apiCall(moveCountryData, "countries");
 }
@@ -90,9 +91,12 @@ function newPackageUp(product,i){
       html += " fileName" + getSuffix(i) + "-" + product.names[j][3][k]['type'] + "=" + product.names[j][3][k]['preview_url'] + " ";
       showFile = product.names[j][3][k]['preview_url'];
     }
-    html += "variantID=" + product.names[j][0] + " price=" + product.names[j][2] + ">"+ product.names[j][1] + "</option>";
+    console.log(product);
+    html += "variantID=" + product.names[j][4] + " price=" + product.names[j][2] + ">"+ product.names[j][1] + "</option>";
   }
-  html += "</select></div>";
+  html += "</select>";
+  html += "<label>How many?</label><select id='select" + getSuffix(i) + "'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option></select>";
+  html += "</div>";
   html += "<div id=sButton" + getSuffix(i) + " class=submitButton onclick=newSubmitForm('" + getSuffix(i).trim() + "',false);>Add to Cart</div></div>";
   html = html.replace("~showFile~",showFile);
   return html;
@@ -142,14 +146,17 @@ function newSubmitForm(sfx, altSwitch){
   var name = document.getElementById("name"+sfx).innerHTML;
 
   var select = document.getElementById("productVariations"+sfx);
+  var numberSelect = document.getElementById("select"+sfx);
+
   if(!select) return;
   var variant_id = select.options[select.selectedIndex].getAttribute('variantID');
   var retail_price = select.options[select.selectedIndex].getAttribute('price');
+  var number = numberSelect.options[numberSelect.selectedIndex].value;
 
   payButton.disabled = false;
 
   // if(parseInt(productValues[1])){
-  addLine(productName, 1, "reg", retail_price, variant_id, name);
+  addLine(productName, number, "reg", retail_price, variant_id, name);
   submitButton.classList.add('elementFade');
   turnOffSizing();
   // }

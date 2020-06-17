@@ -284,7 +284,8 @@ function buildPage(apiData, includeList){
   leftSide = false;
   continueSw = false;
   includeSw = false;
-  console.log(apiData);
+  // console.log(includeList);
+  // console.log(apiData);
   for (var j=0; j < apiData['ProductList'].length; j++){
     for(var i=0; i<dropList.length; i++)
         if(dropList[i] == apiData['ProductList'][j]['id']) continueSw = true;
@@ -292,7 +293,7 @@ function buildPage(apiData, includeList){
     if(includeList){
       for(var i=0; i<includeList.length; i++)
           if(includeList[i] == apiData['ProductList'][j]['id']) includeSw = true;
-               
+
       if(!includeSw) continue;
       includeSw = false;
     }
@@ -304,6 +305,7 @@ function buildPage(apiData, includeList){
 
     sfx = getSuffix(count);
     count++;
+    // console.log(apiData['ProductList'][j]['id']);
     getVariantData(apiData, apiData['ProductList'][j]['id'])
     createNewProduct(sfx,
               leftSide,

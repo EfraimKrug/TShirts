@@ -1,0 +1,174 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Bonding</title>
+  <link rel="stylesheet" type="text/css" href="css/foundation.css">
+  <link rel="stylesheet" type="text/css" href="css/app.css">
+  <link rel="stylesheet" type="text/css" href="css/SBTShirts.css" />
+  <link rel="stylesheet" type="text/css" href="css/PDSBVariantDesc.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- paypal beginning -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AfcRF9xThrarQuF4-C34Jpk9dR3d8F71Lqlpjo-SeTW3c9BI12fF7Byz5Pp3fAkIhmxaMiqpnmVJ8KI5&currency=USD" data-sdk-integration-source="button-factory"></script>
+  <!-- paypal finished -->
+</head>
+  <body>
+  <style>
+  </style>
+        <div w3-include-html="template/pageTop.html"></div>
+        <div  id="product-list" class=grid-container>
+        </div>
+    <div w3-include-html="template/shoppingCart.html"></div>
+    <div w3-include-html="template/sizingChart.html"></div>
+    <div w3-include-html="template/prepPayForm.html"></div>
+    <div w3-include-html="template/prepPayPal.html"></div>
+    <div w3-include-html="template/menu.html"></div>
+    <div w3-include-html="template/descriptions.html"></div>
+    <div w3-include-html="template/productDivs.html"></div>
+    <script>
+    function includeHTML() {
+     var z, i, elmnt, file, xhttp;
+     z = document.getElementsByTagName("*");
+     for (i = 0; i < z.length; i++) {
+       elmnt = z[i];
+       file = elmnt.getAttribute("w3-include-html");
+       if (file) {
+         xhttp = new XMLHttpRequest();
+         xhttp.onreadystatechange = function() {
+           if (this.readyState == 4) {
+             if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+             if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+             /* Remove the attribute, and call this function once more: */
+             elmnt.removeAttribute("w3-include-html");
+             includeHTML();
+           }
+         }
+         xhttp.open("GET", file, true);
+         xhttp.send();
+         return;
+       }
+     }
+    }
+    </script>
+
+    </body>
+
+    <!-- splash screen -->
+    <div id=splashScreen><img src="./images/GroceryStore03.png"/></div>
+    <!-- counties -->
+    <div id=countryList></div>
+    <!-- end area for API work -->
+    <!-- area for database return -->
+    <div id=outDiv></div>
+    <div id=outdiv></div>
+    <!-- area for order ids return -->
+    <div id=orderWork></div>
+    <!-- area for shipping est return -->
+    <div id=outShipping></div>
+
+    <script src="js/PDSBUtilities.js"></script>
+    <script src="js/SBdataBase.js"></script>
+    <script src="js/SBpayPal.js"></script>
+    <!-- <script src="js/oldJS.js"></script> -->
+    <script src="js/oldJS2.js"></script>
+    <script src="js/HTMLTemplates.js"></script>
+    <script src="js/colorCodes.js"></script>
+    <script src="js/doMail.js"></script>
+    <script src="js/PDSBProductDisplayGroup.js"></script>
+    <!-- javascript - dealing with JSON descriptions -->
+    <script src="js/json/PDSBVariantDescDisplayCode.js"></script>
+    <script src="js/json/PDSBVariantDescCode.js"></script>
+    <script src="js/json/PDSBVariantDesc.js"></script>
+    <!-- end of description JSON -->
+    <!-- javascript - dealing screen input -->
+    <script src="js/PDSBAction.js"></script>
+    <!-- end of description JSON -->
+
+    <script>
+    PAYMENT_BEING_PROCESSED = false;
+
+    </script>
+    <!-- api work -->
+    <script src="js/PrintFulAPIgp.js"></script>
+    <script src="js/getPFAPIData.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/sizingInfo.js"></script>
+    <script src="js/dataCollection.js"></script>
+    <script>
+    </script>
+    </html>
+    <script>
+    turn = true;
+    function font2back(sfx){
+      var front = document.getElementById("front"+sfx);
+      var back = document.getElementById("back"+sfx);
+      var shirtBack = document.getElementById("shirtBack"+sfx);
+      // var fImage = document.getElementById("frontImg"+sfx);
+      // var bImage = document.getElementById("backImg"+sfx);
+      // out.style.display = 'none';
+      if(turn){
+        front.classList.add('noshow');
+        back.classList.remove('noshow');
+        shirtBack.classList.remove('noshow');
+      }
+      else{
+        front.classList.remove('noshow');
+        back.classList.add('noshow');
+        shirtBack.classList.add('noshow');
+      }
+      turn = !turn;
+    }
+    </script>
+
+    <script>
+    function querystring(key) {
+      var re=new RegExp('(?:\\?|&)'+key+'=(.*?)(?=&|$)','gi');
+      var r=[], m;
+      while ((m=re.exec(document.location.search)) != null) r[r.length]=m[1];
+      return r;
+    }
+// 178133553  - Antioch
+// 177605943  - Aletheia
+
+    function finalFunction(apiData){
+      var splashScreen = document.getElementById("splashScreen");
+      splashScreen.style.display = "none";
+      var productID = querystring('productID');
+      // console.log("["+productID.length+"]");
+      if(productID.length > 0){
+        // console.log("if: " + productID);
+        buildPage(apiData, [productID]);
+      }
+      else {
+        // console.log("else: " + productID);
+        buildPage(apiData, [177605943]);
+      }
+
+      for(var i=0; i  < PAGE_MAX; i++)touchUp(getSuffix(i));
+
+      var screen_size = getScreenDimenstions();
+      if(screen_size[0] > 700){
+        labelPic = document.getElementById("labelPic");
+        labelPic.style.visibility = 'visible';
+        labelPic.style.display = "block";
+      }
+
+      menuBar = document.getElementById("menuBar");
+      menuBar.style.visibility = 'visible';
+      menuBar.style.display = 'block';
+      var menuHeight = document.getElementById('menuBar').clientHeight;
+      var pageTitle = document.getElementById('pageTitle');
+      if(menuHeight > 40) pageTitle.style.margin = "7%";
+      backImg = document.getElementById("backImg-00");
+      backImg.src = "./images/PDSBBack.gif";
+    }
+
+    includeHTML();
+    getPFApiData(finalFunction).getProdList();
+    // alert([getScreenDimenstions()[0],getScreenDimenstions()[1]]);
+    </script>
+<script>
+
+</script>

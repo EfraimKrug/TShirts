@@ -85,14 +85,43 @@ function sendOops($email){
   }
 }
 
-if($type == "thanks"){
-  sendThanks($email);
-}
+function sendFollowUp01($email){
+  $to = $email;
+  $subject = "Social Bonding";
+  $message = "<html class='no-js' lang='en' dir='ltr'><head><meta charset='utf-8'/></head>
+              <body>
+              <div style='font-size:14px;width:500px;height:400px;padding:36px;'>
+              Hello!
+              <br><br>
+              Thanks so much for ordering shirts from us!
+              <br><br>
+              We are so delighted you have decided to take matters of Social Bondinginto your hands, and you have ordered a shirt.              I realize that you are hankering to get a shirt, and start wearing it andreaping the benefits of Social Bonding... but I do want to warn you that our order process has slowed down a little bit.
+              <br><br>
+              We have your order, and we are waiting for the warehouse to fullfill it. In the past, this process has taken about 10 days. Evidently,Shirts are not a high priority in this COVID stricken environment.
+              <br><br>
+              Again, thank you so much for your confidence,and we will keep you informed.
+              <br><br>
+              <a href='www.NameThatThing.site/PDSocialBonding.html'>Social Bonding</a><br><br>
+              Best of the best,
+              ~Efraim Krug
+              <br><br>
+              managing director
+              <!-- </center> -->
+              </div>
+              </body>
+              </html>";
 
-if($type == "oops"){
-  sendOops($email);
-}
+  $headers = "From: physicaldistancesocialbonding@gmail.com\r\n";
+  $headers .= "Reply-To: physicaldistancesocialbonding@gmail.com\r\n";
+  $headers .= "MIME-Version: 1.0\r\n";
+  $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
+  if(mail($to, $subject, $message, $headers)){
+    return true;
+  } else{
+    return false;
+  }
+}
 
 function sendThanksEmail($SBMailFirst, $SBMailEmail){
   $to = $SBMailEmail;
@@ -141,5 +170,8 @@ if($type == "oops"){
   sendOops($email);
 }
 
+if($type == "FUCOVID"){
+  sendFollowUp01($email);
+}
 
 ?>

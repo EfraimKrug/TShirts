@@ -20,7 +20,7 @@
         <div w3-include-html="template/pageTop.html"></div>
         <div  id="product-list" class=grid-container>
         </div>
-    <div w3-include-html="template/shoppingCart.html"></div>
+    <div w3-include-html="template/shoppingCartWork.html"></div>
     <div w3-include-html="template/sizingChart.html"></div>
     <div w3-include-html="template/prepPayForm.html"></div>
     <div w3-include-html="template/prepPayPal.html"></div>
@@ -83,7 +83,7 @@
     <script src="js/json/PDSBVariantDesc.js"></script>
     <!-- end of description JSON -->
     <!-- javascript - dealing screen input -->
-    <script src="js/PDSBAction.js"></script>
+    <script src="js/PDSBActionWork.js"></script>
     <!-- end of description JSON -->
 
     <script>
@@ -95,7 +95,7 @@
     <script src="js/getPFAPIData.js"></script>
     <script src="js/menu.js"></script>
     <script src="js/sizingInfo.js"></script>
-    <script src="js/dataCollection.js"></script>
+    <script src="js/dataCollectionWork.js"></script>
     <script>
     </script>
     </html>
@@ -106,8 +106,15 @@
       var back = document.getElementById("back"+sfx);
       var shirtBack = document.getElementById("shirtBack"+sfx);
       // var fImage = document.getElementById("frontImg"+sfx);
-      // var bImage = document.getElementById("backImg"+sfx);
+      var bImage = document.getElementById("backImg"+sfx);
       // out.style.display = 'none';
+      shirtBack.innerHTML = "back";
+      // console.log(bImage.src);
+      // console.log(bImage.src.indexOf("emptyBack"));
+      if(bImage.src.indexOf("emptyBack") > -1){
+        shirtBack.innerHTML = "Nothing on back";
+      }
+
       if(turn){
         front.classList.add('noshow');
         back.classList.remove('noshow');

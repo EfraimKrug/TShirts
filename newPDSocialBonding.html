@@ -112,6 +112,23 @@
       display:inline;
       color:maroon;
     }
+
+    #product-00,#product-01,#product-02,#product-03,#product-04,
+    #product-05,#product-06,#product-07,#product-08,#product-09 {
+        border:1px dashed orange;
+        padding:2px;
+    }
+
+    #productVariation-00,#productVariation-01,#productVariation-02,#productVariation-03,#productVariation-04,
+    #productVariation-05,#productVariation-06,#productVariation-07,#productVariation-08,#productVariation-09 {
+        width:30%;
+    }
+
+    #select-00,#select-01,#select-02,#select-03,#select-04,
+    #select-05,#select-06,#select-07,#select-08,#select-09 {
+        width:30%;
+    }
+
     .productSelect {
       width:50%;
       display:block;
@@ -153,18 +170,13 @@
 
     <script>
     function finalFunction(apiData){
+      var pageTitle = document.getElementById("pageTitle");
+      pageTitle.innerHTML = "Other stuff to display your <br>'Social Bonding' attitude!";
       var splashScreen = document.getElementById("splashScreen");
       splashScreen.style.display = "none";
       newBuildPage(apiData);
 
       for(var i=0; i  < PAGE_MAX; i++)touchUp(getSuffix(i));
-
-      // var screen_size = getScreenDimenstions();
-      // if(screen_size[0] > 700){
-      //   labelPic = document.getElementById("labelPic");
-      //   labelPic.style.visibility = 'visible';
-      //   labelPic.style.display = "block";
-      // }
 
       menuBar = document.getElementById("menuBar");
       menuBar.style.visibility = 'visible';

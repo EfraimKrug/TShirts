@@ -9,6 +9,15 @@ var _$Desc = getDesc([{
         }
       },
       {
+        "ProdID":"178755334",
+        "Name":"Unisex Basic Softstyle T-Shirt | Gildan 64000",
+        "MyName":"Short-Sleeve Unisex T-Shirt",
+        "Description":{
+            "Text":"The Gildan 64000 makes for a great staple t-shirt that compliments any outfit. It's made of a heavier cotton and the double-stitched neckline and sleeves give it more durability, so it can become an everyday favorite.",
+            "Bullets": ["100% ring-spun cotton","Sport Grey is 90% ring-spun cotton, 10% polyester","Dark Heather is 65% polyester, 35% cotton","Fabric weight: 4.5 oz/y² (153 g/m²)","Pre-shrunk for extra durability","Shoulder-to-shoulder taping","Quarter-turned to avoid crease down the center","Blank product sourced from Bangladesh, Honduras, Haiti, Mexico, or Nicaragua"]
+        }
+      },      
+      {
         "ProdID":"175225078",
         "Name":"Unisex Basic Softstyle T-Shirt | Gildan 64000",
         "MyName":"Short-Sleeve Unisex T-Shirt",

@@ -12,6 +12,7 @@ var COLOR_CODES = [{"COLOR":"Black", "HEX":"27262b","RGB":"rgb(39, 38, 43)","TEX
 {"COLOR":"Autumn", "HEX":"c85313","RGB":"rgb(200, 83, 19)","TEXT":"White"},
 {"COLOR":"Heather Deep Teal", "HEX":"487485","RGB":"rgb(72, 116, 133)","TEXT":"White"},
 {"COLOR":"Dark Grey Heather", "HEX":"3c302e","RGB":"rgb(60, 48, 46)","TEXT":"White"},
+{"COLOR":"Dark Heather", "HEX":"37363b","RGB":"rgb(55, 54, 59)","TEXT":"White"},
 {"COLOR":"Kelly", "HEX":"1a9462","RGB":"rgb(26, 148, 98)","TEXT":"White"},
 {"COLOR":"Leaf", "HEX":"548655","RGB":"rgb(84, 134, 85)","TEXT":"White"},
 {"COLOR":"Burnt Orange", "HEX":"d76735","RGB":"rgb(215, 103, 53)","TEXT":"White"},
@@ -55,19 +56,25 @@ var COLOR_CODES = [{"COLOR":"Black", "HEX":"27262b","RGB":"rgb(39, 38, 43)","TEX
 {"COLOR":"White", "HEX":"e2e3de","RGB":"rgb(226, 227, 222)","TEXT":"Black"}];
 
 function getHex(color){
+  if(!color) return "";
   for(var i=0; i<COLOR_CODES.length; i++){
+    // if(!COLOR_CODES[i].HEX) continue;
     if(COLOR_CODES[i].COLOR.toLowerCase().trim() == color.toLowerCase().trim()) return COLOR_CODES[i].HEX;
   }
 }
 
 function getColor(hex){
+  if(!hex) return "";
   for(var i=0; i<COLOR_CODES.length; i++){
+    // if(!COLOR_CODES[i].HEX) continue;
     if(COLOR_CODES[i].HEX.toLowerCase().trim() == hex.toLowerCase().trim()) return COLOR_CODES[i].COLOR;
   }
 }
 
 function getText(hex){
+  if(!hex) return "";
   for(var i=0; i<COLOR_CODES.length; i++){
+    // if(!COLOR_CODES[i].HEX) continue;
     if(COLOR_CODES[i].HEX.toLowerCase().trim() == hex.toLowerCase().trim()) return COLOR_CODES[i].TEXT;
   }
 }

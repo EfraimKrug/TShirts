@@ -47,7 +47,7 @@ var productSkel = "<!-- begin product~sfx~ -->" +
 "              <!-- end of the picture and order button section -->" +
 "" +
 "" +
-"<!-- end product~sfx~ -->'" +
+"<!-- end product~sfx~ -->" +
 "<div id=bigPicture~sfx~></div>";
 
 var colorTemplate = "<div id='Color-~iter~~sfx~' class='colorButton'" +

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<!--
+Lines:
+    MoveTo: M, m
+    LineTo: L, l, H, h, V, v
+    Cubic Bézier Curve: C, c, S, s
+    Quadratic Bézier Curve: Q, q, T, t
+    Elliptical Arc Curve: A, a
+    ClosePath: Z, z
+-->
+<body>
+  <style>
+  #goButton {
+    width: 5%;
+    height: 5%;
+    border:2px solid tan;
+    margin-left:20%;
+    padding:1%;
+    font-size:1.7em;
+  }
+  #field {
+    width:100%;
+    height:100%;
+    border:2px solid blue;
+    padding:5%;
+    /* background-color: cyan; */
+  }
+  </style>
+  <div id=goButton onclick=outLoop();>Click</div>
+
+<div id=field>
+  <svg xmlns:xlink="http://www.w3.org/2000/xlink" width=100% height=100%>
+        <text id=text1 x="140" y="0" transform="rotate(15 20,10)" style="stroke:red; fill:#000000; font-size:3em">5% off everything!</text>
+  </svg>
+</div>
+
+<script>
+
+
+function fixSVG(){
+  var flag = false;
+  var text1 = document.getElementById("text1");
+  var rotateVal = 15;
+
+  function changeIt(){
+    flag = !flag;
+    if(flag){
+      s = "rotate(7 20,10)";
+    }
+    else {
+      s = "rotate(15 20,10)";
+    }
+
+    // s = "rotate(" + rotateVal + " 20,10)";
+    // rotateVal += 10;
+    text1.setAttribute("transform", s);
+  }
+
+  return changeIt;
+}
+
+function outLoop(){
+  var changeIt = fixSVG();
+
+  for (var i = 0; i < 18; i++){
+    setTimeout(changeIt, 12*i);
+    setTimeout(changeIt, 24*i);
+  }
+}
+
+</script>
+</body>
+</html>
+<!--
+A30,30 0 0,1 35,20
+M110,110
+L100,0
+-->

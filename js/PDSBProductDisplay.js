@@ -18,6 +18,8 @@
 //@param sfx: 3-digit suffix e.g. -01
 //
 function touchUp(sfx){
+  var emptyBack = "./images/emptyBack.png";
+
   color = document.getElementById("Color-00"+sfx);
   if(!color) return;
   fileNameD = color.getAttribute("default"+sfx);
@@ -27,7 +29,7 @@ function touchUp(sfx){
   Fimg = document.getElementById("frontImg"+sfx);
   Bimg = document.getElementById("backImg"+sfx);
   Fimg.src = fileNameF ? fileNameF : fileNameD;
-  Bimg.src = fileNameB ? fileNameB : fileNameD;
+  Bimg.src = fileNameB ? fileNameB : emptyBack;
 }
 
 //////////////////////////////////////////////////////////
@@ -223,13 +225,14 @@ function getFilesForColor(colorIN, variantData){
 //
 function changeImages(sfx, files, pSKEL){
   // console.log(files);
+  var emptyBack = "./images/emptyBack.png";
   defaultFile = files['default'][0] ? files['default'][0] : "";
   var frontI = '~front~'+sfx;
   var backI = '~back~'+sfx;
   var defaultI = '~default~'+sfx;
 
   pSKEL = files['preview'] ? pSKEL.replace(frontI, files['preview'][0]) : pSKEL.replace(frontI, defaultFile);
-  pSKEL = files['back'] ? pSKEL.replace(backI, files['back'][0]) : pSKEL.replace(backI, defaultFile);
+  pSKEL = files['back'] ? pSKEL.replace(backI, files['back'][0]) : pSKEL.replace(backI, emptyBack);
   pSKEL = files['default'] ? pSKEL.replace(defaultI, files['default'][0]) : pSKEL.replace(defaultI, defaultFile);
   return pSKEL;
 }
@@ -278,7 +281,8 @@ function getVariantData(apiData, prod){
 
 var PAGE_MAX = 9;
 function buildPage(apiData){
-  dropList = [169150005,170108821];
+  dropList = [170109245];
+  // dropList = [169150005,170108821];
 
   count = 0;
   leftSide = false;

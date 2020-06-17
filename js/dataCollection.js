@@ -179,13 +179,44 @@ function moveCountryData(countryData){
 //getCustomerInfo - open form to get name/email info
 //form click launches dataGather process...getReadyForPayPal()
 function getCustomerInfo(){
+  couponPerc = 0;
+  couponValues2Perc = ["BondNow!"];
+  couponValues5Perc = ["BondDude!"];
   // console.log('getCustomerInfo - dataCollection.js');
   if (!calcShoppingCartTotal()) return;
   var totalCart = document.getElementById("total");
   var dataGather = document.getElementById("dataGather");
   var payButton = document.getElementById("payButton");
 
-  var totalPay = totalCart.innerHTML;
+  var couponBox = document.getElementById("coupon");
+  var coupon = couponBox.value;
+  for(var i=0; i<couponValues2Perc.length;i++){
+    if(coupon == couponValues2Perc[i]){
+      couponBox.setAttribute("perc","2");
+      couponBox.value = "Got It!";
+      couponBox.disabled = true;
+      couponPerc=.02;
+    }
+  }
+
+  for(var i=0; i<couponValues5Perc.length;i++){
+    if(coupon == couponValues5Perc[i]){
+      couponBox.setAttribute("perc","5");
+      couponBox.value = "Got It!";
+      couponBox.disabled = true;
+      couponPerc=.05;
+    }
+  }
+
+  var totalPay = totalCart.innerHTML.replace(/[^0-9,^\.]/g, "");
+  //calc coupon...
+  totalPay *= 100;
+  takeOff = couponPerc * totalPay;
+  totalPay -= takeOff;
+  totalPay /= 100;
+
+  totalCart.innerHTML = "Total: $" + totalPay;
+  //
   dataGather.style.visibility = "visible";
 
   var dGName = document.getElementById("dGName");
