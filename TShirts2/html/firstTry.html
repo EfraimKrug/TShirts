@@ -1,0 +1,334 @@
+<html>
+<head>
+  <style>
+  body {
+    background-color: black;
+  }
+
+  #grey, #black, #white, #colors, #fullScene{
+      position: absolute;
+      left:0px;
+      top:0px;
+      width:100%;
+      height:100%;
+      display:block;
+  }
+
+  #door01Out,#door02Out,#door03Out,#door04Out,#door05Out,#door06Out,#door07Out {
+    position: absolute;
+    left:0px;
+    top:0px;
+    width:100%;
+    height:100%;
+    display:none;
+  }
+
+#cutOutDisplay {
+    position: absolute;
+    left:0px;
+    top:0px;
+    width:100%;
+    height:100%;
+  }
+
+  #door01Outline, #door02Outline, #door03Outline, #door04Outline,
+  #door05Outline, #door06Outline, #door07Outline {
+      position: absolute;
+      left:0px;
+      top:0px;
+      width:100%;
+      height:100%;
+      display:block;
+    }
+
+.flex-container {
+  display: flex;
+  z-index: 140;
+}
+
+.leftSide {
+  width:1100px;
+  color:white;
+}
+
+.rightSide {
+  color:white;
+  z-index: 155;
+}
+
+.menuRight {
+  color:white;
+  font-size:2em;
+  padding:3%;
+  display:block;
+}
+
+</style>
+</head>
+<body>
+<h1>The Market Place</h1>
+<div class=flex-container>
+  <div class=leftSide>
+<div id=cutOutDisplay>
+  <img src="../images/market01/cutOutDisplay.png"/>
+</div>
+<div id=fullScene>
+  <img src="../images/market01/fullScene.png"/>
+</div>
+
+
+<!--
+<div id=grey>
+<img src="../images/market01/grey.png"/>
+</div>
+<div id=black>
+<img src="../images/market01/black.png"/>
+</div>
+<div id=colors>
+<img src="../images/market01/colors.png"/>
+</div>
+<div id=white>
+<img src="../images/market01/white.png"/>
+</div>
+-->
+<div id=door01Out>
+  <img src="../images/market01/door01Out.png"/>
+</div>
+<div id=door01Outline>
+<svg xmlns:xlink="http://www.w3.org/2000/xlink" width=100% height=100%>
+<path id=door1 d="" opath="M10,50 l300,125 l0,500 l-300,125 Z"
+style="stroke:#49659a; fill:none; stroke-width:5px"/>
+</svg>
+</div>
+
+<div id=door02Out>
+  <img src="../images/market01/door02Out.png"/>
+</div>
+<div id=door02Outline>
+  <svg xmlns:xlink="http://www.w3.org/2000/xlink" width=100% height=100%>
+      <path id=door2 d="" opath="M300,125 l220,135 l0,330 l-220,65 Z"
+            style="stroke:#ffaf00; fill:none; stroke-width:5px"/>
+  </svg>
+</div>
+<div id=door03Out>
+  <img src="../images/market01/door03Out.png"/>
+</div>
+<div id=door03Outline>
+<svg xmlns:xlink="http://www.w3.org/2000/xlink" width=100% height=100%>
+<path id=door3 d="" opath="M520,235 l110,75 l0,250 l-120,35 Z"
+style="stroke:#ffaf00; fill:none; stroke-width:5px"/>
+</svg>
+</div>
+
+<div id=door04Out>
+  <img src="../images/market01/door04Out.png"/>
+</div>
+<div id=door04Outline>
+<svg xmlns:xlink="http://www.w3.org/2000/xlink" width=100% height=100%>
+<path id=door4 d="" opath="M630,295 l110,75 l0,140 l-110,25 Z"
+style="stroke:#ffaf00; fill:none; stroke-width:5px"/>
+</svg>
+</div>
+
+<div id=door05Out>
+  <img src="../images/market01/door05Out.png"/>
+</div>
+<div id=door05Outline>
+  <!-- right triangle -->
+  <svg xmlns:xlink="http://www.w3.org/2000/xlink" width=100% height=100%>
+      <path id=door5 d="" opath="M825,275 l167,0 l0,425 l-370,0 Z"
+            style="stroke:#874724; fill:none; stroke-width:5px"/>
+  </svg>
+</div>
+<!--
+<div id=door06Outline onclick=drawDoor("door6");>
+  <svg xmlns:xlink="http://www.w3.org/2000/xlink" width=100% height=100%>
+      <path id=door6 d="M300,125 l220,135 l0,330 l-220,65 Z"
+            style="stroke:#ffaf00; fill:none; stroke-width:5px"/>
+  </svg>
+</div>
+-->
+<div id=door07Out>
+  <img src="../images/market01/door07Out.png"/>
+</div>
+<div id=door07Outline>
+  <!-- floor -->
+  <svg xmlns:xlink="http://www.w3.org/2000/xlink" width=100% height=100%>
+      <path id=door7 d="" opath="M710,550 l-50,180 l-570,0"
+            style="stroke:#f4e8be; fill:none; stroke-width:5px"/>
+  </svg>
+</div>
+
+</div>
+<div class=rightSide>
+  <span id=mrDoor1 class=menuRight onclick="drawDoor('door1','fullScene', 'door01Out');">Shirts</span>
+  <span id=mrDoor2 class=menuRight onclick="drawDoor('door2','fullScene', 'door02Out');">Writing</span>
+  <span id=mrDoor3 class=menuRight onclick="drawDoor('door3','fullScene', 'door03Out');">Shirts</span>
+  <span id=mrDoor4 class=menuRight onclick="drawDoor('door4','fullScene', 'door04Out');">Shirts</span>
+  <span id=mrDoor5 class=menuRight onclick="drawDoor('door5','fullScene', 'door05Out');">Purses</span>
+  <span id=mrDoor7 class=menuRight onclick="drawDoor('door7','fullScene', 'door07Out');">Puzzles</span>
+</div>
+
+</div>
+</body>
+<script>
+var NUMBER_STEPS = 27;
+
+function getDoorProgression(fullPath, fromBG, toBG){
+    //this path must be Mx,y l,x,y... Z
+    //the M expression is fed into the paramers x/y
+    //
+    //there can be any number of l expressions
+    //there can be a Z or not
+    //the ONLY spaces are between expressions
+    //
+    if(!fullPath) fullPath ="l-50,190 l-550,0 Z";
+
+    var oldBG = fromBG;
+    var newBG = toBG;
+
+    var extension = "";
+    var legStep = 0;
+
+    var step = 1;
+    var stepArray = fullPath.split(" ");
+    // var path = "M " + x + "," + y;
+    var path = stepArray[0];
+    //current step
+    var xCurrent = "";
+    var yCurrent = "";
+    //
+    var xAccumulator = 0;
+    var yAccumulator = 0;
+
+    var isZ = false;
+    var lastStep = stepArray.length - 1;
+    var lastExpression = stepArray[stepArray.length - 1];
+    var lastStep = false;
+    var doneSw = false;
+    // get Last expression
+    function getLastStep(){
+      if(lastExpression == 'Z'){
+        lastExpression = stepArray[stepArray.length - 2];
+        isZ = true;
+      }
+    }
+
+    function getCurrentStep(){
+        var currentExpression = "";
+        if(stepArray[step]){
+          currentExpression = stepArray[step];
+          yCurrent = currentExpression.substring(currentExpression.indexOf(",")+1);
+          xCurrent = currentExpression.substring(1, currentExpression.indexOf(","));
+        }
+        if(isZ && (step+2 > stepArray.length) ){
+          lastStep = true;
+          yCurrent = "" + (yAccumulator * -1);
+          xCurrent = "" + (xAccumulator * -1);
+        }
+    }
+
+    function absValue(val){
+      if (val < 0) return (parseInt(val)*-1);
+      return val;
+    }
+
+    function extendPath(){
+      // divide path
+      if(doneSw) return path;
+      getCurrentStep();
+      var xLegStep = (xCurrent)/NUMBER_STEPS;
+      var yLegStep = (yCurrent)/NUMBER_STEPS;
+      //
+      //
+      var newX = xLegStep;
+      if(xCurrent.substring(0,1) == "-"){
+        if(!lastStep) xAccumulator -= absValue(newX);
+        newX = "-" + absValue(newX);
+      } else {
+        if(!lastStep) xAccumulator += absValue(newX);
+      }
+      var newY = yLegStep;
+      if(yCurrent.substring(0,1) == "-"){
+        if(!lastStep) yAccumulator -= absValue(newY);
+        newY = "-" + absValue(newY);
+      } else {
+        if(!lastStep) yAccumulator += absValue(newY);
+      }
+
+      path = path + " l" + newX + "," + newY;
+
+      legStep++;
+      if(legStep > NUMBER_STEPS){
+        legStep = 0;
+        step++;
+        if(step > stepArray.length-1){
+          cutOutDisplay = document.getElementById("cutOutDisplay");
+
+          oldBG = document.getElementById(oldBG);
+          newBG = document.getElementById(newBG);
+          oldBG.style.display = "none";
+          newBG.style.display = "block";
+          cutOutDisplay.style.display = "block";
+          doneSw = true;
+        }
+      }
+      return path;
+    }
+
+    getLastStep();
+    return extendPath;
+}
+
+function establishGroundZero(){
+var dBlockArray = ["fullScene"];
+var dNoneArray = ["cutOutDisplay","door01Out","door02Out","door03Out","door04Out","door05Out","door06Out","door07Out"];
+var svgArray = ["door1", "door2", "door3", "door4","door5","door6","door7"];
+  for(var i=0; i < dNoneArray.length; i++){
+    elt = document.getElementById(dNoneArray[i]);
+    if(elt){
+      elt.style.display = "none";
+    }
+  }
+  for(var i=0; i < dBlockArray.length; i++){
+    elt = document.getElementById(dBlockArray[i]);
+    if(elt){
+      elt.style.display = "block";
+    }
+  }
+  for(var i=0; i < svgArray.length; i++){
+    elt = document.getElementById(svgArray[i]);
+    if(elt){
+      elt.setAttribute("d","");
+    }
+  }
+}
+
+function writeLeg(doorElt, func){
+  var gDPExtend = func;
+  var door = doorElt;
+
+  function doWrite(){
+    path = door.getAttribute("d");
+    door .setAttribute("d", gDPExtend());
+  }
+  return doWrite;
+}
+
+
+function drawDoor(doorElt,full,holes){
+  establishGroundZero();
+  fullScene = document.getElementById("fullScene");
+  fullScene.style.display = "block";
+  doorElt = document.getElementById(doorElt);
+  doorElt.style.display = "block";
+
+  path = doorElt.getAttribute("opath");
+  gDPExtend = getDoorProgression(path,full,holes);
+  doWrite = writeLeg(doorElt, gDPExtend);
+  for (var i = 0; i < NUMBER_STEPS * 5; i++){
+    setTimeout(doWrite, 10*i);
+  }
+}
+</script>
+</html>
